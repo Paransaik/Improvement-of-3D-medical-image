@@ -11,7 +11,7 @@ import numpy as np
 import SimpleITK as itk 
 import qimage2ndarray
 import math
-
+# asdfasdfasdfsdf
 class MyWidget(QWidget): 
     def __init__(self): 
         super().__init__() 
