@@ -1,5 +1,6 @@
 import numpy as np
 import sys
+
 # b는 바이너리의 약자 
 class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
 
