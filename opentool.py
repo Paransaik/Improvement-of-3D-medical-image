@@ -216,7 +216,7 @@ class MyApp(QMainWindow):
 
     # 이미지 불러올 때 itk사용 
     def openImage(self):
-
+        self.folder_path = '' # 다른 dataset으로의 변경을 위한 초기화 
         #QFileDialog는 사용자가 파일 또는 경로를 선택할 수 있도록 하는 다이얼로그
         self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file', './image') # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
         print("open", self.imagePath)
@@ -229,12 +229,11 @@ class MyApp(QMainWindow):
                 self.folder_path = self.folder_path + self.imagePath.split('/')[i] + '/'
 
         reader = itk.ImageSeriesReader() # reader이름의 객체 생성
-    
         dicom_names = reader.GetGDCMSeriesFileNames(self.folder_path) # 폴더내에있는 .dcm 파일을 가져온다.
 
         reader.SetFileNames(dicom_names)
         images = reader.Execute() # reader의 FileNames를 실행?
-        
+        print('folder_path', self.folder_path)
         # <class 'SimpleITK.SimpleITK.Image'> <class 'SimpleITK.SimpleITK.Image'>
         print(type(images[0]), type(images[1])) 
 
