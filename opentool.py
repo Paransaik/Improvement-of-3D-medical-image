@@ -12,6 +12,7 @@ import qimage2ndarray
 import math 
 import vtk
 from Rendering import Rendering
+import voxel
 
 class MyWidget(QWidget): 
     def __init__(self): 
@@ -26,7 +27,7 @@ class MyWidget(QWidget):
         self.view_2.setFixedSize(514, 514) # 다이얼 최소/최대 값의 범위는 setRange()함수를 이용
         
         # 텍스트 또는 이미지 라벨을 만들 때 쓰이는 QLabel() 함수, 사용자와의 상호작용을 제공하지는 않는다.
-
+    
         self.lbl_pos = QLabel() # 비어있는 라벨? 생성 -> mouseMoveEvent()에서 .setText()를 이용해 계속 갱신 
         self.lbl_pos.setAlignment(Qt.AlignCenter) # 라벨을 Center에 위치시킨다.
         
@@ -47,11 +48,12 @@ class MyApp(QMainWindow):
     def __init__(self):
         super().__init__() # QMainWindow의 생성자 호출
         
+        self.pyvoxel = voxel.PyVoxel()
          
         self.LRpoint = [0, 0] # 동시클릭 위치 저장변수
         self.LRClicked = False 
-        self.window_level = 40 # wl
-        self.window_width = 400 # ww
+        self.window_level = 2700 # wl
+        self.window_width = 5350 # ww
         self.deltaWL = 0 # wl에 더할 delta 값
         self.deltaWW = 0 # ww에 더할 delta 값
 
@@ -272,6 +274,18 @@ class MyApp(QMainWindow):
         self.wg.view_2.mouseMoveEvent = self.mouseMoveEvent # ...
         self.wg.view_1.setMouseTracking(True) # True일 때는 마우스 이동 감지
         self.wg.view_2.setMouseTracking(True) # False일 때는 마우스 클릭시에만 이동 감지
+
+        # 임시
+        fileName = self.folder_path.split('/')[-2] # 현재 보고있는 .dcm파일의 Directory명
+        path = './raw/' + fileName +'.raw' # path 설정 
+        self.export_raw(path)
+    
+    def export_raw(self, path): # export_raw로 connect된 버튼 하나 만들기 
+        # if image is qPixelmap --> numpy array 
+        print(type(self.EntireImage)) # 해당 dataset의 .dcm의 array형태가 모여있는 변수
+        print(self.EntireImage.shape) # dataset1 기준 (20,512,512)
+        self.pyvoxel.NumpyArraytoVoxel(self.EntireImage) 
+        self.pyvoxel.WriteToRaw(path)
 
 
     def mouseMoveEvent(self, event):
