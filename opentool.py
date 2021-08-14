@@ -122,86 +122,101 @@ class MyApp(QMainWindow):
         num, ok = QInputDialog.getInt(self, 'Input ImageNumber', 'Enter Num') # 두 번째 파라미터(타이틀 바 제목), 세 번째 파라미터(EditHint?)
         self.cur_idx = num - 1 # idx로 변환해야하기 때문에 -1 
         
-        print("show image",self.cur_idx + 1) # 해당 idx의 이미지를 보여준다. 
-        if self.cur_idx > self.NofI-1: # NofI는 openImage에서 한 번 정의 된다. Entireimage[0] : 총 이미지 개수?
-            self.cur_idx = self.NofI-1 # 만약 표시하고 싶은 idx 범위가 사진의 수를 넘어간다면(없는 이미지) 마지막 이미지로 변경
-        elif self.cur_idx < 0: # ?
-            self.cur_idx = self.NofI-224 # 음수 값으로 변경 & 오류 발생 후 종료 
-        
-        self.cur_image = self.EntireImage[self.cur_idx]
-        
-        image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
-        
-        image = qimage2ndarray.array2qimage(image) 
-        image = QPixmap.fromImage(QImage(image)) 
-        self.wg.lbl_original_img.addPixmap(image) 
-        self.wg.lbl_blending_img.addPixmap(image) 
-        self.wg.view_1.setScene(self.wg.lbl_original_img)
-        self.wg.view_2.setScene(self.wg.lbl_blending_img)
-        self.wg.view_1.show()
-        self.wg.view_2.show()
+        if len(self.EntireImage) == 0:
+            print("아직 dataset이 들어오지 않았습니다.")
+
+        elif self.cur_idx < 0 or self.cur_idx >= len(self.EntireImage):
+            print("선택할 수 없는 번호입니다.")
+        else:
+            print("show image",self.cur_idx + 1) # 해당 idx의 이미지를 보여준다. 
+            if self.cur_idx > self.NofI-1: # NofI는 openImage에서 한 번 정의 된다. Entireimage[0] : 총 이미지 개수?
+                self.cur_idx = self.NofI-1 # 만약 표시하고 싶은 idx 범위가 사진의 수를 넘어간다면(없는 이미지) 마지막 이미지로 변경
+            elif self.cur_idx < 0: # ?
+                self.cur_idx = self.NofI-224 # 음수 값으로 변경 & 오류 발생 후 종료 
+            
+            self.cur_image = self.EntireImage[self.cur_idx]
+            
+            image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
+            
+            image = qimage2ndarray.array2qimage(image) 
+            image = QPixmap.fromImage(QImage(image)) 
+            self.wg.lbl_original_img.addPixmap(image) 
+            self.wg.lbl_blending_img.addPixmap(image) 
+            self.wg.view_1.setScene(self.wg.lbl_original_img)
+            self.wg.view_2.setScene(self.wg.lbl_blending_img)
+            self.wg.view_1.show()
+            self.wg.view_2.show()
 
     def onChanged(self,text):
         self.lbl.setText(text)
         self.lbl.adjustSize()
 
     def btn1_clicked(self): # btn1(previous)가 클릭 되었을 때
-    
-        #(Entireimage에는 같은 .dcm 파일의 개수만큼 idx가 있고, btn1과 btn2를 누르며 사진을 옮겨가며 확인 가능하다(현재는 이미지에 변화를 주지 않았기 때문에 다 같은 장면으로 보이는 것뿐))
-        self.cur_idx = self.cur_idx - 1 # idx를 1감소 
-               
-        if self.cur_idx < 0: # idx가 0보다 작을수는 없다. 
-            self.cur_idx = 0
+        
+        if len(self.EntireImage) == 0:
+            print("아직 dataset이 들어오지 않았습니다.")
+        
+        else:
+            #(Entireimage에는 같은 .dcm 파일의 개수만큼 idx가 있고, btn1과 btn2를 누르며 사진을 옮겨가며 확인 가능하다(현재는 이미지에 변화를 주지 않았기 때문에 다 같은 장면으로 보이는 것뿐))
+            self.cur_idx = self.cur_idx - 1 # idx를 1감소 
+                
+            if self.cur_idx < 0: # idx가 0보다 작을수는 없다. 
+                self.cur_idx = 0
+                
+            print("left and image", self.cur_idx +1) # 이전 image는 몇 번쨰 idx이라고 표시
+
+            # EntireImage = (같은 사진 개수, 해상도, 해상도)
+            self.cur_image = self.EntireImage[self.cur_idx] # 해당 idx 번째에 있는 사진을 cur_image로 설정  
+
+            image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
             
-        print("left and image", self.cur_idx +1) # 이전 image는 몇 번쨰 idx이라고 표시
+            image = qimage2ndarray.array2qimage(image)
+            image = QPixmap.fromImage(QImage(image))
 
-        # EntireImage = (같은 사진 개수, 해상도, 해상도)
-        self.cur_image = self.EntireImage[self.cur_idx] # 해당 idx 번째에 있는 사진을 cur_image로 설정  
-
-        image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
-        
-        image = qimage2ndarray.array2qimage(image)
-        image = QPixmap.fromImage(QImage(image))
-
-        
-        self.wg.lbl_original_img.addPixmap(image) # 이전 idx에 있던 이미지를 
-        self.wg.lbl_blending_img.addPixmap(image) # pixmap에 올릴 이미지로 변경
-        self.wg.view_1.setScene(self.wg.lbl_original_img)
-        self.wg.view_2.setScene(self.wg.lbl_original_img) # wh.lbl_blending_img는 어디갔찌
-        self.wg.view_1.show()
-        self.wg.view_2.show()
+            
+            self.wg.lbl_original_img.addPixmap(image) # 이전 idx에 있던 이미지를 
+            self.wg.lbl_blending_img.addPixmap(image) # pixmap에 올릴 이미지로 변경
+            self.wg.view_1.setScene(self.wg.lbl_original_img)
+            self.wg.view_2.setScene(self.wg.lbl_original_img) # wh.lbl_blending_img는 어디갔찌
+            self.wg.view_1.show()
+            self.wg.view_2.show()
 
 
     def btn2_clicked(self):
 
-        self.cur_idx = self.cur_idx + 1 # 다음 이미지 idx 
-
-        if self.cur_idx > self.NofI-1:
-            self.cur_idx = self.NofI-1 
-
-        print("right and image=", self.cur_idx +1) 
-
-
-        self.cur_image = self.EntireImage[self.cur_idx]
-
-        image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
+        if len(self.EntireImage) == 0:
+            print("아직 dataset이 들어오지 않았습니다.")
         
-        image = qimage2ndarray.array2qimage(image)
-        image = QPixmap.fromImage(QImage(image))
+        else:
+            self.cur_idx = self.cur_idx + 1 # 다음 이미지 idx 
 
-        #왼쪽 프레임 이미지 업데이트 필요
-        self.wg.lbl_original_img.addPixmap(image)
-        self.wg.lbl_blending_img.addPixmap(image)
-        self.wg.view_1.setScene(self.wg.lbl_original_img)
-        self.wg.view_2.setScene(self.wg.lbl_original_img) # wg.lbl_blending_img는 어디갔나
-        self.wg.view_1.show()
-        self.wg.view_2.show()
+            if self.cur_idx > self.NofI-1:
+                self.cur_idx = self.NofI-1 
+
+            print("right and image=", self.cur_idx +1) 
+
+
+            self.cur_image = self.EntireImage[self.cur_idx]
+
+            image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
+            
+            image = qimage2ndarray.array2qimage(image)
+            image = QPixmap.fromImage(QImage(image))
+
+            #왼쪽 프레임 이미지 업데이트 필요
+            self.wg.lbl_original_img.addPixmap(image)
+            self.wg.lbl_blending_img.addPixmap(image)
+            self.wg.view_1.setScene(self.wg.lbl_original_img)
+            self.wg.view_2.setScene(self.wg.lbl_original_img) # wg.lbl_blending_img는 어디갔나
+            self.wg.view_1.show()
+            self.wg.view_2.show()
     
     def btn3_clicked(self):
         # Btn3 모듈을 이용하여 기능 구현 
-
-        # Btn3.SliceRendering(self.imagePath) # Slice
-        Rendering.VolumeRendering(self.folder_path) # Volume
+        if len(self.EntireImage) == 0:
+            print("아직 dataset이 들어오지 않았습니다.")
+        else:
+            Rendering.VolumeRendering(self.folder_path) # Volume
         
     def AdjustPixelRange(self, image, level, width): # Hounsfield 조절 함수
         # 수학 식
@@ -218,67 +233,72 @@ class MyApp(QMainWindow):
 
     # 이미지 불러올 때 itk사용 
     def openImage(self):
-        self.folder_path = '' # 다른 dataset으로의 변경을 위한 초기화 
+    
         #QFileDialog는 사용자가 파일 또는 경로를 선택할 수 있도록 하는 다이얼로그
         self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file', './image') # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
-        print("open", self.imagePath)
+        
+        if self.imagePath == '':
+            print('openImage 종료')
+        
+        else:
+            self.folder_path = '' # 다른 dataset으로의 변경을 위한 초기화 
 
-        for i in range(len(self.imagePath.split('/'))-1): # folder_path를 imagePath를 이용해서 구해야지만 앞으로 문제 발생 X 
+            for i in range(len(self.imagePath.split('/'))-1): # folder_path를 imagePath를 이용해서 구해야지만 앞으로 문제 발생 X 
+                
+                if i == len(self.imagePath.split('/'))-1:
+                    self.folder_path = self.folder_path + self.imagePath.split('/')[i] 
+                else:  
+                    self.folder_path = self.folder_path + self.imagePath.split('/')[i] + '/'
+
+            reader = itk.ImageSeriesReader() # reader이름의 객체 생성
+            dicom_names = reader.GetGDCMSeriesFileNames(self.folder_path) # 폴더내에있는 .dcm 파일을 가져온다.
+
+            reader.SetFileNames(dicom_names)
+            images = reader.Execute() # reader의 FileNames를 실행?
+            print('folder_path', self.folder_path)
+            # <class 'SimpleITK.SimpleITK.Image'> <class 'SimpleITK.SimpleITK.Image'>
+            print(type(images[0]), type(images[1])) 
+
+            ImgArray = itk.GetArrayFromImage(images) # 이미지로부터 배열을 가져옴
+            print(ImgArray.shape)
+            self.EntireImage = np.asarray(ImgArray, dtype=np.float32) # asarray는 데이터 형태가 다를 경우에만 복사(copy)가 된다.
             
-            if i == len(self.imagePath.split('/'))-1:
-                self.folder_path = self.folder_path + self.imagePath.split('/')[i] 
-            else:  
-                self.folder_path = self.folder_path + self.imagePath.split('/')[i] + '/'
-
-        reader = itk.ImageSeriesReader() # reader이름의 객체 생성
-        dicom_names = reader.GetGDCMSeriesFileNames(self.folder_path) # 폴더내에있는 .dcm 파일을 가져온다.
-
-        reader.SetFileNames(dicom_names)
-        images = reader.Execute() # reader의 FileNames를 실행?
-        print('folder_path', self.folder_path)
-        # <class 'SimpleITK.SimpleITK.Image'> <class 'SimpleITK.SimpleITK.Image'>
-        print(type(images[0]), type(images[1])) 
-
-        ImgArray = itk.GetArrayFromImage(images) # 이미지로부터 배열을 가져옴
-        print(ImgArray.shape)
-        self.EntireImage = np.asarray(ImgArray, dtype=np.float32) # asarray는 데이터 형태가 다를 경우에만 복사(copy)가 된다.
+            self.EntireImage = np.squeeze(self.EntireImage) # (배열, 축)을 통해 지정된 축의 차원을 축소, (1, 1024, 1024) -> (1024, 1024)
         
-        self.EntireImage = np.squeeze(self.EntireImage) # (배열, 축)을 통해 지정된 축의 차원을 축소, (1, 1024, 1024) -> (1024, 1024)
-    
-        print(self.EntireImage.shape) # (6, 1024, 1024)  
+            print(self.EntireImage.shape) # (6, 1024, 1024)  
 
-        # 같은 이미지의 .dcm이 두 개가 된다면 EntireImage가 (2, n, n)이되서 프로그램 오류x
-        # 또한 같은 이미지의 .dcm 쌍이 두 개가 존재한다면 나머지 한 개의 이미지는 출력되지 않음..
-        self.NofI = self.EntireImage.shape[0] # 같은 이미지 개수
-        self.Nx = self.EntireImage.shape[1] # Nx에서 받아주기는 하지만 [1]은 높이(y)가 아닌가?
-        self.Ny = self.EntireImage.shape[2] # Ny에서 받아주기는 하지만 [2]는 너비(x)가 아닌가?
+            # 같은 이미지의 .dcm이 두 개가 된다면 EntireImage가 (2, n, n)이되서 프로그램 오류x
+            # 또한 같은 이미지의 .dcm 쌍이 두 개가 존재한다면 나머지 한 개의 이미지는 출력되지 않음..
+            self.NofI = self.EntireImage.shape[0] # 같은 이미지 개수
+            self.Nx = self.EntireImage.shape[1] # Nx에서 받아주기는 하지만 [1]은 높이(y)가 아닌가?
+            self.Ny = self.EntireImage.shape[2] # Ny에서 받아주기는 하지만 [2]는 너비(x)가 아닌가?
 
-        self.cur_image = self.EntireImage[self.cur_idx] # cur_image는 pixmap에 올라갈 image, cur_idx는 EntireImage에서 몇 번째 이미지를 올릴지 정하는 idx
+            self.cur_image = self.EntireImage[self.cur_idx] # cur_image는 pixmap에 올라갈 image, cur_idx는 EntireImage에서 몇 번째 이미지를 올릴지 정하는 idx
 
-        # 보고 싶은 신체 부위가 있다면 HU table을 참고해 Window Center와 Window Width를 조절한 뒤 그 부분 위주로 출력해줄 수 있다. 
-        # WC를 중심으로 WW의 범위만큼을 중심적으로 표현해준다.
-        # window_level이 낮을수록 하얗게 나온다.(HU 조절?), window_width는 WC를 중심으로 관찰하고자 하는 HU 범위를 의미 
-        image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width) 
-        image = qimage2ndarray.array2qimage(image) # 배열에서 이미지로
-        image = QPixmap.fromImage(QImage(image)) # image를 입력해주고 QPixmap 객체를 하나 만든다. https://wikidocs.net/33768 < 참고하면 좋다.
-        
-        self.wg.lbl_original_img.addPixmap(image) # MyWidget에서 GraphicsScene()로 선언한 변수에 pixmap을 표시될 이미지로 설정
-        self.wg.view_1.setScene(self.wg.lbl_original_img) # MyWidget에서 QGraphicsView()로 선언한 view_1의 화면으로 설정
-        self.wg.view_1.show() # view_1 시작
+            # 보고 싶은 신체 부위가 있다면 HU table을 참고해 Window Center와 Window Width를 조절한 뒤 그 부분 위주로 출력해줄 수 있다. 
+            # WC를 중심으로 WW의 범위만큼을 중심적으로 표현해준다.
+            # window_level이 낮을수록 하얗게 나온다.(HU 조절?), window_width는 WC를 중심으로 관찰하고자 하는 HU 범위를 의미 
+            image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width) 
+            image = qimage2ndarray.array2qimage(image) # 배열에서 이미지로
+            image = QPixmap.fromImage(QImage(image)) # image를 입력해주고 QPixmap 객체를 하나 만든다. https://wikidocs.net/33768 < 참고하면 좋다.
+            
+            self.wg.lbl_original_img.addPixmap(image) # MyWidget에서 GraphicsScene()로 선언한 변수에 pixmap을 표시될 이미지로 설정
+            self.wg.view_1.setScene(self.wg.lbl_original_img) # MyWidget에서 QGraphicsView()로 선언한 view_1의 화면으로 설정
+            self.wg.view_1.show() # view_1 시작
 
-        self.wg.lbl_blending_img.addPixmap(image) # 원래는 blending된 image를 넣어야 하지만 아직 blending 기능X
-        self.wg.view_2.setScene(self.wg.lbl_blending_img)
-        self.wg.view_2.show()
+            self.wg.lbl_blending_img.addPixmap(image) # 원래는 blending된 image를 넣어야 하지만 아직 blending 기능X
+            self.wg.view_2.setScene(self.wg.lbl_blending_img)
+            self.wg.view_2.show()
 
-        self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent # view_1의 mouseMoveEvent 갱신
-        self.wg.view_2.mouseMoveEvent = self.mouseMoveEvent # ...
-        self.wg.view_1.setMouseTracking(True) # True일 때는 마우스 이동 감지
-        self.wg.view_2.setMouseTracking(True) # False일 때는 마우스 클릭시에만 이동 감지
+            self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent # view_1의 mouseMoveEvent 갱신
+            self.wg.view_2.mouseMoveEvent = self.mouseMoveEvent # ...
+            self.wg.view_1.setMouseTracking(True) # True일 때는 마우스 이동 감지
+            self.wg.view_2.setMouseTracking(True) # False일 때는 마우스 클릭시에만 이동 감지
 
-        # 임시
-        fileName = self.folder_path.split('/')[-2] # 현재 보고있는 .dcm파일의 Directory명
-        path = './raw/' + fileName +'.raw' # path 설정 
-        self.export_raw(path)
+            # 임시
+            fileName = self.folder_path.split('/')[-2] # 현재 보고있는 .dcm파일의 Directory명
+            path = './raw/' + fileName +'.raw' # path 설정 
+            self.export_raw(path)
     
     def export_raw(self, path): # export_raw로 connect된 버튼 하나 만들기 
         # if image is qPixelmap --> numpy array 
@@ -305,7 +325,7 @@ class MyApp(QMainWindow):
 
             
             square = (rX - mX)*(rX - mX) + (rY - mY)*(rY - mY)
-            dist = math.sqrt(square) # 거리 
+            dist = math.sqrt(square) * 2 + 1000 # 거리
 
             temp_wl = 0 
             temp_ww = 0 
