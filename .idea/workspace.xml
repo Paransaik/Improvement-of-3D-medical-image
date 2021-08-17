@@ -1,51 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="8.12. home&#10;ReadFromRaw 이해 완">
-      <change beforePath="$PROJECT_DIR$/.idea/ConnectAi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ConnectAi.iml" afterDir="false" />
+    <list default="true" id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="8.18.&#10;add 8.15. dataset&#10;and modify function name">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/3T_mask.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/PD.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/PD_rot.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/PD_rot.mgz.lta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/PD_rot.mgz.reg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/T1.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/T1_rot.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/T1_rot.mgz.lta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/T1_rot.mgz.reg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/T2star.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/T2star_rot.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/T2star_rot.mgz.lta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/T2star_rot.mgz.reg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/dti_fixed_coreg_dwi.nii" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash10.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash10_rot.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash10_rot.mgz.lta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash10_rot.mgz.reg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash20.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash20_rot.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash20_rot.mgz.lta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash20_rot.mgz.reg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash30.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash30_rot.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash30_rot.mgz.lta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash30_rot.mgz.reg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash40.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash40_rot.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash40_rot.mgz.lta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash40_rot.mgz.reg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash50.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash50_rot.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash50_rot.mgz.lta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash50_rot.mgz.reg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash60.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash60_rot.mgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash60_rot.mgz.lta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/flash60_rot.mgz.reg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/rotation.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/rotation.lta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/3T/rotation.xfm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rendering/Rendering.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rendering/Rendering.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/voxel.py" beforeDir="false" afterPath="$PROJECT_DIR$/voxel.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -174,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628699314439</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="8.18.&#10;add 8.15. dataset&#10;and modify function name">
+      <created>1629240115945</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1629240115945</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -222,6 +187,7 @@
     <MESSAGE value="8.11. home&#10;ReadFromRaw" />
     <MESSAGE value="8.11. home&#10;add datasets&#10;ReadFromRaw" />
     <MESSAGE value="8.12. home&#10;ReadFromRaw 이해 완" />
-    <option name="LAST_COMMIT_MESSAGE" value="8.12. home&#10;ReadFromRaw 이해 완" />
+    <MESSAGE value="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
+    <option name="LAST_COMMIT_MESSAGE" value="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
   </component>
 </project>
