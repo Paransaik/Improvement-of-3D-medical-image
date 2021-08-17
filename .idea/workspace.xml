@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="8.18.&#10;add 8.15. dataset&#10;and modify function name">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rendering/Rendering.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rendering/Rendering.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/voxel.py" beforeDir="false" afterPath="$PROJECT_DIR$/voxel.py" afterDir="false" />
-    </list>
+    <list default="true" id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
