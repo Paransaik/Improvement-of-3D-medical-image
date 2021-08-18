@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.18. make funtion exportRawAndBin">
+    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.18. add funtion openRawAndBin and icon image file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icon/openRaw.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/raw/dataset1_001.Seq1.Ser5.Img2.dcm.raw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/raw/dataset1_001.Seq1.Ser5.Img3.dcm.raw" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/voxel.py" beforeDir="false" afterPath="$PROJECT_DIR$/voxel.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +50,7 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/viewer/voxel.py" />
   </component>
   <component name="RunManager">
-    <configuration name="opentool" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="opentool" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="ConnectAi" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -72,7 +73,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.opentool" />
         <item itemvalue="Python.opentool" />
       </list>
     </recent_temporary>
@@ -163,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629287114866</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="8.18. add funtion openRawAndBin and icon image file">
+      <created>1629317184396</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1629317184396</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -221,6 +228,7 @@
     <MESSAGE value="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
     <MESSAGE value="8.18. before add funtion write_bin" />
     <MESSAGE value="8.18. make funtion exportRawAndBin" />
-    <option name="LAST_COMMIT_MESSAGE" value="8.18. make funtion exportRawAndBin" />
+    <MESSAGE value="8.18. add funtion openRawAndBin and icon image file" />
+    <option name="LAST_COMMIT_MESSAGE" value="8.18. add funtion openRawAndBin and icon image file" />
   </component>
 </project>

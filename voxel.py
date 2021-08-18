@@ -46,10 +46,12 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
         print('success ReadFromBin')
         with open(filename, 'rb') as f:  # rb = byte 형식으로 파일 읽기 # f.close를 매번하기 귀찮기 때문에 with를 사용, f는 instance
             try:
-                Header = np.tofile(f, dtype='int32', count=1)  # dtype이 int32인 data만 file로부터 받아오는?
+                Header = np.fromfile(f, dtype='int32', count=1)  # dtype이 int32인 data만 file로부터 받아오는?
                 self.m_Org = Header[0]  # header는 Raw파일에 첫 두바이트를 m_org를 넣었다. 저게 -1이라면
                                         # 만약 -1이 아니라면 숫자란 이야기다 256이 들어있다.
+                print('1 Header =', Header)
                 if self.m_Org == -1:  # 데이터가 거꾸로 뒤집어진? 경우
+                    print('check if')
                     Header = np.fromfile(f, dtype='float32', count=6)  # "x, y, z spacing", "x, y, z orgin"
 
                     self.m_fXSp = Header[0]
@@ -66,11 +68,12 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
                     self.m_nX = self.m_Org  # m_nX는 X크기 but, Header[1] = m_nX 값일텐데 왜?
 
                 Header = np.fromfile(f, dtype='int32', count=2)  # nY nZ
-                self.m_nY = Header[0]
-                self.m_nZ = Header[1]
+                self.m_nY = Header[0]  # 512
+                self.m_nZ = Header[1]  # 20
 
                 Data = np.fromfile(f, dtype='int16', count=self.m_nX*self.m_nY*self.m_nZ)
                 self.m_Voxel = np.reshape(Data, (self.m_nZ, self.m_nY, self.m_nX))
+                # print('self.m_Voxel =', self.m_Voxel)
 
             except IOError:
                 print('Could not read file ' + filename)
