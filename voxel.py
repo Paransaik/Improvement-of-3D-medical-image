@@ -49,9 +49,7 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
                 Header = np.fromfile(f, dtype='int32', count=1)  # dtype이 int32인 data만 file로부터 받아오는?
                 self.m_Org = Header[0]  # header는 Raw파일에 첫 두바이트를 m_org를 넣었다. 저게 -1이라면
                                         # 만약 -1이 아니라면 숫자란 이야기다 256이 들어있다.
-                print('1 Header =', Header)
                 if self.m_Org == -1:  # 데이터가 거꾸로 뒤집어진? 경우
-                    print('check if')
                     Header = np.fromfile(f, dtype='float32', count=6)  # "x, y, z spacing", "x, y, z orgin"
 
                     self.m_fXSp = Header[0]
