@@ -332,7 +332,7 @@ class MyApp(QMainWindow):
             rY = np.array(self.LRpoint[1])
 
             square = (rX - mX) * (rX - mX) + (rY - mY) * (rY - mY)
-            dist = math.sqrt(square)  # 거리
+            dist = math.sqrt(square) * 2  # 거리
 
             temp_wl = 0
             temp_ww = 0

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
+    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.18.&#10;add 8.15. dataset&#10;and modify function name">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/voxel.py" beforeDir="false" afterPath="$PROJECT_DIR$/voxel.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,6 +27,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/opentool.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1wFMOWACWrqF3YWN0X0DPeEBC6l" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -41,7 +48,7 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/viewer/voxel.py" />
   </component>
   <component name="RunManager">
-    <configuration name="opentool" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="opentool" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ConnectAi" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -62,11 +69,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.opentool" />
+        <item itemvalue="Python.opentool" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="" />
+      <changelist id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="" />
       <created>1628049851292</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -164,6 +177,13 @@
                       </list>
                     </value>
                   </entry>
+                </map>
+              </option>
+              <option name="COLUMN_ID_WIDTH">
+                <map>
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="27" />
+                  <entry key="Table.Default.Date.ColumnIdWidth" value="32" />
+                  <entry key="Table.Space.CommitStatus.ColumnIdWidth" value="32" />
                 </map>
               </option>
             </State>
