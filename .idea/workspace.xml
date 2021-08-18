@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b32f48e5-b579-4972-b3d8-2d257eace8f5" name="변경" comment="8.12. home&#10;ReadFromRaw 이해 완">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="second" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -46,11 +49,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\haram\.conda\envs\ConnectAi\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/viewer" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/viewer/opentool.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/opentool.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -63,7 +66,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="b32f48e5-b579-4972-b3d8-2d257eace8f5" name="변경" comment="8.12. home&#10;ReadFromRaw 이해 완" />
+      <changelist id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="" />
       <created>1628049851292</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -125,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628699314439</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="8.18.&#10;add 8.15. dataset&#10;and modify function name">
+      <created>1629240115945</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1629240115945</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -144,7 +154,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/Taeyeong" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -161,6 +183,7 @@
     <MESSAGE value="8.11. home&#10;ReadFromRaw" />
     <MESSAGE value="8.11. home&#10;add datasets&#10;ReadFromRaw" />
     <MESSAGE value="8.12. home&#10;ReadFromRaw 이해 완" />
-    <option name="LAST_COMMIT_MESSAGE" value="8.12. home&#10;ReadFromRaw 이해 완" />
+    <MESSAGE value="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
+    <option name="LAST_COMMIT_MESSAGE" value="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
   </component>
 </project>
