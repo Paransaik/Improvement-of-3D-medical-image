@@ -78,17 +78,23 @@ class MyApp(QMainWindow):
         self.initUI()  # 멤버 메소드 호출
         
     def initUI(self):
-        openAction = QAction(QIcon('./icon/open.png'), 'open', self)
+        openDcmAction = QAction(QIcon('./icon/openDcm.png'), 'openDcm', self)
+        openRawAction = QAction(QIcon('./icon/openRaw.png'), 'openRaw', self)
+        exportRawAndBinAction = QAction(QIcon('./icon/save.png'), 'exportRaw', self)
         # saveAction = QAction(QIcon('./icon/save.png'), 'save', self)
         # optionAction = QAction(QIcon('./icon/option.png'), 'option', self)
 
-        openAction.triggered.connect(self.openImage)
+        openDcmAction.triggered.connect(self.openDcm)  # 메소드에 매핑
+        openRawAction.triggered.connect(self.openRaw)
+        exportRawAndBinAction.triggered.connect(self.exportRawAndBin)
         # saveAction.triggered.connect(self.saveImage)
         # optionAction.triggered.connect(self.optionImage)
 
         self.toolbar = self.addToolBar('ToolBar')
 
-        self.toolbar.addAction(openAction)
+        self.toolbar.addAction(openDcmAction)
+        self.toolbar.addAction(openRawAction)
+        self.toolbar.addAction(exportRawAndBinAction)
         # self.toolbar.addAction(saveAction)
         # self.toolbar.addAction(optionAction)
 
@@ -126,15 +132,15 @@ class MyApp(QMainWindow):
         # btn1.setShortcut('Ctrl+1')
         # btn2.setShortcut('Ctrl+2')
 
-        btn1.clicked.connect(self.stopButton) # 버튼 클릭시 연결될 메소드
+        btn1.clicked.connect(self.stopButton)  # 버튼 클릭시 연결될 메소드
         btn2.clicked.connect(self.s_rButton)
         btn3.clicked.connect(self.renderButton)
         btn4.clicked.connect(self.previousButton)
         btn5.clicked.connect(self.nextButton)
         btn6.clicked.connect(self.showDialog)
 
-        self.setWindowTitle('Test Image') # 타이틀바에 나타나는 창의 제목
-        self.setGeometry(100, 100, 1100, 600) # (move, resize)의 기능을 넣음, resize(w, h) : 위젯의 크기를 너비 w(px), 높이 h(px)로 조절
+        self.setWindowTitle('Test Image')  # 타이틀바에 나타나는 창의 제목
+        self.setGeometry(100, 100, 1100, 600)  # (move, resize)의 기능을 넣음, resize(w, h) : 위젯의 크기를 너비 w(px), 높이 h(px)로 조절
         self.show()
 
     # btn1(stop)가 클릭 되었을 때
@@ -182,11 +188,11 @@ class MyApp(QMainWindow):
         if len(self.EntireImage) == 0:
             print("아직 dataset이 들어오지 않았습니다.")
         else:
-            self.cur_idx = self.cur_idx + 1 # 다음 이미지 idx
-            if self.cur_idx > self.NofI-1:
-                self.cur_idx = self.NofI-1
+            self.cur_idx = self.cur_idx + 1  # 다음 이미지 idx
+            if self.cur_idx > self.NofI - 1:
+                self.cur_idx = self.NofI - 1
 
-            print("right and image=", self.cur_idx +1)
+            print("right and image =", self.cur_idx + 1)
             self.cur_image = self.EntireImage[self.cur_idx]
 
             image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
@@ -232,12 +238,12 @@ class MyApp(QMainWindow):
             self.wg.view_2.show()
 
     # 이미지 불러올 때 itk사용
-    def openImage(self):
+    def openDcm(self):
         # QFileDialog는 사용자가 파일 또는 경로를 선택할 수 있도록 하는 다이얼로그
         self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file', './image')  # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
 
         if self.imagePath == '':
-            print('openImage 종료')
+            print('openDcm 종료')
         else:
             self.folder_path = ''  # 다른 dataset으로의 변경을 위한 초기화
             for i in range(len(self.imagePath.split('/')) - 1):  # folder_path를 imagePath를 이용해서 구해야지만 앞으로 문제 발생 X
@@ -293,17 +299,32 @@ class MyApp(QMainWindow):
             self.wg.view_1.setMouseTracking(True)  # True일 때는 마우스 이동 감지
             self.wg.view_2.setMouseTracking(True)  # False일 때는 마우스 클릭시에만 이동 감지
 
-            # 임시
-            # fileName = self.folder_path.split('/')[-2]  # 현재 보고있는 .dcm파일의 Directory명
-            # path = './raw/' + fileName + '.raw'  # path 설정
-            # self.export_raw(path)
+    def openRaw(self):
+        return
 
-    def export_raw(self, path):  # export_raw로 connect된 버튼 하나 만들기
+    # DCM --> Raw, Bin
+    def exportRawAndBin(self):
         # if image is qPixelmap --> numpy array
-        print(type(self.EntireImage))  # 해당 dataset의 .dcm의 array형태가 모여있는 변수
-        print(self.EntireImage.shape)  # dataset1 기준 (20,512,512)
-        self.pyvoxel.NumpyArraytoVoxel(self.EntireImage)
-        self.pyvoxel.WriteToRaw(path)
+        # print(type(self.EntireImage))  # 해당 dataset의 .dcm의 array형태가 모여있는 변수
+        # print(self.EntireImage.shape)
+        # dataset1 기준 (20,512,512)
+        if self.imagePath == '':
+            print('exportRaw 종료')
+        else:
+            direName = self.folder_path.split('/')[-2]  # 현재 보고있는 .dcm파일의 Directory명
+            fileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
+
+            path = './raw/' + direName + '_' + fileName + '.raw'  # path 설정
+            self.vx.NumpyArraytoVoxel(self.EntireImage)
+            self.vx.WriteToRaw(path)
+
+            # 임시로 지정한 masking = 마스크값
+            self.masking = '';
+            if self.masking =='':  # 마스크 값이 있으면 WriteToRaw 실행
+                print('exportBin 종료')
+            else:
+                path = './Bin/' + direName + '_' + fileName + '.bin'  # path 설정
+                self.vx.WriteToBin(path)
 
     def AdjustPixelRange(self, image, level, width):  # Hounsfield 조절 함수
         # 수학 식

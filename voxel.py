@@ -111,12 +111,8 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
     def WriteToRaw(self, filename):
         # Header에는 영상의 크기, 컬러의 수, 펠리트 등 다양한 정보들이 들어있다.(기본적으로 가로, 세로 크기와 color정보)
         # 이미지를 출력할 때 반드시 필요한 정보가있다. 그래서 사용자의 정보 입력이 없이는 raw파일을 출력할 수 없다.
-        print('success WriteToRaw')
-        print(filename)
         HeaderDim = np.array([self.m_Org, self.m_nX, self.m_nY, self.m_nZ], dtype=np.int32)  # shape = (4,)
-        HeaderSpOrg = np.array([self.m_fXSp, self.m_fYSp, self.m_fZSp, self.m_fXOrg, self.m_fYOrg, self.m_fZOrg], dtype=np.float32) # shape = (6,)
-        print(HeaderDim)
-        print(HeaderSpOrg)
+        HeaderSpOrg = np.array([self.m_fXSp, self.m_fYSp, self.m_fZSp, self.m_fXOrg, self.m_fYOrg, self.m_fZOrg], dtype=np.float32)  # shape = (6,)
 
         Save = self.m_Voxel.astype(np.int16, copy=False)  # if the type of m_voxel is np.int16, copy operation isn't perform
 
