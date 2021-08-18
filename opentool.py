@@ -322,6 +322,7 @@ class MyApp(QMainWindow):
                 self.Ny = self.EntireImage.shape[2]  # Ny에서 받아주기는 하지만 [2]는 너비(x)가 아닌가?
 
                 self.cur_image = self.EntireImage[self.cur_idx]  # cur_image는 pixmap에 올라갈 image, cur_idx는 EntireImage에서 몇 번째 이미지를 올릴지 정하는 idx
+                # =============================================================================================
 
                 image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
                 image = qimage2ndarray.array2qimage(image)  # 배열에서 이미지로
@@ -341,7 +342,6 @@ class MyApp(QMainWindow):
                 self.wg.view_1.setMouseTracking(True)  # True일 때는 마우스 이동 감지
                 self.wg.view_2.setMouseTracking(True)  # False일 때는 마우스 클릭시에만 이동 감지
 
-                # =============================================================================================
                     # # 임시로 지정한 masking = 마스크값
                     # self.masking = '';
                     # if self.masking == '':  # 마스크 값이 있으면 WriteToRaw 실행
@@ -366,8 +366,8 @@ class MyApp(QMainWindow):
             self.vx.WriteToRaw(path)
 
             # 임시로 지정한 masking = 마스크값
-            self.masking = '';
-            if self.masking =='':  # 마스크 값이 있으면 WriteToRaw 실행
+            self.masking = ''
+            if self.masking == '':  # 마스크 값이 있으면 WriteToRaw 실행
                 print('exportBin 종료')
             else:
                 path = './bin/' + direName + '_' + fileName + '.bin'  # path 설정
