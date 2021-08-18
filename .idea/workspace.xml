@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.18. before add funtion write_bin">
+    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.18. make funtion exportRawAndBin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icon/openRaw.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw/dataset1.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw/dataset6.raw" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/voxel.py" beforeDir="false" afterPath="$PROJECT_DIR$/voxel.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -157,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629283723107</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="8.18. make funtion exportRawAndBin">
+      <created>1629287114866</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1629287114866</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -214,6 +220,7 @@
     <MESSAGE value="8.12. home&#10;ReadFromRaw 이해 완" />
     <MESSAGE value="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
     <MESSAGE value="8.18. before add funtion write_bin" />
-    <option name="LAST_COMMIT_MESSAGE" value="8.18. before add funtion write_bin" />
+    <MESSAGE value="8.18. make funtion exportRawAndBin" />
+    <option name="LAST_COMMIT_MESSAGE" value="8.18. make funtion exportRawAndBin" />
   </component>
 </project>

@@ -43,6 +43,7 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
         self.m_Voxel = []
 
     def ReadFromRaw(self, filename):  # 이미지 16비트
+        print('success ReadFromBin')
         with open(filename, 'rb') as f:  # rb = byte 형식으로 파일 읽기 # f.close를 매번하기 귀찮기 때문에 with를 사용, f는 instance
             try:
                 Header = np.tofile(f, dtype='int32', count=1)  # dtype이 int32인 data만 file로부터 받아오는?
@@ -77,7 +78,7 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
 
     def ReadFromBin(self, filename): # .bin 파일 읽는
             with open(filename, 'rb') as f:
-                # print('success ReadFromBin')
+                print('success ReadFromBin')
                 try:
                     Header = np.fromfile(f,dtype='int32', count=1)
                     self.m_Org = Header[0]

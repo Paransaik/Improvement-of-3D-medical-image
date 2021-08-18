@@ -79,13 +79,13 @@ class MyApp(QMainWindow):
         
     def initUI(self):
         openDcmAction = QAction(QIcon('./icon/openDcm.png'), 'openDcm', self)
-        openRawAction = QAction(QIcon('./icon/openRaw.png'), 'openRaw', self)
-        exportRawAndBinAction = QAction(QIcon('./icon/save.png'), 'exportRaw', self)
+        openRawAndBinAction = QAction(QIcon('./icon/openRawAndBin.png'), 'openRawAndBin', self)
+        exportRawAndBinAction = QAction(QIcon('./icon/exportRawAndBin.png'), 'exportRawAndBin', self)
         # saveAction = QAction(QIcon('./icon/save.png'), 'save', self)
         # optionAction = QAction(QIcon('./icon/option.png'), 'option', self)
 
         openDcmAction.triggered.connect(self.openDcm)  # 메소드에 매핑
-        openRawAction.triggered.connect(self.openRaw)
+        openRawAndBinAction.triggered.connect(self.openRawAndBin)
         exportRawAndBinAction.triggered.connect(self.exportRawAndBin)
         # saveAction.triggered.connect(self.saveImage)
         # optionAction.triggered.connect(self.optionImage)
@@ -93,7 +93,7 @@ class MyApp(QMainWindow):
         self.toolbar = self.addToolBar('ToolBar')
 
         self.toolbar.addAction(openDcmAction)
-        self.toolbar.addAction(openRawAction)
+        self.toolbar.addAction(openRawAndBinAction)
         self.toolbar.addAction(exportRawAndBinAction)
         # self.toolbar.addAction(saveAction)
         # self.toolbar.addAction(optionAction)
@@ -299,8 +299,34 @@ class MyApp(QMainWindow):
             self.wg.view_1.setMouseTracking(True)  # True일 때는 마우스 이동 감지
             self.wg.view_2.setMouseTracking(True)  # False일 때는 마우스 클릭시에만 이동 감지
 
-    def openRaw(self):
-        return
+    def openRawAndBin(self):
+            self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file', './image')  # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
+
+            if self.imagePath == '':
+                print('openDcm 종료')
+            else:
+                self.folder_path = ''  # 다른 dataset으로의 변경을 위한 초기화
+                for i in range(len(self.imagePath.split('/')) - 1):  # folder_path를 imagePath를 이용해서 구해야지만 앞으로 문제 발생 X
+                    if i == len(self.imagePath.split('/')) - 1:
+                        self.folder_path = self.folder_path + self.imagePath.split('/')[i]
+                    else:
+                        self.folder_path = self.folder_path + self.imagePath.split('/')[i] + '/'
+
+                direName = self.folder_path.split('/')[-2]  # 현재 보고있는 .dcm파일의 Directory명
+                fileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
+
+                print('folder_path =', self.folder_path)
+                print('self.imagePath =', self.imagePath)
+                # path = './raw/' + direName + '_' + fileName + '.raw'  # path 설정
+                self.vs.ReadFromRaw(self.folder_path)
+
+                # # 임시로 지정한 masking = 마스크값
+                # self.masking = '';
+                # if self.masking == '':  # 마스크 값이 있으면 WriteToRaw 실행
+                #     print('exportBin 종료')
+                # else:
+                #     path = './Bin/' + direName + '_' + fileName + '.bin'  # path 설정
+                #     self.vx.ReadFromBin(path)
 
     # DCM --> Raw, Bin
     def exportRawAndBin(self):
@@ -315,6 +341,7 @@ class MyApp(QMainWindow):
             fileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
 
             path = './raw/' + direName + '_' + fileName + '.raw'  # path 설정
+            print(path)
             self.vx.NumpyArraytoVoxel(self.EntireImage)
             self.vx.WriteToRaw(path)
 
