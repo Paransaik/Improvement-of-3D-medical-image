@@ -1,99 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ConnectAi.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icon/open.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icon/option.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icon/save.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img1-1.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img1.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img10-10.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img10.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img11-11.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img11.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img12-12.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img12.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img13-13.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img13.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img14-14.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img14.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img15-15.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img15.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img16-16.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img16.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img17-17.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img17.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img18-18.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img18.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img19-19.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img19.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img2-2.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img2.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img20-20.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img20.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img3-3.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img3.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img4-4.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img4.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img5-5.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img5.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img6-6.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img6.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img7-7.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img7.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img8-8.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img8.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img9-9.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img9.dcm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/3T_mask.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/PD.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/PD_rot.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/PD_rot.mgz.lta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/PD_rot.mgz.reg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T1.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T1_rot.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T1_rot.mgz.lta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T1_rot.mgz.reg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T2star.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T2star_rot.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T2star_rot.mgz.lta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T2star_rot.mgz.reg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/dti_fixed_coreg_dwi.nii" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash10.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash10_rot.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash10_rot.mgz.lta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash10_rot.mgz.reg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash20.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash20_rot.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash20_rot.mgz.lta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash20_rot.mgz.reg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash30.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash30_rot.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash30_rot.mgz.lta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash30_rot.mgz.reg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash40.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash40_rot.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash40_rot.mgz.lta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash40_rot.mgz.reg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash50.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash50_rot.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash50_rot.mgz.lta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash50_rot.mgz.reg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash60.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash60_rot.mgz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash60_rot.mgz.lta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash60_rot.mgz.reg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/rotation.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/rotation.lta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image/3T/3T/rotation.xfm" afterDir="false" />
+    <list default="true" id="b32f48e5-b579-4972-b3d8-2d257eace8f5" name="변경" comment="8.12. home&#10;ReadFromRaw 이해 완">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/voxel.py" beforeDir="false" afterPath="$PROJECT_DIR$/voxel.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +63,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="" />
+      <changelist id="b32f48e5-b579-4972-b3d8-2d257eace8f5" name="변경" comment="8.12. home&#10;ReadFromRaw 이해 완" />
       <created>1628049851292</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
