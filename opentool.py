@@ -212,7 +212,6 @@ class MyApp(QMainWindow):
     def showDialog(self):
         num, ok = QInputDialog.getInt(self, 'Input ImageNumber', 'Enter Num')  # 두 번째 파라미터(타이틀 바 제목), 세 번째 파라미터(EditHint?)
         self.cur_idx = num - 1  # idx로 변환해야하기 때문에 -1
-
         if len(self.EntireImage) == 0:
             print("아직 dataset이 들어오지 않았습니다.")
         elif self.cur_idx < 0 or self.cur_idx >= len(self.EntireImage):
@@ -241,7 +240,6 @@ class MyApp(QMainWindow):
     def openDcm(self):
         # QFileDialog는 사용자가 파일 또는 경로를 선택할 수 있도록 하는 다이얼로그
         self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file', './image')  # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
-
         if self.imagePath == '':
             print('openDcm 종료')
         else:
@@ -341,14 +339,13 @@ class MyApp(QMainWindow):
                 self.wg.view_2.mouseMoveEvent = self.mouseMoveEvent  # ...
                 self.wg.view_1.setMouseTracking(True)  # True일 때는 마우스 이동 감지
                 self.wg.view_2.setMouseTracking(True)  # False일 때는 마우스 클릭시에만 이동 감지
-
-                    # # 임시로 지정한 masking = 마스크값
-                    # self.masking = '';
-                    # if self.masking == '':  # 마스크 값이 있으면 WriteToRaw 실행
-                    #     print('openBin 종료')
-                    # else:
-                    #     path = './Bin/' + direName + '_' + fileName + '.bin'  # path 설정
-                    #     self.vx.ReadFromBin(path)
+                # # 임시로 지정한 masking = 마스크값
+                # self.masking = '';
+                # if self.masking == '':  # 마스크 값이 있으면 WriteToRaw 실행
+                #     print('openBin 종료')
+                # else:
+                #     path = './Bin/' + direName + '_' + fileName + '.bin'  # path 설정
+                #     self.vx.ReadFromBin(path)
 
     # DCM --> Raw, Bin
     # if image is qPixelmap --> numpy array
