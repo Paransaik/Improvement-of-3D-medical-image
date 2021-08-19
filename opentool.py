@@ -13,7 +13,7 @@ import qimage2ndarray
 import math
 
 import vtk
-from Rendering import Rendering   
+from Rendering import Rendering
 import voxel
 
 class MyWidget(QWidget): 
@@ -78,17 +78,23 @@ class MyApp(QMainWindow):
         self.initUI()  # 멤버 메소드 호출
         
     def initUI(self):
-        openAction = QAction(QIcon('./icon/open.png'), 'open', self)
+        openDcmAction = QAction(QIcon('./icon/openDcm.png'), 'openDcm', self)
+        openRawAndBinAction = QAction(QIcon('./icon/openRawAndBin.png'), 'openRawAndBin', self)
+        exportRawAndBinAction = QAction(QIcon('./icon/exportRawAndBin.png'), 'exportRawAndBin', self)
         # saveAction = QAction(QIcon('./icon/save.png'), 'save', self)
         # optionAction = QAction(QIcon('./icon/option.png'), 'option', self)
 
-        openAction.triggered.connect(self.openImage)
+        openDcmAction.triggered.connect(self.openDcm)  # 메소드에 매핑
+        openRawAndBinAction.triggered.connect(self.openRawAndBin)
+        exportRawAndBinAction.triggered.connect(self.exportRawAndBin)
         # saveAction.triggered.connect(self.saveImage)
         # optionAction.triggered.connect(self.optionImage)
 
         self.toolbar = self.addToolBar('ToolBar')
 
-        self.toolbar.addAction(openAction)
+        self.toolbar.addAction(openDcmAction)
+        self.toolbar.addAction(openRawAndBinAction)
+        self.toolbar.addAction(exportRawAndBinAction)
         # self.toolbar.addAction(saveAction)
         # self.toolbar.addAction(optionAction)
 
@@ -126,15 +132,15 @@ class MyApp(QMainWindow):
         # btn1.setShortcut('Ctrl+1')
         # btn2.setShortcut('Ctrl+2')
 
-        btn1.clicked.connect(self.stopButton) # 버튼 클릭시 연결될 메소드
+        btn1.clicked.connect(self.stopButton)  # 버튼 클릭시 연결될 메소드
         btn2.clicked.connect(self.s_rButton)
         btn3.clicked.connect(self.renderButton)
         btn4.clicked.connect(self.previousButton)
         btn5.clicked.connect(self.nextButton)
         btn6.clicked.connect(self.showDialog)
 
-        self.setWindowTitle('Test Image') # 타이틀바에 나타나는 창의 제목
-        self.setGeometry(100, 100, 1100, 600) # (move, resize)의 기능을 넣음, resize(w, h) : 위젯의 크기를 너비 w(px), 높이 h(px)로 조절
+        self.setWindowTitle('Test Image')  # 타이틀바에 나타나는 창의 제목
+        self.setGeometry(100, 100, 1100, 600)  # (move, resize)의 기능을 넣음, resize(w, h) : 위젯의 크기를 너비 w(px), 높이 h(px)로 조절
         self.show()
 
     # btn1(stop)가 클릭 되었을 때
@@ -182,11 +188,11 @@ class MyApp(QMainWindow):
         if len(self.EntireImage) == 0:
             print("아직 dataset이 들어오지 않았습니다.")
         else:
-            self.cur_idx = self.cur_idx + 1 # 다음 이미지 idx
-            if self.cur_idx > self.NofI-1:
-                self.cur_idx = self.NofI-1
+            self.cur_idx = self.cur_idx + 1  # 다음 이미지 idx
+            if self.cur_idx > self.NofI - 1:
+                self.cur_idx = self.NofI - 1
 
-            print("right and image=", self.cur_idx +1)
+            print("right and image =", self.cur_idx + 1)
             self.cur_image = self.EntireImage[self.cur_idx]
 
             image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
@@ -205,8 +211,7 @@ class MyApp(QMainWindow):
     # 사용자로부터 단순한 정수를 입력받는 것이 아니라 다양한 옵션 중 하나를 선택하고자 한다면 getItem 메소드를 사용
     def showDialog(self):
         num, ok = QInputDialog.getInt(self, 'Input ImageNumber', 'Enter Num')  # 두 번째 파라미터(타이틀 바 제목), 세 번째 파라미터(EditHint?)
-        self.cur_idx = num - 1
-
+        self.cur_idx = num - 1  # idx로 변환해야하기 때문에 -1
         if len(self.EntireImage) == 0:
             print("아직 dataset이 들어오지 않았습니다.")
         elif self.cur_idx < 0 or self.cur_idx >= len(self.EntireImage):
@@ -232,12 +237,11 @@ class MyApp(QMainWindow):
             self.wg.view_2.show()
 
     # 이미지 불러올 때 itk사용
-    def openImage(self):
+    def openDcm(self):
         # QFileDialog는 사용자가 파일 또는 경로를 선택할 수 있도록 하는 다이얼로그
         self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file', './image')  # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
-
         if self.imagePath == '':
-            print('openImage 종료')
+            print('openDcm 종료')
         else:
             self.folder_path = ''  # 다른 dataset으로의 변경을 위한 초기화
             for i in range(len(self.imagePath.split('/')) - 1):  # folder_path를 imagePath를 이용해서 구해야지만 앞으로 문제 발생 X
@@ -255,12 +259,11 @@ class MyApp(QMainWindow):
             # <class 'SimpleITK.SimpleITK.Image'> <class 'SimpleITK.SimpleITK.Image'>
             print(type(images[0]), type(images[1]))
 
-            ImgArray = itk.GetArrayFromImage(images)  # 이미지로부터 배열을 가져옴
-            print(ImgArray.shape)
-            self.EntireImage = np.asarray(ImgArray, dtype=np.float32)  # asarray는 데이터 형태가 다를 경우에만 복사(copy)가 된다.
-
-            self.EntireImage = np.squeeze(
-                self.EntireImage)  # (배열, 축)을 통해 지정된 축의 차원을 축소, (1, 1024, 1024) -> (1024, 1024)
+            imgArray = itk.GetArrayFromImage(images)  # 이미지로부터 배열을is_opened  가져옴
+            print(imgArray.shape)
+            # EntireImage Handler========================================================================
+            self.EntireImage = np.asarray(imgArray, dtype=np.float32)  # asarray는 데이터 형태가 다를 경우에만 복사(copy)가 된다.
+            self.EntireImage = np.squeeze(self.EntireImage)  # (배열, 축)을 통해 지정된 축의 차원을 축소, (1, 1024, 1024) -> (1024, 1024)
 
             print(self.EntireImage.shape)  # (6, 1024, 1024)
 
@@ -271,6 +274,7 @@ class MyApp(QMainWindow):
             self.Ny = self.EntireImage.shape[2]  # Ny에서 받아주기는 하지만 [2]는 너비(x)가 아닌가?
 
             self.cur_image = self.EntireImage[self.cur_idx]  # cur_image는 pixmap에 올라갈 image, cur_idx는 EntireImage에서 몇 번째 이미지를 올릴지 정하는 idx
+            #=============================================================================================
 
             # 보고 싶은 신체 부위가 있다면 HU table을 참고해 Window Center와 Window Width를 조절한 뒤 그 부분 위주로 출력해줄 수 있다.
             # WC를 중심으로 WW의 범위만큼을 중심적으로 표현해준다.
@@ -293,17 +297,78 @@ class MyApp(QMainWindow):
             self.wg.view_1.setMouseTracking(True)  # True일 때는 마우스 이동 감지
             self.wg.view_2.setMouseTracking(True)  # False일 때는 마우스 클릭시에만 이동 감지
 
-            # 임시
-            # fileName = self.folder_path.split('/')[-2]  # 현재 보고있는 .dcm파일의 Directory명
-            # path = './raw/' + fileName + '.raw'  # path 설정
-            # self.export_raw(path)
+    def openRawAndBin(self):
+            self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file', './')  # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
+            if self.imagePath == '':
+                print('openRaw 종료')
+            else:
+                print(self.imagePath)
+                self.vx.ReadFromRaw(self.imagePath)
 
-    def export_raw(self, path):  # export_raw로 connect된 버튼 하나 만들기
-        # if image is qPixelmap --> numpy array
-        print(type(self.EntireImage))  # 해당 dataset의 .dcm의 array형태가 모여있는 변수
-        print(self.EntireImage.shape)  # dataset1 기준 (20,512,512)
-        self.pyvoxel.NumpyArraytoVoxel(self.EntireImage)
-        self.pyvoxel.WriteToRaw(path)
+                imgArray = self.vx.m_Voxel  # 이미지로부터 배열을 가져옴
+                print('imgArray =', imgArray.shape)
+                # EntireImage Handler========================================================================
+                self.EntireImage = np.asarray(imgArray, dtype=np.float32)  # asarray는 데이터 형태가 다를 경우에만 복사(copy)가 된다.
+                self.EntireImage = np.squeeze(self.EntireImage)  # (배열, 축)을 통해 지정된 축의 차원을 축소, (1, 1024, 1024) -> (1024, 1024)
+
+                print('EntireImage =', self.EntireImage.shape)  # (6, 1024, 1024)
+
+                # 같은 이미지의 .dcm이 두 개가 된다면 EntireImage가 (2, n, n)이되서 프로그램 오류x
+                # 또한 같은 이미지의 .dcm 쌍이 두 개가 존재한다면 나머지 한 개의 이미지는 출력되지 않음..
+                self.NofI = self.EntireImage.shape[0]  # 같은 이미지 개수
+                self.Nx = self.EntireImage.shape[1]  # Nx에서 받아주기는 하지만 [1]은 높이(y)가 아닌가?
+                self.Ny = self.EntireImage.shape[2]  # Ny에서 받아주기는 하지만 [2]는 너비(x)가 아닌가?
+
+                self.cur_image = self.EntireImage[self.cur_idx]  # cur_image는 pixmap에 올라갈 image, cur_idx는 EntireImage에서 몇 번째 이미지를 올릴지 정하는 idx
+                # =============================================================================================
+
+                image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
+                image = qimage2ndarray.array2qimage(image)  # 배열에서 이미지로
+                image = QPixmap.fromImage(
+                    QImage(image))  # image를 입력해주고 QPixmap 객체를 하나 만든다. https://wikidocs.net/33768 < 참고하면 좋다.
+
+                self.wg.lbl_original_img.addPixmap(image)  # MyWidget에서 GraphicsScene()로 선언한 변수에 pixmap을 표시될 이미지로 설정
+                self.wg.view_1.setScene(self.wg.lbl_original_img)  # MyWidget에서 QGraphicsView()로 선언한 view_1의 화면으로 설정
+                self.wg.view_1.show()  # view_1 시작
+
+                self.wg.lbl_blending_img.addPixmap(image)  # 원래는 blending된 image를 넣어야 하지만 아직 blending 기능X
+                self.wg.view_2.setScene(self.wg.lbl_blending_img)
+                self.wg.view_2.show()
+
+                self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent  # view_1의 mouseMoveEvent 갱신
+                self.wg.view_2.mouseMoveEvent = self.mouseMoveEvent  # ...
+                self.wg.view_1.setMouseTracking(True)  # True일 때는 마우스 이동 감지
+                self.wg.view_2.setMouseTracking(True)  # False일 때는 마우스 클릭시에만 이동 감지
+                # # 임시로 지정한 masking = 마스크값
+                # self.masking = '';
+                # if self.masking == '':  # 마스크 값이 있으면 WriteToRaw 실행
+                #     print('openBin 종료')
+                # else:
+                #     path = './Bin/' + direName + '_' + fileName + '.bin'  # path 설정
+                #     self.vx.ReadFromBin(path)
+
+    # DCM --> Raw, Bin
+    # if image is qPixelmap --> numpy array
+    def exportRawAndBin(self):
+        if self.imagePath == '':
+            print('exportRaw 종료')
+        else:
+            direName = self.folder_path.split('/')[-2]  # 현재 보고있는 .dcm파일의 Directory명
+            dcmfileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
+            fileName = dcmfileName[:-4]  # 뒤에 확장자명 제거
+
+            path = './raw/' + direName + '_' + fileName + '.raw'  # 저장할 path 설정
+            print(path)
+            self.vx.NumpyArraytoVoxel(self.EntireImage)
+            self.vx.WriteToRaw(path)
+
+            # 임시로 지정한 masking = 마스크값
+            self.masking = ''
+            if self.masking == '':  # 마스크 값이 있으면 WriteToRaw 실행
+                print('exportBin 종료')
+            else:
+                path = './bin/' + direName + '_' + fileName + '.bin'  # path 설정
+                self.vx.WriteToBin(path)
 
     def AdjustPixelRange(self, image, level, width):  # Hounsfield 조절 함수
         # 수학 식
@@ -332,7 +397,7 @@ class MyApp(QMainWindow):
             rY = np.array(self.LRpoint[1])
 
             square = (rX - mX) * (rX - mX) + (rY - mY) * (rY - mY)
-            dist = math.sqrt(square)  # 거리
+            dist = math.sqrt(square) * 2  # 거리
 
             temp_wl = 0
             temp_ww = 0
