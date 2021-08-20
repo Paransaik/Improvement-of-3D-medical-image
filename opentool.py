@@ -25,8 +25,8 @@ class MyWidget(QWidget):
         self.view_1 = QGraphicsView(self.lbl_original_img)  # 원본 이미지
         self.view_2 = QGraphicsView(self.lbl_blending_img)  # 변환된 이미지 뷰
 
-        self.lbl_pos = QLabel()  # 비어있는 라벨? 생성 -> mouseMoveEvent()에서 .setText()를 이용해 계속 갱신
-        self.lbl_pos.setAlignment(Qt.AlignLeft)  # 라벨을 Center에 위치시킨다.
+        self.lbl_pos = QLabel() # 비어있는 라벨? 생성 -> mouseMoveEvent()에서 .setText()를 이용해 계속 갱신
+        self.lbl_pos.setAlignment(Qt.AlignLeft)  # 라벨을 AlignLeft에 위치시킨다.
 
         self.draw = QVBoxLayout() #오른쪽에 그리는 방법 펜 컬러 버러쉬 컬러 수정하는 창
 
@@ -36,10 +36,10 @@ class MyWidget(QWidget):
         box = QVBoxLayout()
         gb.setLayout(box)
 
-        text = ['Curve','polygon']
+        text = ['Curve','Polygon']
         self.radiobtns = []
         
-        for i in range(len(text)): #펜 사이즈를 설정하는 함수
+        for i in range(len(text)): # Curve, Polygon 위젯 생성 
             self.radiobtns.append(QRadioButton(text[i], self))
             self.radiobtns[i].clicked.connect(self.radioClicked)
             box.addWidget(self.radiobtns[i])
@@ -132,7 +132,7 @@ class MyWidget(QWidget):
         self.hbox1.addWidget(self.view_2)  # 폼 박스에 변환 이미지 위젯 추가
         self.hbox1.addLayout(self.draw)
 
-        self.hbox2.addWidget(self.lbl_pos) # H박스에 라벨 위젯 추가 (previous, next, ImgNum)
+        self.hbox2.addWidget(self.lbl_pos) # H박스에 위젯 추가 (previous, next, ImgNum 등)
         self.hbox2.addStretch(3)
         self.hbox2.addWidget(self.btn1)
         self.hbox2.addWidget(self.btn2)
@@ -145,21 +145,21 @@ class MyWidget(QWidget):
         self.vbox.addLayout(self.hbox1)
         self.vbox.addLayout(self.hbox2)
 
-        #draw레이아웃에 여백 공간 생성
+        # draw레이아웃에 여백 공간 생성
         self.draw.addStretch(1) 
 
         self.setLayout(self.vbox)  # addLayout(self.hbox)를 했기 때문에 setLayout을 vbox로
-        #hbox1안에 위젯들 여백 공간 설정
+        # hbox1안에 위젯들 여백 공간 설정
         self.vbox.setStretchFactor(self.hbox1, 1)
 
-    def radioClicked(self): #그리는 방법 설정에 뭘로 설정했는지 확인하는 함수
+    def radioClicked(self): # 그리는 방법 설정에 뭘로 설정했는지 확인하는 함수
         for i in range(len(self.radiobtns)):
             if self.radiobtns[i].isChecked():
                 self.drawType = i
                 break
-    def checkClicked(self): #지우개 부분에 뭘로 설정했는지 확인하는 함수
+    def checkClicked(self): # 지우개 부분에 뭘로 설정했는지 확인하는 함수
         pass
-    def showColorDlg(self): #펜컬러, 브러쉬 컬러 설정하는 함수       
+    def showColorDlg(self): # 펜컬러, 브러쉬 컬러 설정하는 함수       
          
         # 색상 대화상자 생성      
         color = QColorDialog.getColor()
@@ -561,7 +561,7 @@ class MyApp(QMainWindow):
         self.wg.lbl_pos.adjustSize() # 내용에 맞게 위젯의 크기를 조정한다. https://doc.qt.io/qt-5/qwidget.html#adjustSize
 
         if event.buttons() & QtCore.Qt.LeftButton: # 그리는 기능
-            print("################################################################")
+
             self.end = event.pos()
             
             if self.wg.drawType == 0: # 그리는 방법을 Curve로 설정했을경우 실행
@@ -579,8 +579,6 @@ class MyApp(QMainWindow):
  
                 polygon = QPolygonF(self.location)
                 self.items.append(self.wg.lbl_blending_img.addPolygon(polygon, pen, brush))
-        
-            print("111111111111111111111111111111111111111111111111111111111111")
 
         # mousePressEvent에서 클릭을 감지하면 True로 변경
         if self.LRClicked:
@@ -667,7 +665,7 @@ class MyApp(QMainWindow):
             x = event.globalX()
             y = event.globalY()
 
-            self.LRpoint = [x, y]  # 동시에 클릭했다면 x, y 갱신
+            self.LRpoint = [x, y]  
     
     def mouseReleaseEvent(self, event):        
  
