@@ -1,9 +1,8 @@
 import sys
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import (QApplication, QLabel, QMainWindow, QWidget,
-                             QHBoxLayout, QVBoxLayout, QAction, QFileDialog, QGraphicsView, QGraphicsScene)
-from PyQt5.QtGui import QPixmap, QIcon, QImage, QPainter, QFont
-from PyQt5.QtCore import Qt, QPointF
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import pydicom
 
@@ -33,18 +32,150 @@ class MyWidget(QWidget):
         self.lbl_pos = QLabel()  # 비어있는 라벨? 생성 -> mouseMoveEvent()에서 .setText()를 이용해 계속 갱신
         self.lbl_pos.setAlignment(Qt.AlignLeft)  # 라벨을 Center에 위치시킨다.
 
-        # 박스 형태를 그림으로 그리기
-        self.hbox = QHBoxLayout()  # 행( row) 방향(수평)으로 위젯을 배치할 때 사용하는 레이아웃
+        self.draw = QVBoxLayout()
 
-        # 행을 기준으로 배치하기 때문에 원본, 변환 이미지 위젯을 추가함
-        self.hbox.addWidget(self.view_1)  # 폼 박스에 원본 이미지 위젯 추가
-        self.hbox.addWidget(self.view_2)  # 폼 박스에 변환 이미지 위젯 추가
+        gb = QGroupBox('그리기 종류')
+        self.draw.addWidget(gb)
 
-        self.vbox = QVBoxLayout()  # 열(col) 방향(수직)으로 위젯을 배치할 때 사용
-        self.vbox.addLayout(self.hbox)
-        self.vbox.addWidget(self.lbl_pos)  # V박스에 라벨 위젯 추가 (previous, next, ImgNum)
+        box = QVBoxLayout()
+        gb.setLayout(box)
 
-        self.setLayout(self.vbox)  # addLayout(self.hbox)를 했기 때문에 setLayout을 vbox로
+        text = ['Curve','polygon']
+        self.radiobtns = []
+        
+        for i in range(len(text)):
+            self.radiobtns.append(QRadioButton(text[i], self))
+            self.radiobtns[i].clicked.connect(self.radioClicked)
+            box.addWidget(self.radiobtns[i])
+        self.radiobtns[0].setChecked(True)
+        self.drawType = 0
+         
+        
+        gb = QGroupBox('펜 설정')        
+        self.draw.addWidget(gb)        
+ 
+        grid = QGridLayout()      
+        gb.setLayout(grid)        
+ 
+        label = QLabel('선굵기')
+        grid.addWidget(label, 0, 0)
+ 
+        self.combo = QComboBox()
+        grid.addWidget(self.combo, 0, 1)       
+ 
+        for i in range(1, 21):
+            self.combo.addItem(str(i))
+ 
+        label = QLabel('선색상')
+        grid.addWidget(label, 1,0)        
+         
+        self.pencolor = QColor(0,0,0)
+        self.penbtn = QPushButton()        
+        self.penbtn.setStyleSheet('background-color: rgb(0,0,0)')
+        self.penbtn.clicked.connect(self.showColorDlg)
+        grid.addWidget(self.penbtn,1, 1)
+ 
+        # 그룹박스3
+        gb = QGroupBox('붓 설정')        
+        self.draw.addWidget(gb)
+
+        hbox = QHBoxLayout()
+        gb.setLayout(hbox)
+ 
+        label = QLabel('붓색상')
+        hbox.addWidget(label)                
+ 
+        self.brushcolor = QColor(255,255,255)
+        self.brushbtn = QPushButton()        
+        self.brushbtn.setStyleSheet('background-color: rgb(255,255,255)')
+        self.brushbtn.clicked.connect(self.showColorDlg)
+        hbox.addWidget(self.brushbtn)
+ 
+        # 그룹박스4
+        gb = QGroupBox('지우개')        
+        self.draw.addWidget(gb)
+ 
+        hbox = QHBoxLayout()
+        gb.setLayout(hbox)        
+         
+        self.checkbox  = QCheckBox('지우개 동작')
+        self.checkbox.stateChanged.connect(self.checkClicked)
+        hbox.addWidget(self.checkbox)   
+
+        self.hbox = QHBoxLayout()#수평으로 위젯을 설정
+
+        self.hbox.addWidget(self.view_1) #이미지 띄울공간 생성
+        self.hbox.addWidget(self.view_2)
+        self.hbox.addLayout(self.draw) 
+        
+
+        self.vbox = QVBoxLayout() #수직으로 위젯을 설정
+        self.vbox.addLayout(self.hbox) #밑에 버튼과 글씨를 출력하는 수직으로 설정함
+        self.vbox.addWidget(self.lbl_pos) #글자가 나오는 공간
+        
+        self.setLayout(self.vbox) #위젯을 나타냄
+  
+        self.draw.addStretch(1) 
+
+        self.vbox.setStretchFactor(self.draw, 0)
+        self.vbox.setStretchFactor(self.hbox, 1)
+
+    def radioClicked(self):
+        for i in range(len(self.radiobtns)):
+            if self.radiobtns[i].isChecked():
+                self.drawType = i
+                break
+    def checkClicked(self):
+        pass
+    def showColorDlg(self):       
+         
+        # 색상 대화상자 생성      
+        color = QColorDialog.getColor()
+ 
+        sender = self.sender()
+ 
+        # 색상이 유효한 값이면 참, QFrame에 색 적용
+        if sender == self.penbtn and color.isValid():           
+            self.pencolor = color
+            self.penbtn.setStyleSheet('background-color: {}'.format( color.name()))
+        else:
+            self.brushcolor = color
+            self.brushbtn.setStyleSheet('background-color: {}'.format( color.name()))
+
+class AdjustDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.setupUI()
+
+        self.level = int
+        self.width = int
+    
+    def setupUI(self):
+        self.setGeometry(1100, 200, 300, 100)
+        self.setWindowTitle("Sign In")
+        self.setWindowIcon(QIcon('icon.png'))
+
+        label1 = QLabel("level: ")
+        label2 = QLabel("Width: ")
+
+        self.lineEdit1 = QLineEdit()
+        self.lineEdit2 = QLineEdit()
+        self.pushButton1= QPushButton("입력 완료")
+        self.pushButton1.clicked.connect(self.pushButtonClicked)
+
+        layout = QGridLayout()
+        layout.addWidget(label1, 0, 0)
+        layout.addWidget(self.lineEdit1, 0, 1)
+        layout.addWidget(self.pushButton1, 0, 2)
+        layout.addWidget(label2, 1, 0)
+        layout.addWidget(self.lineEdit2, 1, 1)
+
+        self.setLayout(layout)
+    
+    def pushButtonClicked(self):
+        self.level = self.lineEdit1.text()
+        self.width = self.lineEdit2.text()
+        self.close()
 
 class MyApp(QMainWindow):
     def __init__(self):
@@ -70,11 +201,19 @@ class MyApp(QMainWindow):
         self.cur_image = []  # Pixmap에 올라갈 이미지, 왜 리스트 자료형으로 선언했는지 모르겠다.
         self.EntireImage = []  # Pixmap에 올라갈 이미지들을 가지고있는 Image(폴더?), 같은 사진(중복) .dcm파일들의 개수만큼 idx를 가지고 있으며 한 사진마다 blending 등을 수행하고 ImgNum버튼을 통해 각 사진별로 달라진점 확인 가능?
         self.adjustedImage = []  # 현재 사용X
+        self.location = [] #polygon의 위치 좌표
 
         self.vx = voxel.PyVoxel()  # 복셀 생성자 호출
 
         self.imagePath = ''  # 3D Rendering을 위한 변수 선언
         self.folder_path = ''  # 2D Rendering을 위한 변수 선언
+
+        self.viewer = QGraphicsView()
+        self.items = []
+        self.start = QPointF()
+        self.end = QPointF()
+        self.polygon = QPoint()
+        self.label = QLabel()
 
         self.wg = MyWidget()  # MyWidget 클래스를 사용하기 위해서 객체를 생성
         self.setCentralWidget(self.wg)  # QMainWindow 화면에 레이아웃과 위젯을 표시하기 위해사용
@@ -84,25 +223,27 @@ class MyApp(QMainWindow):
         openDcmAction = QAction(QIcon('./icon/openDcm.png'), 'openDcm', self)
         openRawAndBinAction = QAction(QIcon('./icon/openRawAndBin.png'), 'openRawAndBin', self)
         exportRawAndBinAction = QAction(QIcon('./icon/exportRawAndBin.png'), 'exportRawAndBin', self)
+        adjsutAction = QAction(QIcon('.icon/Adjust.png'), "Adjust", self)
         # saveAction = QAction(QIcon('./icon/save.png'), 'save', self)
         # optionAction = QAction(QIcon('./icon/option.png'), 'option', self)
 
         openDcmAction.triggered.connect(self.openDcm)  # 메소드에 매핑
         openRawAndBinAction.triggered.connect(self.openRawAndBin)
         exportRawAndBinAction.triggered.connect(self.exportRawAndBin)
+        adjsutAction.triggered.connect(self.AdjustDialogClicked)
         # saveAction.triggered.connect(self.saveImage)
         # optionAction.triggered.connect(self.optionImage)
 
         self.toolbar = self.addToolBar('ToolBar')
+        # self.toolbar = self.addToolBar("Adjust")
 
         self.toolbar.addAction(openDcmAction)
         self.toolbar.addAction(openRawAndBinAction)
         self.toolbar.addAction(exportRawAndBinAction)
-        # self.toolbar.addAction(saveAction)
-        # self.toolbar.addAction(optionAction)
+        self.toolbar = self.addToolBar("Adjust")
 
         # 푸시 버튼 또는 명렁 버튼은 사용자가 프로그램에 명령을 내려서 어떤 동작을 하도록 할 때 사용되는 버튼
-        btn1 = QPushButton('&Stop', self)  # &은 단축키를 지정하기 위해서 첫 번째 파라미터는 버튼에 나타날 텍스트, 두 번째 파라미터는 버튼이 속할 부모 클래스
+        btn1 = QPushButton('&Undo', self)  # &은 단축키를 지정하기 위해서 첫 번째 파라미터는 버튼에 나타날 텍스트, 두 번째 파라미터는 버튼이 속할 부모 클래스
         btn1.move(400, 565)  # 위젯을 스크린의 x=900px, y=300px의 위치로 이동
         btn1.setCheckable(True)  # 누른 상태와 그렇지 않은 상태를 구분한다.
         btn1.toggle()  # 버튼의 상태가 바뀌게 된다. 따라서 이 버튼은 프로그램이 시작될 때 선택되어 있다.
@@ -135,7 +276,7 @@ class MyApp(QMainWindow):
         # btn1.setShortcut('Ctrl+1')
         # btn2.setShortcut('Ctrl+2')
 
-        btn1.clicked.connect(self.stopButton)  # 버튼 클릭시 연결될 메소드
+        btn1.clicked.connect(self.undoButton)  # 버튼 클릭시 연결될 메소드
         btn2.clicked.connect(self.s_rButton)
         btn3.clicked.connect(self.renderButton)
         btn4.clicked.connect(self.previousButton)
@@ -143,12 +284,16 @@ class MyApp(QMainWindow):
         btn6.clicked.connect(self.showDialog)
 
         self.setWindowTitle('Test Image')  # 타이틀바에 나타나는 창의 제목
-        self.setGeometry(100, 100, 1100, 600)  # (move, resize)의 기능을 넣음, resize(w, h) : 위젯의 크기를 너비 w(px), 높이 h(px)로 조절
+        # self.setGeometry(100, 100, 1100, 600)  # (move, resize)의 기능을 넣음, resize(w, h) : 위젯의 크기를 너비 w(px), 높이 h(px)로 조절
+        self.setGeometry(300, 300, 1100, 600) #띄울 위치 2개 크기 2개
         self.show()
 
     # btn1(stop)가 클릭 되었을 때
-    def stopButton(self):
-        return 0
+    def undoButton(self):
+        print(self.items)
+        self.items.pop(-1)
+        print(self.items)
+        self.update()
 
     # btn2(s_r)가 클릭 되었을 때
     def s_rButton(self):
@@ -276,6 +421,10 @@ class MyApp(QMainWindow):
             self.Nx = self.EntireImage.shape[1]  # Nx에서 받아주기는 하지만 [1]은 높이(y)가 아닌가?
             self.Ny = self.EntireImage.shape[2]  # Ny에서 받아주기는 하지만 [2]는 너비(x)가 아닌가?
 
+            self.wg.view_1.setFixedSize(self.EntireImage.shape[1],self.EntireImage.shape[2] ) #원본이미지 공간 설정
+            self.wg.view_2.setFixedSize(self.EntireImage.shape[1], self.EntireImage.shape[2])
+            print("view size가", self.EntireImage.shape[1],"와",self.EntireImage.shape[2],"로 설정 되었습니다.")
+
             self.cur_image = self.EntireImage[self.cur_idx]  # cur_image는 pixmap에 올라갈 image, cur_idx는 EntireImage에서 몇 번째 이미지를 올릴지 정하는 idx
             #=============================================================================================
 
@@ -372,6 +521,30 @@ class MyApp(QMainWindow):
             else:
                 path = './bin/' + direName + '_' + fileName + '.bin'  # path 설정
                 self.vx.WriteToBin(path)
+    
+    def AdjustDialogClicked(self):
+        dlg = AdjustDialog()
+        dlg.exec_()
+        self.level = dlg.level
+        self.width = dlg.width
+        self.label.setText("level: %s width: %s" % (self.level, self.width))
+        self.level = int(self.level)
+        self.width = int(self.width)
+
+        image = self.AdjustPixelRange(self.cur_image, self.level, self.width) #이미지를 받아서 window의 높이와 너비를 바꿔서 image로 설정
+        
+        image = qimage2ndarray.array2qimage(image)  #Q이미지를 numpy array로 바꿈
+        image = QPixmap.fromImage(QImage(image))  #numpy array를 pixmap으로 변환
+        self.wg.lbl_original_img.addPixmap(image)  #원본이미지의 Q이미지를 pix맵으로 설정
+        self.wg.lbl_blending_img.addPixmap(image)  #라벨링 되어있는 이미지의 Q이미지를 pix맵으로 설정
+        self.wg.view_1.setScene(self.wg.lbl_original_img) #원본 이미지를 보도록 설정
+        self.wg.view_2.setScene(self.wg.lbl_blending_img) #라벨링 할 이미지를 보도록 설정
+        self.wg.view_1.show()#원본이미지를 띄움
+        self.wg.view_2.show()#라벨링 이미지를 띄움
+    
+    def onChanged(self,text):
+        self.lbl.setText(text)#마우스 위치를 알려주는 글을 입력
+        self.lbl.adjustSize()#위에서 설정한 text를 출력
 
     def AdjustPixelRange(self, image, level, width):  # Hounsfield 조절 함수
         # 수학 식
@@ -389,6 +562,28 @@ class MyApp(QMainWindow):
         txt = "마우스가 위치한 이미지의 좌표 ; x={0},y={1}".format(event.x(), event.y())
         self.wg.lbl_pos.setText(txt)
         self.wg.lbl_pos.adjustSize()  # 내용에 맞게 위젯의 크기를 조정한다. https://doc.qt.io/qt-5/qwidget.html#adjustSize
+
+        if event.buttons() & QtCore.Qt.LeftButton:
+            print("################################################################")
+            self.end = event.pos()
+            
+            if self.wg.drawType == 0:
+                pen = QPen(QColor(self.wg.pencolor),self.wg.combo.currentIndex())              
+                line = QLineF(self.start.x(), self.start.y(), self.end.x(), self.end.y())
+                self.items.append(self.wg.lbl_blending_img.addLine(line, pen))
+                 
+                # 시작점을 다시 기존 끝점으로
+                self.start = event.pos()
+
+            if self.wg.drawType == 1:
+                pen = QPen(QColor(self.wg.pencolor),self.wg.combo.currentIndex())
+                brush = QBrush(self.wg.brushcolor)
+ 
+ 
+                polygon = QPolygonF(self.location)
+                self.items.append(self.wg.lbl_blending_img.addPolygon(polygon, pen, brush))
+        
+            print("111111111111111111111111111111111111111111111111111111111111")
 
         # mousePressEvent에서 클릭을 감지하면 True로 변경
         if self.LRClicked:
@@ -468,6 +663,23 @@ class MyApp(QMainWindow):
             y = event.globalY()
 
             self.LRpoint = [x, y]  # 동시에 클릭했다면 x, y 갱신
+    
+    def mouseReleaseEvent(self, event):        
+ 
+        if event.button() == QtCore.Qt.LeftButton:
+ 
+            if self.wg.checkbox.isChecked():
+                return None
+ 
+            pen = QPen(QColor(self.wg.pencolor),self.wg.combo.currentIndex())
+
+            if self.wg.drawType == 1:
+ 
+                brush = QBrush(self.wg.brushcolor)
+ 
+                self.items.clear()
+                Polygon = QPolygonF(self.start, self.end)
+                self.wg.lbl_blending_img.addPolygon(Polygon, pen, brush)
 
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Control:
