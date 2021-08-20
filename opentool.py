@@ -50,6 +50,9 @@ class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()  # QMainWindow의 생성자 호출
         
+        self.bCtrl = False
+        self.zoom = QPointF()
+        
         self.LRpoint = [0, 0]  # 동시클릭 위치 저장변수
         self.LRClicked = False 
         self.window_level = 2700  # wl
