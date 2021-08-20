@@ -2,8 +2,8 @@ import sys
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import (QApplication, QLabel, QMainWindow, QWidget,
                              QHBoxLayout, QVBoxLayout, QAction, QFileDialog, QGraphicsView, QGraphicsScene)
-from PyQt5.QtGui import QPixmap, QIcon, QImage
-from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap, QIcon, QImage, QPainter, QFont
+from PyQt5.QtCore import Qt, QPointF
 from PyQt5.QtWidgets import *
 import pydicom
 
@@ -49,7 +49,10 @@ class MyWidget(QWidget):
 class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()  # QMainWindow의 생성자 호출
-        
+
+        self.bCtrl = False
+        self.zoom = QPointF()
+
         self.LRpoint = [0, 0]  # 동시클릭 위치 저장변수
         self.LRClicked = False 
         self.window_level = 2700  # wl
@@ -400,6 +403,22 @@ class MyApp(QMainWindow):
             y = event.globalY()
 
             self.LRpoint = [x, y]  # 동시에 클릭했다면 x, y 갱신
+
+    def keyPressEvent(self, e):
+        if e.key() == Qt.Key_Control:
+            self.bCtrl = True
+        self.update()
+
+    def keyReleaseEvent(self, e):
+        if e.key() == Qt.Key_Control:
+            self.bCtrl = False
+        self.update()
+
+    def wheelEvent(self, e):
+        if self.bCtrl:
+            print(self.zoom.y())#이 값에 514 곱하기
+            self.zoom += e.angleDelta() / 120
+        self.update()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

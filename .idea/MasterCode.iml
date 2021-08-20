@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.8 (MasterCode)" jdkType="Python SDK" />
+=======
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
+>>>>>>> 7ce738e75b51890c46700ae339363b5964b5d9fd
+=======
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+>>>>>>> 7ce738e75b51890c46700ae339363b5964b5d9fd
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

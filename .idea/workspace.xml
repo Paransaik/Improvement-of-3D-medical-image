@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
+    <list default="true" id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="8.20.&#10;add mouseWheelEvent">
+      <change beforePath="$PROJECT_DIR$/.idea/ConnectAi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ConnectAi.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/MasterCode.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MasterCode.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/voxel.py" beforeDir="false" afterPath="$PROJECT_DIR$/voxel.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,9 +40,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/.conda/envs/ConnectAi/python.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Opentool/main.py" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/viewer/voxel.py" />
@@ -48,7 +56,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\haram\.conda\envs\ConnectAi\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\NEW FACE\anaconda3\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -135,7 +143,28 @@
       <option name="project" value="LOCAL" />
       <updated>1629240115945</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="t.y. last commit">
+      <created>1629253646274</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1629253646274</updated>
+    </task>
+    <task id="LOCAL-00011" summary="8.20.&#10;add mouseWheelEvent">
+      <created>1629442360721</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1629442360721</updated>
+    </task>
+    <task id="LOCAL-00012" summary="8.20.&#10;add mouseWheelEvent">
+      <created>1629442686963</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1629442686963</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -184,6 +213,18 @@
     <MESSAGE value="8.11. home&#10;add datasets&#10;ReadFromRaw" />
     <MESSAGE value="8.12. home&#10;ReadFromRaw 이해 완" />
     <MESSAGE value="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
-    <option name="LAST_COMMIT_MESSAGE" value="8.18.&#10;add 8.15. dataset&#10;and modify function name" />
+    <MESSAGE value="t.y. last commit" />
+    <MESSAGE value="8.20.&#10;add mouseWheelEvent" />
+    <option name="LAST_COMMIT_MESSAGE" value="8.20.&#10;add mouseWheelEvent" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../Opentool/main.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
