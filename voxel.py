@@ -156,6 +156,17 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
         
         self.m_Voxel = data.astype(np.int16, copy=-False)  # .append로하면 겉에는 list가 된다.
 
+    def Create_Mask_Space(self, data):  # 넘파이 배열을 받으면
+        self.initialize()
+
+        Dim = data.shape  # shape = (,)
+        self.m_nX = Dim[2]  # shape는 (가로, 세로)가 아닌 (세로, 가로)의 순서이기 때문
+        self.m_nY = Dim[1]
+        self.m_nZ = Dim[0] 
+        
+        self.m_Voxel = data.astype(np.uint8, copy=-False)  # .append로하면 겉에는 list가 된다.
+
+
     def ConvertValue(self, SrcV, TarV): # 값을 변환시키는 함수? 
         idx = self.m_Voxel == SrcV
         self.m_Voxel[idx] = TarV

@@ -234,6 +234,8 @@ class MyApp(QMainWindow):
         self.EntireImage = []  # Pixmap에 올라갈 이미지들을 가지고있는 Image(폴더?), 같은 사진(중복) .dcm파일들의 개수만큼 idx를 가지고 있으며 한 사진마다 blending 등을 수행하고 ImgNum버튼을 통해 각 사진별로 달라진점 확인 가능?
         self.adjustedImage = []  # 현재 사용X
         self.location = [] #polygon의 위치 좌표
+        
+        self.mask_space = None
 
         self.vx = voxel.PyVoxel()  # 복셀 생성자 호출
 
@@ -414,6 +416,9 @@ class MyApp(QMainWindow):
             self.Nx = self.EntireImage.shape[1]  
             self.Ny = self.EntireImage.shape[2]  
 
+            temp_space = np.zeros(self.EntireImage.shape)
+            self.mask_space = self.vx.Create_Mask_Space(temp_space)
+
             # self.wg.view_1.setFixedSize(self.EntireImage.shape[1],self.EntireImage.shape[2]) # 이미지 크기에 맞게 view를 설정하면 너무 커지는 현상 발생  
             # self.wg.view_2.setFixedSize(self.EntireImage.shape[1], self.EntireImage.shape[2])
             print("view size가", self.EntireImage.shape[1],"와",self.EntireImage.shape[2],"로 설정 되었습니다.")
@@ -505,7 +510,7 @@ class MyApp(QMainWindow):
 
             # 임시로 지정한 masking = 마스크값
             self.masking = ''
-            if self.masking == '':  # 마스크 값이 있으면 WriteToRaw 실행
+            if self.masking == '':  # 마스크 값이 있으면 WriteToBin 실행
                 print('exportBin 종료')
             else:
                 path = './bin/' + direName + '_' + fileName + '.bin'  # path 설정
@@ -571,6 +576,7 @@ class MyApp(QMainWindow):
                  
                 # 시작점을 다시 기존 끝점으로
                 self.start = event.pos()
+                # self.mask_space
 
             if self.wg.drawType == 1: # 그리는 방법을 polygon으로 설정했을경우 실행
                 pen = QPen(QColor(self.wg.pencolor),self.wg.combo.currentIndex())
@@ -590,7 +596,7 @@ class MyApp(QMainWindow):
             rY = np.array(self.LRpoint[1])
 
             square = (rX - mX) * (rX - mX) + (rY - mY) * (rY - mY)
-            dist = math.sqrt(square) * 2  # 거리
+            dist = math.sqrt(square) * 2 + 1000  # 거리
 
             temp_wl = 0
             temp_ww = 0
@@ -697,7 +703,7 @@ class MyApp(QMainWindow):
     def wheelEvent(self, e):
         if self.bCtrl:
             print(self.zoom.y()) # 이 값에 514 곱하기
-            self.zoom += e.angleDelta() / 120
+            self.zoom += e.angleDelta() / 120   
         self.update()
 
 if __name__ == '__main__':
