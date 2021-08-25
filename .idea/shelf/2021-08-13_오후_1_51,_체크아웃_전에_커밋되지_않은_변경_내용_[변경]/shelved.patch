@@ -1,0 +1,192 @@
+Index: opentool.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/opentool.py b/opentool.py
+--- a/opentool.py	(revision 2a710bc18d6a78db704626c1f12e329a13cbe4c4)
++++ b/opentool.py	(date 1628830092529)
+@@ -1,1 +1,0 @@
+-.
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ca6369f7-6654-46a5-a8dd-9807bc485bac\" name=\"변경\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/README.md\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/icon/open.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/icon/option.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/icon/save.png\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img1-1.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img1.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img10-10.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img10.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img11-11.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img11.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img12-12.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img12.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img13-13.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img13.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img14-14.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img14.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img15-15.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img15.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img16-16.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img16.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img17-17.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img17.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img18-18.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img18.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img19-19.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img19.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img2-2.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img2.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img20-20.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img20.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img3-3.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img3.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img4-4.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img4.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img5-5.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img5.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img6-6.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img6.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img7-7.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img7.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img8-8.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img8.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img9-9.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/001.Seq1.Ser5.Img9.dcm\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/3T_mask.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/PD.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/PD_rot.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/PD_rot.mgz.lta\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/PD_rot.mgz.reg\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/T1.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/T1_rot.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/T1_rot.mgz.lta\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/T1_rot.mgz.reg\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/T2star.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/T2star_rot.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/T2star_rot.mgz.lta\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/T2star_rot.mgz.reg\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/dti_fixed_coreg_dwi.nii\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash10.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash10_rot.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash10_rot.mgz.lta\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash10_rot.mgz.reg\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash20.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash20_rot.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash20_rot.mgz.lta\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash20_rot.mgz.reg\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash30.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash30_rot.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash30_rot.mgz.lta\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash30_rot.mgz.reg\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash40.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash40_rot.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash40_rot.mgz.lta\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash40_rot.mgz.reg\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash50.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash50_rot.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash50_rot.mgz.lta\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash50_rot.mgz.reg\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash60.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash60_rot.mgz\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash60_rot.mgz.lta\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/flash60_rot.mgz.reg\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/rotation.dat\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/rotation.lta\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/image/3T/3T/rotation.xfm\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/opentool.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/opentool.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/voxel.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/voxel.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1wFMOWACWrqF3YWN0X0DPeEBC6l\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$USER_HOME$/.conda/envs/ConnectAi/python.exe\" />\r\n    <property name=\"restartRequiresConfirmation\" value=\"false\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable\" />\r\n    <property name=\"two.files.diff.last.used.file\" value=\"$PROJECT_DIR$/viewer/voxel.py\" />\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"opentool\" type=\"PythonConfigurationType\" factoryName=\"Python\" nameIsGenerated=\"true\">\r\n      <module name=\"ConnectAi\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"C:\\Users\\haram\\.conda\\envs\\ConnectAi\\python.exe\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/viewer\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/viewer/opentool.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"애플리케이션 수준\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"디폴트 작업\">\r\n      <changelist id=\"ca6369f7-6654-46a5-a8dd-9807bc485bac\" name=\"변경\" comment=\"\" />\r\n      <created>1628049851292</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1628049851292</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"add save icon\">\r\n      <created>1628163234962</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1628163234962</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"8.5. home&#10;add image file\">\r\n      <created>1628164669938</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1628164669938</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"8.6. home\">\r\n      <created>1628223034785</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1628223034785</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"8.10. home&#10;Add Annotation\">\r\n      <created>1628526993290</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1628526993290</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"8.10. home&#10;ReadFromRaw\">\r\n      <created>1628532447824</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1628532447824</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"8.11. home&#10;ReadFromRaw\">\r\n      <created>1628691239411</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1628691239411</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"8.11. home&#10;add datasets&#10;ReadFromRaw\">\r\n      <created>1628691252229</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1628691252229</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"8.12. home&#10;ReadFromRaw 이해 완\">\r\n      <created>1628699314439</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1628699314439</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"9\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.History.Properties\">\r\n    <option name=\"COLUMN_ID_ORDER\">\r\n      <list>\r\n        <option value=\"Default.Root\" />\r\n        <option value=\"Default.Author\" />\r\n        <option value=\"Default.Date\" />\r\n        <option value=\"Default.Subject\" />\r\n        <option value=\"Space.CommitStatus\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"add save icon\" />\r\n    <MESSAGE value=\"8.5. home&#10;add image file\" />\r\n    <MESSAGE value=\"8.6. home\" />\r\n    <MESSAGE value=\"8.10. home&#10;Add Annotation\" />\r\n    <MESSAGE value=\"8.10. home&#10;ReadFromRaw\" />\r\n    <MESSAGE value=\"8.11. home&#10;ReadFromRaw\" />\r\n    <MESSAGE value=\"8.11. home&#10;add datasets&#10;ReadFromRaw\" />\r\n    <MESSAGE value=\"8.12. home&#10;ReadFromRaw 이해 완\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"8.12. home&#10;ReadFromRaw 이해 완\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 2a710bc18d6a78db704626c1f12e329a13cbe4c4)
++++ b/.idea/workspace.xml	(date 1628830182403)
+@@ -1,92 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="">
+-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/icon/open.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/icon/option.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/icon/save.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img1-1.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img1.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img10-10.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img10.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img11-11.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img11.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img12-12.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img12.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img13-13.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img13.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img14-14.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img14.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img15-15.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img15.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img16-16.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img16.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img17-17.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img17.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img18-18.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img18.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img19-19.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img19.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img2-2.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img2.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img20-20.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img20.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img3-3.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img3.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img4-4.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img4.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img5-5.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img5.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img6-6.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img6.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img7-7.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img7.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img8-8.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img8.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img9-9.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/001.Seq1.Ser5.Img9.dcm" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/3T_mask.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/PD.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/PD_rot.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/PD_rot.mgz.lta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/PD_rot.mgz.reg" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T1.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T1_rot.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T1_rot.mgz.lta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T1_rot.mgz.reg" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T2star.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T2star_rot.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T2star_rot.mgz.lta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/T2star_rot.mgz.reg" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/dti_fixed_coreg_dwi.nii" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash10.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash10_rot.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash10_rot.mgz.lta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash10_rot.mgz.reg" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash20.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash20_rot.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash20_rot.mgz.lta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash20_rot.mgz.reg" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash30.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash30_rot.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash30_rot.mgz.lta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash30_rot.mgz.reg" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash40.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash40_rot.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash40_rot.mgz.lta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash40_rot.mgz.reg" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash50.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash50_rot.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash50_rot.mgz.lta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash50_rot.mgz.reg" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash60.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash60_rot.mgz" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash60_rot.mgz.lta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/flash60_rot.mgz.reg" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/rotation.dat" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/rotation.lta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/image/3T/3T/rotation.xfm" afterDir="false" />
++    <list default="true" id="ca6369f7-6654-46a5-a8dd-9807bc485bac" name="변경" comment="8.12. home&#10;ReadFromRaw 이해 완">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/voxel.py" beforeDir="false" afterPath="$PROJECT_DIR$/voxel.py" afterDir="false" />
+@@ -97,6 +12,11 @@
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+   </component>
+   <component name="Git.Settings">
++    <option name="RECENT_BRANCH_BY_REPOSITORY">
++      <map>
++        <entry key="$PROJECT_DIR$" value="second" />
++      </map>
++    </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="GitSEFilterConfiguration">
+@@ -125,19 +45,19 @@
+     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/viewer/voxel.py" />
+   </component>
+   <component name="RunManager">
+-    <configuration name="opentool" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+-      <module name="ConnectAi" />
++    <configuration name="opentool" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+       <envs>
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+-      <option name="SDK_HOME" value="C:\Users\haram\.conda\envs\ConnectAi\python.exe" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/viewer" />
++      <option name="SDK_HOME" value="C:\Users\haram\.conda\envs\Online-Realtime-Action-Recognition-based-on-OpenPose-master\python.exe" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+       <option name="IS_MODULE_SDK" value="false" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/viewer/opentool.py" />
++      <module name="" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/opentool.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -146,6 +66,11 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Python.opentool" />
++      </list>
++    </recent_temporary>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+Index: voxel.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import numpy as np\r\nimport sys\r\n# b는 바이너리의 약자 \r\nclass PyVoxel: # Voxel은 Volumn과 pixel의 합성어\r\n\r\nclass PyVoxel:\r\n    # Raw 이미지 파일은 이미지 파일 포맷 중 하나로 디지털 카메라나 이미지 스캐너의 이미지 센서로부터 최소한으로 처리한 데이터를 포함하고있다.\r\n    # 전혀 가공되지 않은 상태이며 촬상매체에 감지된 빛의 세기에 대한 정보만을 담고있다.\r\n    # raw는 JPEG보다 수많은 이점을 가지고 있다.\r\n    # 더 높은 화질, 무손실 압축, 섬세한 제어, 색 공간은 사용자가 원하는 대로 설정할 수 있다.\r\n\r\n    # BIN파일은 다른 회사의 디스크 이미지 개발 및 편집 응용 프로그램의 다양한 만든 파일이다. \r\n    # 이 파일의 내용은 바이너리 형태이다. \r\n    # 텍스트 파일이아닌 컴퓨터 파일이다. \r\n    # 바이너리파일은 '한 줄에 해당하는 데이터를 읽어라'와 같은 명령을 사용하지 않고 '10 바이트를 읽어라'로 사용\r\n\r\n    def __init__(self):\r\n        self.m_Org = -1 # 지금 신경안써도된다. 다 255로 되어있을 것이다. , 순서가 뒤바꼈을 경우를 대비한것이다.\r\n        self.m_nX = 0 # 픽셀 개수\r\n        self.m_nY = 0 # ...\r\n        self.m_nZ = 0 #... \r\n\r\n        self.m_fXSp=1.0 # Spacing(sp) : 사진끼리 떨어져있는 거리(x)\r\n        self.m_fYSp=1.0 # ...(y)\r\n        self.m_fZSp=1.0 # ...(z)\r\n\r\n        self.m_fXOrg=-1.0 # Org면 오리지널? \r\n        self.m_fYOrg=-1.0\r\n        self.m_fZOrg=-1.0\r\n\r\n        self.m_Voxel = []\r\n\r\n    def initialize(self): # 변수들의 초기 내용을 설정 \r\n        self.m_Org = -1\r\n        self.m_nX = 0\r\n        self.m_nY = 0\r\n        self.m_nZ = 0\r\n\r\n        self.m_fXSp = 1.0 # Spacing(sp) : 사진끼리 떨어져있는 거리(x)\r\n        self.m_fYSp = 1.0 # ...(y)\r\n        self.m_fZSp = 1.0 # ...(z)\r\n\r\n        self.m_fXOrg = -1.0\r\n        self.m_fYOrg = -1.0\r\n        self.m_fZOrg = -1.0\r\n        self.m_Voxel = []\r\n\r\n\r\n    def ReadFromRaw(self, filename): # 이미지 16비트\r\n        with open(filename, 'rb') as f: # rb = byte 형식으로 파일 읽기 # f.close를 매번하기 귀찮기 때문에 with를 사용, f는 instance\r\n            try:\r\n                Header = np.tofile(f, dtype='int32', count=1) # dtype이 int32인 data만 file로부터 받아오는?\r\n                self.m_Org = Header[0] # header는 Raw파일에 첫 두바이트를 m_org를 넣었다. 저게 -1이라면 \r\n                                        # 만약 -1이 아니라면 숫자란 이야기다 256이 들어있다.\r\n                if self.m_Org == -1: # 데이터가 거꾸로 뒤집어진? 경우 \r\n                    Header = np.fromfile(f, dtype='float32', count=6) # \"x, y, z spacing\", \"x, y, z orgin\"\r\n\r\n                    self.m_fXSp = Header[0]\r\n                    self.m_fYSp = Header[1]\r\n                    self.m_fZSp = Header[2]\r\n\r\n                    self.m_fXOrg = Header[3]\r\n                    self.m_fYOrg = Header[4]\r\n                    self.m_fZOrg = Header[5]\r\n\r\n                    Header = np.fromfile(f, dtype='int32', count=1) # \"nX\"\r\n                    self.m_nX = Header[0]\r\n                else: # 정상일 경우\r\n                    self.m_nX = self.m_Org # m_nX는 X크기 but, Header[1] = m_nX 값일텐데 왜? \r\n\r\n                Header = np.fromfile(f, dtype='int32', count=2) # nY nZ\r\n                self.m_nY = Header[0]\r\n                self.m_nZ = Header[1]\r\n\r\n                Data = np.fromfile(f, dtype='int16', count=self.m_nX*self.m_nY*self.m_nZ)\r\n                self.m_Voxel = np.reshape(Data, (self.m_nZ, self.m_nY, self.m_nX))\r\n\r\n            except IOError:\r\n                print('Could not read file ' + filename)\r\n                sys.exit()\r\n\r\n    def ReadFromBin(self,filename): # .bin 파일 읽는\r\n            with open(filename,'rb') as f:\r\n                try:\r\n                    Header = np.fromfile(f,dtype='int32', count=1)\r\n                    self.m_Org = Header[0]\r\n\r\n                    if self.m_Org == -1:\r\n                        Header = np.fromfile(f, dtype='float32', count=6)\r\n                        self.m_fXSp = Header[0]\r\n                        self.m_fYSp = Header[1]\r\n                        self.m_fZSp = Header[2]\r\n\r\n                        self.m_fXOrg = Header[3]\r\n                        self.m_fYOrg = Header[4]\r\n                        self.m_fZOrg = Header[5]\r\n\r\n                        Header = np.fromfile(f, dtype='int32', count=1)\r\n                        self.m_nX = Header[0]\r\n                    else:\r\n                        self.m_nX = self.m_Org\r\n\r\n                    Header = np.fromfile(f, dtype='int32', count=2)\r\n                    self.m_nY = Header[0]\r\n                    self.m_nZ = Header[1]\r\n\r\n                    Data = np.fromfile(f, dtype='uint8', count=self.m_nX*self.m_nY*self.m_nZ)\r\n                    self.m_Voxel = np.reshape(Data, (self.m_nZ, self.m_nY, self.m_nX))\r\n\r\n                except IOError:\r\n                    print('Could not read file' + filename)\r\n                    sys.exit()\r\n\r\n    def WriteToRaw(self, filename):\r\n        # Header에는 영상의 크기, 컬러의 수, 펠리트 등 다양한 정보들이 들어있다.(기본적으로 가로, 세로 크기와 color정보)\r\n        # 이미지를 출력할 때 반드시 필요한 정보가있다. 그래서 사용자의 정보 입력이 없이는 raw파일을 출력할 수 없다.\r\n        print('success WriteToRaw')\r\n        print(filename)\r\n        HeaderDim = np.array([self.m_Org, self.m_nX, self.m_nY, self.m_nZ], dtype=np.int32) # shape = (4,)\r\n        HeaderSpOrg = np.array([self.m_fXSp, self.m_fYSp, self.m_fZSp, self.m_fXOrg, self.m_fYOrg, self.m_fZOrg], dtype=np.float32) # shape = (6,)\r\n        print(HeaderDim)\r\n        print(HeaderSpOrg)\r\n\r\n        Save = self.m_Voxel.astype(np.int16, copy=False) # if the type of m_voxel is np.int16, copy operation isn't perform\r\n\r\n        with open(filename,'wb') as f: # 쓰기 전용으로 파일 오픈\r\n            HeaderDim[0].tofile(f) # self.m_Org를 넣는다.\r\n            HeaderSpOrg.tofile(f) # HeaderSpOrg\r\n            HeaderDim[1:].tofile(f) # HeaderDim의 값을 넣는다.\r\n            Save.tofile(f) # .\r\n            \r\n    def WriteToBin(self, filename):\r\n        print('success WriteToBin')\r\n        HeaderDim = np.array([self.m_Org, self.m_nX, self.m_nY, self.m_nZ], dtype=np.int32)\r\n        HeaderSpOrg = np.array([self.m_fXSp, self.m_fYSp, self.m_fZSp, self.m_fXOrg, self.m_fYOrg, self.m_fZOrg], dtype=np.float32)\r\n\r\n        Save = self.m_Voxel.astype(np.uint8, copy=False)\r\n\r\n        with open(filename, 'wb') as f:\r\n            HeaderDim[0].tofile(f)\r\n            HeaderSpOrg.tofile(f)\r\n            HeaderDim[1:].tofile(f)\r\n            Save.tofile(f)\r\n\r\n\r\n    def AdjustPixelRange(self, Lower, Upper): # WL, WW를 설정\r\n        # version 2 \r\n        range_ratio = (Upper - Lower) / 256.0\r\n        pData = self.m_Voxel\r\n\r\n        img_adjusted = (pData - Lower)/range_ratio\r\n        img_adjusted = img_adjusted.clip(0, 255)\r\n        return img_adjusted\r\n\r\n\r\n    def NumpyArraytoVoxel(self, data): # 넘파이 배열을 받으면   \r\n        self.initialize()\r\n\r\n        Dim = data.shape # shape = (,)\r\n        self.m_nX = Dim[2] # shape는 (가로, 세로)가 아닌 (세로, 가로)의 순서이기 때문 \r\n        self.m_nY = Dim[1]\r\n        self.m_nZ = Dim[0] \r\n        \r\n        self.m_Voxel = data.astype(np.int16, copy = False) # .append로하면 겉에는 list가 된다.\r\n\r\n    def ConvertValue(self, SrcV, TarV): # 값을 변환시키는 함수? \r\n        idx = self.m_Voxel == SrcV\r\n        self.m_Voxel[idx] = TarV\r\n\r\n    def SaveWithoutHeader(self, filename): # Header 없이 저장하는 버전 \r\n        print('success SaveWithoutHeader')\r\n        Save = self.m_Voxel.astype(np.uint8, copy=False)\r\n        print(Save)\r\n        with open(filename, 'wb') as f:\r\n            Save.tofile(f)\r\n\r\n    def Normalize(self):\r\n        self.m_Voxel = self.m_Voxel.astype(np.float32, copy=False)\r\n        maxvalue = np.max(self.m_Voxel) # m_Voxel의 가장 큰 값을 뽑아낸다. \r\n        print(maxvalue)\r\n        self.m_Voxel = self.m_Voxel/maxvalue # 0.~으로 정규화 된다. \r\n\r\n    def NormalizeMM(self):\r\n        self.m_Voxel = self.m_Voxel.astype(np.float32, copy = False)\r\n        maxvalue = np.max(self.m_Voxel) # m_Voxel의 가장 큰 값을 뽑아낸다.\r\n        minvalue = np.min(self.m_Voxel) # m_Voxel의 가장 작은 값을 뽑아낸다.\r\n\r\n        diff = maxvalue - minvalue\r\n        self.m_Voxel = (self.m_Voxel - minvalue)/diff\r\n\r\n    def AdjustPixelRangeNormalize(self, Upper): # version 1? \r\n        self.m_Voxel = self.m_Voxel.astype(np.float32, copy = False)\r\n        minvalue = np.min(self.m_Voxel)\r\n        self.m_Voxel = self.m_Voxel.clip(minvalue, Upper)\r\n\r\n        diff = Upper - minvalue\r\n        self.m_Voxel = (self.m_Voxel - minvalue)/diff
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/voxel.py b/voxel.py
+--- a/voxel.py	(revision 2a710bc18d6a78db704626c1f12e329a13cbe4c4)
++++ b/voxel.py	(date 1628830050014)
+@@ -1,7 +1,6 @@
+ import numpy as np
+ import sys
+ # b는 바이너리의 약자 
+-class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
+ 
+ class PyVoxel:
+     # Raw 이미지 파일은 이미지 파일 포맷 중 하나로 디지털 카메라나 이미지 스캐너의 이미지 센서로부터 최소한으로 처리한 데이터를 포함하고있다.
+@@ -13,7 +12,6 @@
+     # 이 파일의 내용은 바이너리 형태이다. 
+     # 텍스트 파일이아닌 컴퓨터 파일이다. 
+     # 바이너리파일은 '한 줄에 해당하는 데이터를 읽어라'와 같은 명령을 사용하지 않고 '10 바이트를 읽어라'로 사용
+-
+     def __init__(self):
+         self.m_Org = -1 # 지금 신경안써도된다. 다 255로 되어있을 것이다. , 순서가 뒤바꼈을 경우를 대비한것이다.
+         self.m_nX = 0 # 픽셀 개수
