@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.25.&#10;1. 예외처리&#10;  - OPEN DCM 버튼 클릭 시 DCM 외 다른 파일 예외 처리&#10;  - OPEN RAW 버튼 클릭 시 RAW 외 다른 파일 예외 처리&#10;2. BIN 파일 읽고 쓰기&#10;  - OPEN RAW 버튼 클릭 시 저장 된 BIN을 함께 불러 옴&#10;  - SAVE RAW 버튼 클릭 시 RAW 파일과 BIN 파일 함께 저장&#10;3. DCM 파일을 열었을 때 RAW 파일로 저장은 되지만, RAW파일을 열었을 때 RAW 파일로 저장 안되는 버그 수정 &#10;4. Curve로 그림 그릴 시 최초 x, y 좌푯값 안맞는 버그 수정">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_19_9_50__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_08_19_9_50__________.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56__________.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56__________1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56__________1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/voxel.py" beforeDir="false" afterPath="$PROJECT_DIR$/voxel.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +10,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="second" />
@@ -212,7 +209,21 @@
       <option name="project" value="LOCAL" />
       <updated>1629870651200</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="8.25.&#10;1. 예외처리&#10;  - OPEN DCM 버튼 클릭 시 DCM 외 다른 파일 예외 처리&#10;  - OPEN RAW 버튼 클릭 시 RAW 외 다른 파일 예외 처리&#10;2. BIN 파일 읽고 쓰기&#10;  - OPEN RAW 버튼 클릭 시 저장 된 BIN을 함께 불러 옴&#10;  - SAVE RAW 버튼 클릭 시 RAW 파일과 BIN 파일 함께 저장&#10;3. DCM 파일을 열었을 때 RAW 파일로 저장은 되지만, RAW파일을 열었을 때 RAW 파일로 저장 안되는 버그 수정 &#10;4. Curve로 그림 그릴 시 최초 x, y 좌푯값 안맞는 버그 수정">
+      <created>1629904819594</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1629904819594</updated>
+    </task>
+    <task id="LOCAL-00020" summary="8.25.&#10;1. 예외처리&#10;  - OPEN DCM 버튼 클릭 시 DCM 외 다른 파일 예외 처리&#10;  - OPEN RAW 버튼 클릭 시 RAW 외 다른 파일 예외 처리&#10;2. BIN 파일 읽고 쓰기&#10;  - OPEN RAW 버튼 클릭 시 저장 된 BIN을 함께 불러 옴&#10;  - SAVE RAW 버튼 클릭 시 RAW 파일과 BIN 파일 함께 저장&#10;3. DCM 파일을 열었을 때 RAW 파일로 저장은 되지만, RAW파일을 열었을 때 RAW 파일로 저장 안되는 버그 수정 &#10;4. Curve로 그림 그릴 시 최초 x, y 좌푯값 안맞는 버그 수정">
+      <created>1629904863312</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1629904863312</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -276,6 +287,7 @@
     <MESSAGE value="8.19.&#10;Things done modify-merge" />
     <MESSAGE value="8.25.&#10;before pull main commit" />
     <MESSAGE value="8.25.&#10;after pull main" />
-    <option name="LAST_COMMIT_MESSAGE" value="8.25.&#10;after pull main" />
+    <MESSAGE value="8.25.&#10;1. 예외처리&#10;  - OPEN DCM 버튼 클릭 시 DCM 외 다른 파일 예외 처리&#10;  - OPEN RAW 버튼 클릭 시 RAW 외 다른 파일 예외 처리&#10;2. BIN 파일 읽고 쓰기&#10;  - OPEN RAW 버튼 클릭 시 저장 된 BIN을 함께 불러 옴&#10;  - SAVE RAW 버튼 클릭 시 RAW 파일과 BIN 파일 함께 저장&#10;3. DCM 파일을 열었을 때 RAW 파일로 저장은 되지만, RAW파일을 열었을 때 RAW 파일로 저장 안되는 버그 수정 &#10;4. Curve로 그림 그릴 시 최초 x, y 좌푯값 안맞는 버그 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="8.25.&#10;1. 예외처리&#10;  - OPEN DCM 버튼 클릭 시 DCM 외 다른 파일 예외 처리&#10;  - OPEN RAW 버튼 클릭 시 RAW 외 다른 파일 예외 처리&#10;2. BIN 파일 읽고 쓰기&#10;  - OPEN RAW 버튼 클릭 시 저장 된 BIN을 함께 불러 옴&#10;  - SAVE RAW 버튼 클릭 시 RAW 파일과 BIN 파일 함께 저장&#10;3. DCM 파일을 열었을 때 RAW 파일로 저장은 되지만, RAW파일을 열었을 때 RAW 파일로 저장 안되는 버그 수정 &#10;4. Curve로 그림 그릴 시 최초 x, y 좌푯값 안맞는 버그 수정" />
   </component>
 </project>

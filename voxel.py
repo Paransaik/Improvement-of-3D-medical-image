@@ -166,7 +166,6 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
         
         self.m_Voxel = data.astype(np.uint8, copy=-False)  # .append로하면 겉에는 list가 된다.
 
-
     def ConvertValue(self, SrcV, TarV): # 값을 변환시키는 함수? 
         idx = self.m_Voxel == SrcV
         self.m_Voxel[idx] = TarV
