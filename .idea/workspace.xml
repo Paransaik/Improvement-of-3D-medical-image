@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.25.&#10;after pull main">
-      <change afterPath="$PROJECT_DIR$/raw/.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/raw/.raw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/raw/dataset1.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/raw/dataset1.raw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-12__11_45__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-12__11_45__________.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-12__11_45__________1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-12__11_45__________1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-13__12_28__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-13__12_28__________.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-13__1_51__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-13__1_51__________.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18__7_57__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-18__7_57__________.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18__9_14__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-18__9_14__________.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18__9_42__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-18__9_42__________.xml" afterDir="false" />
+    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.25.&#10;1. 예외처리&#10;  - OPEN DCM 버튼 클릭 시 DCM 외 다른 파일 예외 처리&#10;  - OPEN RAW 버튼 클릭 시 RAW 외 다른 파일 예외 처리&#10;2. BIN 파일 읽고 쓰기&#10;  - OPEN RAW 버튼 클릭 시 저장 된 BIN을 함께 불러 옴&#10;  - SAVE RAW 버튼 클릭 시 RAW 파일과 BIN 파일 함께 저장&#10;3. DCM 파일을 열었을 때 RAW 파일로 저장은 되지만, RAW파일을 열었을 때 RAW 파일로 저장 안되는 버그 수정 &#10;4. Curve로 그림 그릴 시 최초 x, y 좌푯값 안맞는 버그 수정">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_19_9_50__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_08_19_9_50__________.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56__________.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56__________1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56__________1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
     </list>
