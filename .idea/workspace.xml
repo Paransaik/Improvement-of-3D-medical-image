@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.25.&#10;before pull main commit">
+    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.25.&#10;after pull main">
+      <change afterPath="$PROJECT_DIR$/raw/.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/raw/.raw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/raw/dataset1.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/raw/dataset1.raw" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-12__11_45__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-12__11_45__________.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-12__11_45__________1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-12__11_45__________1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-13__12_28__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-13__12_28__________.xml" afterDir="false" />
@@ -9,6 +13,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18__7_57__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-18__7_57__________.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18__9_14__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-18__9_14__________.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18__9_42__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2021-08-18__9_42__________.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -208,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629870346468</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="8.25.&#10;after pull main">
+      <created>1629870651200</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1629870651200</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -271,6 +283,7 @@
     <MESSAGE value="8.19.&#10;Things done modify" />
     <MESSAGE value="8.19.&#10;Things done modify-merge" />
     <MESSAGE value="8.25.&#10;before pull main commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="8.25.&#10;before pull main commit" />
+    <MESSAGE value="8.25.&#10;after pull main" />
+    <option name="LAST_COMMIT_MESSAGE" value="8.25.&#10;after pull main" />
   </component>
 </project>

@@ -235,7 +235,7 @@ class MyApp(QMainWindow):
         self.adjustedImage = []  # 현재 사용X
         self.location = [] #polygon의 위치 좌표
         
-        self.mask_space = None
+        self.mask_space = None  # 그림 그리는 페인트 마스크값
 
         self.vx = voxel.PyVoxel()  # 복셀 생성자 호출
 
@@ -287,7 +287,7 @@ class MyApp(QMainWindow):
         self.setGeometry(100, 100, 1100, 600)  # (move, resize)의 기능을 넣음, resize(w, h) : 위젯의 크기를 너비 w(px), 높이 h(px)로 조절
         self.show()
 
-    # btn1(stop)가 클릭 되었을 때
+    # btn1(uodo)가 클릭 되었을 때
     def undoButton(self):
         print(self.items)
         self.items.pop(-1)
@@ -449,6 +449,8 @@ class MyApp(QMainWindow):
 
     def openRawAndBin(self):
             self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file', './raw')  # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
+            self.folder_path = self.imagePath.split('/')[:-2]
+
             if self.imagePath == '':
                 print('openRaw 종료')
             else:
@@ -485,35 +487,50 @@ class MyApp(QMainWindow):
                 self.wg.view_2.mouseMoveEvent = self.mouseMoveEvent 
                 self.wg.view_1.setMouseTracking(True)  
                 self.wg.view_2.setMouseTracking(True)  
-                # # 임시로 지정한 masking = 마스크값
-                # self.masking = '';
-                # if self.masking == '':  # 마스크 값이 있으면 WriteToRaw 실행
-                #     print('openBin 종료')
-                # else:
-                #     path = './Bin/' + direName + '_' + fileName + '.bin'  # path 설정
-                #     self.vx.ReadFromBin(path)
 
-    # DCM --> Raw, Bin
+                if self.mask_space == None:  # 마스크 값이 있으면 WriteToRaw 실행
+                    print('openBin 종료')
+                else:
+                    # 편의성을 위해(파일 둘다 확인) 임시로 ./raw 로 설정, 나중에 './bin/'으로 바꿀 것 - 태영
+                    path = './raw/' + direName + '.bin'  # path 설정
+                    self.vx.ReadFromBin(path)
+
+    # DCM --> Raw, Bin or Raw, Bin --> Raw, Bin
     # if image is qPixelmap --> numpy array
     def exportRawAndBin(self):
         if self.imagePath == '':
             print('exportRaw 종료')
         else:
-            direName = self.folder_path.split('/')[-2]  # 현재 보고있는 .dcm파일의 Directory명
             dcmfileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
-            fileName = dcmfileName[:-4]  # 뒤에 확장자명 제거
+            extendName = dcmfileName[-3:]  # 뒤에 확장자명 검색
 
-            path = './raw/' + direName + '_' + fileName + '.raw'  # 저장할 path 설정
-            print(path)
-            self.vx.NumpyArraytoVoxel(self.EntireImage)
-            self.vx.WriteToRaw(path)
+            print('imagePath###', self.imagePath)
+            print('folder_path###', self.folder_path)
 
-            # 임시로 지정한 masking = 마스크값
-            self.masking = ''
-            if self.masking == '':  # 마스크 값이 있으면 WriteToBin 실행
-                print('exportBin 종료')
-            else:
-                path = './bin/' + direName + '_' + fileName + '.bin'  # path 설정
+            if extendName == 'dcm' or extendName == 'DCM' :  #DCM 파일로 열었을 때 저장하는 곳
+                direName = self.folder_path.split('/')[-1]  # 현재 보고있는 .dcm파일의 Directory명
+                path = './raw/' + direName + '.raw'  # 저장할 path 설정
+
+                print('if opened DCM')
+                self.vx.NumpyArraytoVoxel(self.EntireImage)
+                self.vx.WriteToRaw(path)
+
+                # temp_space = np.zeros(self.EntireImage.shape)
+                # print(temp_space)
+                # self.mask_space = self.vx.Create_Mask_Space(temp_space)
+                # print(self.mask_space)
+                # 편의성을 위해(파일 둘다 확인) 임시로 ./raw 로 설정, 나중에 './bin/'으로 바꿀 것 - 태영
+                path = './raw/' + direName + '.bin'  # path 설정
+                self.vx.WriteToBin(path)
+            else:                                         #RAW 파일로 열었을 때 저장하는 곳
+                self.vx.WriteToRaw(path)
+                print('if opened RAW')
+                # temp_space = np.zeros(self.EntireImage.shape)
+                # print(temp_space)
+                # self.mask_space = self.vx.Create_Mask_Space(temp_space)
+                # print(self.mask_space)
+                # 편의성을 위해(파일 둘다 확인) 임시로 ./raw 로 설정, 나중에 './bin/'으로 바꿀 것 - 태영
+                path = './raw/' + direName + '.bin'  # path 설정
                 self.vx.WriteToBin(path)
     
     def AdjustDialogClicked(self):
@@ -563,23 +580,24 @@ class MyApp(QMainWindow):
     def mouseMoveEvent(self, event):
         txt = "마우스가 위치한 이미지의 좌표 ; x={0},y={1}".format(event.x(), event.y())
         self.wg.lbl_pos.setText(txt)
-        self.wg.lbl_pos.adjustSize() # 내용에 맞게 위젯의 크기를 조정한다. https://doc.qt.io/qt-5/qwidget.html#adjustSize
+        self.wg.lbl_pos.adjustSize()  # 내용에 맞게 위젯의 크기를 조정한다. https://doc.qt.io/qt-5/qwidget.html#adjustSize
 
         if event.buttons() & QtCore.Qt.LeftButton: # 그리는 기능
 
             self.end = event.pos()
             
-            if self.wg.drawType == 0: # 그리는 방법을 Curve로 설정했을경우 실행
-                pen = QPen(QColor(self.wg.pencolor),self.wg.combo.currentIndex())              
+            if self.wg.drawType == 0:  # 그리는 방법을 Curve로 설정했을경우 실행
+                pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
                 line = QLineF(self.start.x(), self.start.y(), self.end.x(), self.end.y())
                 self.items.append(self.wg.lbl_blending_img.addLine(line, pen))
-                 
+                print(line)
+
                 # 시작점을 다시 기존 끝점으로
                 self.start = event.pos()
                 # self.mask_space
 
-            if self.wg.drawType == 1: # 그리는 방법을 polygon으로 설정했을경우 실행
-                pen = QPen(QColor(self.wg.pencolor),self.wg.combo.currentIndex())
+            if self.wg.drawType == 1:  # 그리는 방법을 polygon으로 설정했을경우 실행
+                pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
                 brush = QBrush(self.wg.brushcolor)
  
  
@@ -596,7 +614,7 @@ class MyApp(QMainWindow):
             rY = np.array(self.LRpoint[1])
 
             square = (rX - mX) * (rX - mX) + (rY - mY) * (rY - mY)
-            dist = math.sqrt(square) * 2 + 1000  # 거리
+            dist = math.sqrt(square) * 2 # 거리
 
             temp_wl = 0
             temp_ww = 0
