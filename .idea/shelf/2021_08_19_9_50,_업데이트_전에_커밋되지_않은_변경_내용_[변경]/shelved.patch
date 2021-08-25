@@ -1,0 +1,86 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"19c25ae2-f4d5-4778-8f43-3c4b3a7296e4\" name=\"변경\" comment=\"8.18. before add funtion write_bin\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/opentool.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/opentool.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/raw/dataset1.raw\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/raw/dataset6.raw\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/voxel.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/voxel.py\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"second\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitSEFilterConfiguration\">\n    <file-type-list>\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\n      <filtered-out-file-type name=\"TAG\" />\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\n    </file-type-list>\n  </component>\n  <component name=\"HighlightingSettingsPerFile\">\n    <setting file=\"file://$PROJECT_DIR$/opentool.py\" root0=\"FORCE_HIGHLIGHTING\" />\n  </component>\n  <component name=\"ProjectId\" id=\"1wFMOWACWrqF3YWN0X0DPeEBC6l\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"last_opened_file_path\" value=\"$USER_HOME$/.conda/envs/ConnectAi/python.exe\" />\n    <property name=\"restartRequiresConfirmation\" value=\"false\" />\n    <property name=\"settings.editor.selected.configurable\" value=\"com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable\" />\n    <property name=\"two.files.diff.last.used.file\" value=\"$PROJECT_DIR$/viewer/voxel.py\" />\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"opentool\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"ConnectAi\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"C:\\Users\\haram\\.conda\\envs\\ConnectAi\\python.exe\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/opentool.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Python.opentool\" />\n        <item itemvalue=\"Python.opentool\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"애플리케이션 수준\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"디폴트 작업\">\n      <changelist id=\"19c25ae2-f4d5-4778-8f43-3c4b3a7296e4\" name=\"변경\" comment=\"\" />\n      <created>1628049851292</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1628049851292</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"add save icon\">\n      <created>1628163234962</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1628163234962</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"8.5. home&#10;add image file\">\n      <created>1628164669938</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1628164669938</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"8.6. home\">\n      <created>1628223034785</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1628223034785</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"8.10. home&#10;Add Annotation\">\n      <created>1628526993290</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1628526993290</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"8.10. home&#10;ReadFromRaw\">\n      <created>1628532447824</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1628532447824</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"8.11. home&#10;ReadFromRaw\">\n      <created>1628691239411</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1628691239411</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"8.11. home&#10;add datasets&#10;ReadFromRaw\">\n      <created>1628691252229</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1628691252229</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"8.12. home&#10;ReadFromRaw 이해 완\">\n      <created>1628699314439</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1628699314439</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"8.18.&#10;add 8.15. dataset&#10;and modify function name\">\n      <created>1629240115945</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1629240115945</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"8.18. before add funtion write_bin\">\n      <created>1629283723107</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1629283723107</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"11\" />\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.History.Properties\">\n    <option name=\"COLUMN_ID_ORDER\">\n      <list>\n        <option value=\"Default.Root\" />\n        <option value=\"Default.Author\" />\n        <option value=\"Default.Date\" />\n        <option value=\"Default.Subject\" />\n        <option value=\"Space.CommitStatus\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"origin/Taeyeong\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n              <option name=\"COLUMN_ID_WIDTH\">\n                <map>\n                  <entry key=\"Table.Default.Author.ColumnIdWidth\" value=\"27\" />\n                  <entry key=\"Table.Default.Date.ColumnIdWidth\" value=\"32\" />\n                  <entry key=\"Table.Space.CommitStatus.ColumnIdWidth\" value=\"32\" />\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\n    <MESSAGE value=\"add save icon\" />\n    <MESSAGE value=\"8.5. home&#10;add image file\" />\n    <MESSAGE value=\"8.6. home\" />\n    <MESSAGE value=\"8.10. home&#10;Add Annotation\" />\n    <MESSAGE value=\"8.10. home&#10;ReadFromRaw\" />\n    <MESSAGE value=\"8.11. home&#10;ReadFromRaw\" />\n    <MESSAGE value=\"8.11. home&#10;add datasets&#10;ReadFromRaw\" />\n    <MESSAGE value=\"8.12. home&#10;ReadFromRaw 이해 완\" />\n    <MESSAGE value=\"8.18.&#10;add 8.15. dataset&#10;and modify function name\" />\n    <MESSAGE value=\"8.18. before add funtion write_bin\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"8.18. before add funtion write_bin\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 01197b9a5620b2606d83ca9614e7ca5dcb47959a)
++++ b/.idea/workspace.xml	(date 1629334223614)
+@@ -1,12 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.18. before add funtion write_bin">
++    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.19. Mac first commit">
++      <change beforePath="$PROJECT_DIR$/.idea/ConnectAi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ConnectAi.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/raw/dataset1.raw" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/raw/dataset6.raw" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/voxel.py" beforeDir="false" afterPath="$PROJECT_DIR$/voxel.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -32,6 +30,13 @@
+   <component name="HighlightingSettingsPerFile">
+     <setting file="file://$PROJECT_DIR$/opentool.py" root0="FORCE_HIGHLIGHTING" />
+   </component>
++  <component name="ProblemsViewState">
++    <hideBySeverity>
++      <option value="15" />
++      <option value="200" />
++      <option value="300" />
++    </hideBySeverity>
++  </component>
+   <component name="ProjectId" id="1wFMOWACWrqF3YWN0X0DPeEBC6l" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="2" id="Add" />
+@@ -57,7 +62,7 @@
+       <envs>
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+-      <option name="SDK_HOME" value="C:\Users\haram\.conda\envs\ConnectAi\python.exe" />
++      <option name="SDK_HOME" value="$USER_HOME$/.conda/envs/ConnectAi/bin/python" />
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+       <option name="IS_MODULE_SDK" value="false" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+Index: .idea/ConnectAi.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<module type=\"PYTHON_MODULE\" version=\"4\">\n  <component name=\"NewModuleRootManager\">\n    <content url=\"file://$MODULE_DIR$\" />\n    <orderEntry type=\"jdk\" jdkName=\"Python 3.6 (ConnectAi)\" jdkType=\"Python SDK\" />\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\n  </component>\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/ConnectAi.iml b/.idea/ConnectAi.iml
+--- a/.idea/ConnectAi.iml	(revision 01197b9a5620b2606d83ca9614e7ca5dcb47959a)
++++ b/.idea/ConnectAi.iml	(date 1629316754839)
+@@ -2,7 +2,7 @@
+ <module type="PYTHON_MODULE" version="4">
+   <component name="NewModuleRootManager">
+     <content url="file://$MODULE_DIR$" />
+-    <orderEntry type="jdk" jdkName="Python 3.6 (ConnectAi)" jdkType="Python SDK" />
++    <orderEntry type="jdk" jdkName="Python 3.9 (ConnectAi)" jdkType="Python SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectRootManager\" version=\"2\" project-jdk-name=\"Python 3.6 (ConnectAi)\" project-jdk-type=\"Python SDK\" />\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 01197b9a5620b2606d83ca9614e7ca5dcb47959a)
++++ b/.idea/misc.xml	(date 1629316754847)
+@@ -1,4 +1,4 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (ConnectAi)" project-jdk-type="Python SDK" />
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.9 (ConnectAi)" project-jdk-type="Python SDK" />
+ </project>
+\ No newline at end of file
