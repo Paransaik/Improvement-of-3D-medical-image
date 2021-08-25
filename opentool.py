@@ -16,8 +16,8 @@ import vtk
 from Rendering import Rendering
 import voxel
 
-class MyWidget(QWidget): 
-    def __init__(self): 
+class MyWidget(QWidget):
+    def __init__(self):
         super().__init__()  # 부모 클래스(QWidget)의 생성자를 super()를 통해 호출
 
         # QGraphics를 이용한 ~
@@ -49,9 +49,9 @@ class MyWidget(QWidget):
 class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()  # QMainWindow의 생성자 호출
-        
+
         self.LRpoint = [0, 0]  # 동시클릭 위치 저장변수
-        self.LRClicked = False 
+        self.LRClicked = False
         self.window_level = 2700  # wl
         self.window_width = 5350  # ww
         self.deltaWL = 0  # wl에 더할 delta 값
@@ -76,7 +76,7 @@ class MyApp(QMainWindow):
         self.wg = MyWidget()  # MyWidget 클래스를 사용하기 위해서 객체를 생성
         self.setCentralWidget(self.wg)  # QMainWindow 화면에 레이아웃과 위젯을 표시하기 위해사용
         self.initUI()  # 멤버 메소드 호출
-        
+
     def initUI(self):
         openDcmAction = QAction(QIcon('./icon/openDcm.png'), 'openDcm', self)
         openRawAndBinAction = QAction(QIcon('./icon/openRawAndBin.png'), 'openRawAndBin', self)
@@ -179,7 +179,7 @@ class MyApp(QMainWindow):
             self.wg.lbl_original_img.addPixmap(image)  # 이전 idx에 있던 이미지를
             self.wg.lbl_blending_img.addPixmap(image)  # pixmap에 올릴 이미지로 변경
             self.wg.view_1.setScene(self.wg.lbl_original_img)
-            self.wg.view_2.setScene(self.wg.lbl_original_img)  # wh.lbl_blending_img는 어디갔찌
+            self.wg.view_2.setScene(self.wg.lbl_blending_img)  # wh.lbl_blending_img는 어디갔찌
             self.wg.view_1.show()
             self.wg.view_2.show()
 
@@ -203,7 +203,7 @@ class MyApp(QMainWindow):
             self.wg.lbl_original_img.addPixmap(image)
             self.wg.lbl_blending_img.addPixmap(image)
             self.wg.view_1.setScene(self.wg.lbl_original_img)
-            self.wg.view_2.setScene(self.wg.lbl_original_img) # wg.lbl_blending_img는 어디갔나
+            self.wg.view_2.setScene(self.wg.lbl_blending_img) # wg.lbl_blending_img는 어디갔나
             self.wg.view_1.show()
             self.wg.view_2.show()
 

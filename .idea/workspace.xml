@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.19.&#10;Things done modify">
-      <change afterPath="$PROJECT_DIR$/raw/dataset1_001.Seq1.Ser5.Img2.raw" afterDir="false" />
+    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.19.&#10;Things done modify-merge">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629325017203</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="8.19.&#10;Things done modify-merge">
+      <created>1629325845818</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1629325845818</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -249,6 +256,7 @@
     <MESSAGE value="8.18. add funtion openRawAndBin and icon image file" />
     <MESSAGE value="8.19.&#10;Things done&#10;1. Funtion name rivise(openIamge &gt; openDCM )&#10;2. Implement open Raw&amp;Bin&#10;    - View needs to be resized!&#10;3. Implement export Ran&amp;Bin&#10;    - File name is removed the &quot;dcm&quot; extension and added the &quot;raw&quot; extension.&#10;        ex) dcm file input: ./image/dataset1/001.Seq1.Ser5.Img1.dcm&#10;             raw file output: ./raw/dataset1_001.Seq1.Ser5.Img1.raw&#10;             bin file output: ./bin/dataset1_001.Seq1.Ser5.Img1.bin&#10;    !!!! When you click the previous, next and dialog button, we must save the file name as a imagePath." />
     <MESSAGE value="8.19.&#10;Things done modify" />
-    <option name="LAST_COMMIT_MESSAGE" value="8.19.&#10;Things done modify" />
+    <MESSAGE value="8.19.&#10;Things done modify-merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="8.19.&#10;Things done modify-merge" />
   </component>
 </project>
