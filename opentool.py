@@ -516,7 +516,7 @@ class MyApp(QMainWindow):
             dcmfileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
             extendName = dcmfileName[-3:]  # 뒤에 확장자명 조회하기, 확장자 명에 따라 호출되는 함수가 다름
             if extendName == 'dcm' or extendName == 'DCM' or extendName == 'raw' or extendName == 'RAW':  # dcm 파일로 열었을 때 raw로 저장하는 곳
-                print('if opened DCM')
+                print('opened DCM or RAW')
                 direName = self.folder_path.split('/')[-2]  # 현재 보고있는 .dcm파일의 Directory명
                 path = './raw/' + direName + '.raw'  # 저장할 path 설정
                 self.vx.NumpyArraytoVoxel(self.EntireImage)
@@ -640,7 +640,7 @@ class MyApp(QMainWindow):
         if event.button() == QtCore.Qt.LeftButton:
             if self.wg.drawType == 0:
                 self.start = event.pos()
-                self.start = self.start + QtCore.QPoint(-10, -44)
+                self.start = self.start + QtCore.QPoint(-10, -44)  # default -13, -57
                 self.end = event.pos()
 
             if self.wg.drawType == 1:  # polygon의 위치를 받고 그것을 self location에 추가함
