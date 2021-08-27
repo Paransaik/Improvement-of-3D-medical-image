@@ -51,7 +51,6 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
                                         # 만약 -1이 아니라면 숫자란 이야기다 256이 들어있다.
                 if self.m_Org == -1:  # 데이터가 거꾸로 뒤집어진? 경우
                     Header = np.fromfile(f, dtype='float32', count=6)  # "x, y, z spacing", "x, y, z orgin"
-
                     self.m_fXSp = Header[0]
                     self.m_fYSp = Header[1]
                     self.m_fZSp = Header[2]
@@ -145,6 +144,10 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
         img_adjusted = (pData - Lower)/range_ratio
         img_adjusted = img_adjusted.clip(0, 255)
         return img_adjusted
+
+    def adjust_pixel_size(self, size):  # zoom in, out by wheel value -Ty
+        pData = self.m_Voxel * size
+        return pData
 
     def NumpyArraytoVoxel(self, data):  # 넘파이 배열을 받으면
         self.initialize()

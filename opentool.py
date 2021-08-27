@@ -14,7 +14,7 @@ import math
 import vtk
 from Rendering import Rendering
 import voxel
-
+#from skimage.transform import resize
 
 class MyWidget(QWidget):
     def __init__(self):
@@ -409,27 +409,31 @@ class MyApp(QMainWindow):
 
                 reader.SetFileNames(dicom_names)
                 images = reader.Execute()
-                # print('folder_path', self.folder_path)
-                # <class 'SimpleITK.SimpleITK.Image'> <class 'SimpleITK.SimpleITK.Image'>
-                print(type(images[0]), type(images[1]))
 
-                imgArray = itk.GetArrayFromImage(images)  # 이미지로부터 배열을is_opened  가져옴
-                print(imgArray.shape)
+                imgArray = itk.GetArrayFromImage(images)  # 이미지로부터 배열을 is_opened 가져옴
+                # imgArray.resize((20, 1024, 1024))
+                # imgArray = skimage.transform.resize(20, 1024, 1024)  # skimage.transform.resize
+
+
                 # EntireImage Handler========================================================================
                 self.EntireImage = np.asarray(imgArray, dtype=np.float32)  # asarray는 데이터 형태가 다를 경우에만 복사(copy)가 된다.
+
+                print('t1', self.EntireImage.shape)
                 self.EntireImage = np.squeeze(
                     self.EntireImage)  # (배열, 축)을 통해 지정된 축의 차원을 축소, (1, 1024, 1024) -> (1024, 1024)
-
-                print(self.EntireImage.shape)
+                print('t2', self.EntireImage.shape)
 
                 self.NofI = self.EntireImage.shape[0]  # 같은 이미지 개수
                 self.Nx = self.EntireImage.shape[1]
                 self.Ny = self.EntireImage.shape[2]
+
                 temp_space = np.zeros(self.EntireImage.shape)
                 self.vx.Create_Mask_Space(temp_space) # 사실 얘가 반환하는 건 존재하지 않는다. -> None
                 self.mask_space = self.vx.m_Voxel
-                # self.wg.view_1.setFixedSize(self.EntireImage.shape[1],self.EntireImage.shape[2]) # 이미지 크기에 맞게 view를 설정하면 너무 커지는 현상 발생
-                # self.wg.view_2.setFixedSize(self.EntireImage.shape[1], self.EntireImage.shape[2])
+                # 이미지 크기에 맞게 view를 설정하면 너무 커지는 현상 발생
+                #self.EntireImage.resize(20, 1024, 1024)
+                self.wg.view_1.setFixedSize(self.EntireImage.shape[1]+2, self.EntireImage.shape[2]+2)
+                self.wg.view_2.setFixedSize(self.EntireImage.shape[1]+2, self.EntireImage.shape[2]+2)
                 print("view size가", self.EntireImage.shape[1], "와", self.EntireImage.shape[2], "로 설정 되었습니다.")
 
                 self.cur_image = self.EntireImage[self.cur_idx]
@@ -723,8 +727,36 @@ class MyApp(QMainWindow):
 
     def wheelEvent(self, e):
         if self.bCtrl:
-            print(self.zoom.y())  # 이 값에 514 곱하기
             self.zoom += e.angleDelta() / 120
+            print('t1', self.wg.lbl_blending_img)
+            print('t2', type(self.wg.lbl_blending_img))
+            print('t3', self.wg.lbl_blending_img.shape)
+            #elf.wg.lbl_blending_img.setFixedSize(self.EntireImage.shape[1] * self.zoom.y(), self.EntireImage.shape[2] * self.zoom.y())
+            # self.EntireImage.resize((self.cur_idx,self.EntireImage.shape[1] * self.zoom.y(),self.EntireImage.shape[2] * self.zoom.y()))
+            # print(self.zoom) # PyQt5.QtCore.QPointF(0.0, 1.0)
+            # print(self.zoom.y())#이 값에 512 곱하기 // 1.0
+            # image = self.adjust_pixel_size(self.zoom.y())
+            # image = qimage2ndarray.array2qimage(image)  # 배열에서 이미지로
+            # image = QPixmap.fromImage(
+            #     QImage(image))  # image를 입력해주고 QPixmap 객체를 하나 만든다. https://wikidocs.net/33768 < 참고하면 좋다.
+
+            # print(self.wg.lbl_original_img.width()) # 512
+
+            # self.wg.lbl_original_img.addPixmap(image)  # MyWidget에서 GraphicsScene()로 선언한 변수에 pixmap을 표시될 이미지로 설정
+            # self.wg.view_1.setScene(self.wg.lbl_original_img)  # MyWidget에서 QGraphicsView()로 선언한 view_1의 화면으로 설정
+            # print(self.zoom.y() * self.wg.lbl_original_img.width())
+            # self.wg.view_1.show()  # view_1 시작
+
+            # 오른쪽 프레임 이미지 업데이트 필요
+            # self.wg.lbl_blending_img.addPixmap(image)
+            # self.wg.lbl_original_img.addPixmap(image)
+            # self.wg.view_1.setScene(self.wg.lbl_blending_img)
+            # self.wg.view_2.setScene(self.wg.lbl_blending_img)
+            # self.wg.view_1.show()
+            # self.wg.view_2.show()
+
+
+
         self.update()
 
 if __name__ == '__main__':
