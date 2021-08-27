@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.26.&#10;before push, commit">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-12__11_45__________1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-12_오후_11_45,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-13__12_28__________.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-13_오전_12_28,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18__7_57__________.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18__9_14__________.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18__9_42__________.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18_오전_7_57,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18_오전_9_14,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-18_오전_9_42,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-19__7_17__________.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-19__7_27__________.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-19__7_27__________1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-19_오전_7_17,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]/dataset1_001.Seq1.Ser5.Img2.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-19_오전_7_17,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-19_오전_7_27,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]/dataset1_001.Seq1.Ser5.Img2.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-19_오전_7_27,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-19_오전_7_27,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]1/dataset1_001.Seq1.Ser5.Img2.raw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-19_오전_7_27,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_19_9_50,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_19_9_50__________.xml" beforeDir="false" />
+    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.27.&#10;atfer second pull, commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
     </list>
@@ -257,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629904995479</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="8.26.&#10;before pull, commit">
+      <created>1630025692232</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1630025692232</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -323,6 +309,8 @@
     <MESSAGE value="8.25.&#10;after pull main" />
     <MESSAGE value="8.25.&#10;1. 예외처리&#10;  - OPEN DCM 버튼 클릭 시 DCM 외 다른 파일 예외 처리&#10;  - OPEN RAW 버튼 클릭 시 RAW 외 다른 파일 예외 처리&#10;2. BIN 파일 읽고 쓰기&#10;  - OPEN RAW 버튼 클릭 시 저장 된 BIN을 함께 불러 옴&#10;  - SAVE RAW 버튼 클릭 시 RAW 파일과 BIN 파일 함께 저장&#10;3. DCM 파일을 열었을 때 RAW 파일로 저장은 되지만, RAW파일을 열었을 때 RAW 파일로 저장 안되는 버그 수정 &#10;4. Curve로 그림 그릴 시 최초 x, y 좌푯값 안맞는 버그 수정" />
     <MESSAGE value="8.26.&#10;before push, commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="8.26.&#10;before push, commit" />
+    <MESSAGE value="8.26.&#10;before pull, commit" />
+    <MESSAGE value="8.27.&#10;atfer second pull, commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="8.27.&#10;atfer second pull, commit" />
   </component>
 </project>

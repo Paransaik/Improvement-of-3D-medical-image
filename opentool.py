@@ -238,7 +238,7 @@ class MyApp(QMainWindow):
         self.adjustedImage = []  # 현재 사용X
         self.location = []  # polygon의 위치 좌표
 
-        self.mask_space = '1'  # 그림 그리는 페인트 마스크값
+        self.mask_space = None  # 그림 그리는 페인트 마스크값
 
         self.vx = voxel.PyVoxel()  # 복셀 생성자 호출
 
@@ -426,7 +426,8 @@ class MyApp(QMainWindow):
                 self.Ny = self.EntireImage.shape[2]
 
                 temp_space = np.zeros(self.EntireImage.shape)
-                self.mask_space = self.vx.Create_Mask_Space(temp_space)
+                self.vx.Create_Mask_Space(temp_space) # 사실 얘가 반환하는 건 존재하지 않는다. -> None
+                self.mask_space = self.vx.m_Voxel
 
                 # self.wg.view_1.setFixedSize(self.EntireImage.shape[1],self.EntireImage.shape[2]) # 이미지 크기에 맞게 view를 설정하면 너무 커지는 현상 발생
                 # self.wg.view_2.setFixedSize(self.EntireImage.shape[1], self.EntireImage.shape[2])
@@ -457,8 +458,7 @@ class MyApp(QMainWindow):
                 self.wg.view_2.setMouseTracking(True)  # False일 때는 마우스 클릭시에만 이동 감지
 
     def openRawAndBin(self):
-        self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file',
-                                                        './raw')  # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
+        self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file', './raw')  # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
 
         if self.imagePath == '':
             print('openRaw 종료')
@@ -466,6 +466,12 @@ class MyApp(QMainWindow):
             dcmfileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
             extendName = dcmfileName[-3:]  # 뒤에 확장자명 조회하기, 확장자 명에 따라 호출되는 함수가 다름
             if extendName == 'raw' or extendName == 'RAW':  # only open raw file
+                self.folder_path = ''  # 다른 dataset으로의 변경을 위한 초기화
+                for i in range(len(self.imagePath.split('/')) - 1):  # folder_path를 imagePath를 이용해서 구해야지만 앞으로 문제 발생 X
+                    if i == len(self.imagePath.split('/')) - 1:
+                        self.folder_path = self.folder_path + self.imagePath.split('/')[i]
+                    else:
+                        self.folder_path = self.folder_path + self.imagePath.split('/')[i] + '/'
                 self.vx.ReadFromRaw(self.imagePath)
                 imgArray = self.vx.m_Voxel  # 이미지로부터 배열을 가져옴
 
@@ -496,16 +502,21 @@ class MyApp(QMainWindow):
                 self.wg.view_1.setMouseTracking(True)
                 self.wg.view_2.setMouseTracking(True)
 
-                if self.mask_space == '':  # 마스크 값이 있으면 WriteToRaw 실행
-                    print('openBin 종료')
-                else:
-                    direName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 Directory명
-                    direName = direName[:-4]  # 뒤에 확장자 제거
+                try:
+                    fileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 Directory명
+                    fileName = fileName[:-4]  # 뒤에 확장자 제거
                     # ex) direName = dataset.raw > dataset
 
                     # 편의성을 위해(파일 둘다 확인) 임시로 ./raw 로 설정, 나중에 './bin/'으로 바꿀 것 - 태영
-                    path = './raw/' + direName + '.bin'  # path 설정
+                    path = './raw/' + fileName + '.bin'  # path 설정
                     self.vx.ReadFromBin(path)
+                    self.mask_space = self.vx.m_Voxel
+                except FileNotFoundError:
+                    print('현재 해당 .raw에 대한 bin 파일이 존재하지 않습니다.')
+                    print('빈 mask_space 생성...')
+                    temp_space = np.zeros(self.EntireImage.shape)
+                    self.vx.Create_Mask_Space(temp_space)
+                    self.mask_space = self.vx.m_Voxel
 
     # DCM --> Raw, Bin or Raw, Bin --> Raw, Bin
     # if image is qPixelmap --> numpy array
@@ -516,12 +527,13 @@ class MyApp(QMainWindow):
             dcmfileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
             extendName = dcmfileName[-3:]  # 뒤에 확장자명 조회하기, 확장자 명에 따라 호출되는 함수가 다름
             if extendName == 'dcm' or extendName == 'DCM' or extendName == 'raw' or extendName == 'RAW':  # dcm 파일로 열었을 때 raw로 저장하는 곳
-                print('opened DCM or RAW')
+                print('if opened {}'.format(extendName))
                 direName = self.folder_path.split('/')[-2]  # 현재 보고있는 .dcm파일의 Directory명
                 path = './raw/' + direName + '.raw'  # 저장할 path 설정
                 self.vx.NumpyArraytoVoxel(self.EntireImage)
                 self.vx.WriteToRaw(path)  # dcm으로 연 파일 raw로 저장
 
+                self.vx.Create_Mask_Space(self.mask_space)
                 # 편의성을 위해(파일 둘다 확인) 임시로 ./raw 로 설정, 나중에 './bin/'으로 바꿀 것 - 태영
                 path = './raw/' + direName + '.bin'  # path 설정
                 self.vx.WriteToBin(path)
@@ -542,10 +554,7 @@ class MyApp(QMainWindow):
         dlg.exec_()
         self.level = dlg.level
         self.width = dlg.width
-        print('1111111', type(self.level))
-        # if type(self.level) != float:
-        #     print('level, width가 제대로 입력되지 않았습니다.')
-        # else:
+
         self.label.setText("level: %s width: %s" % (self.level, self.width))
         try:
             self.level = int(self.level)
@@ -562,6 +571,7 @@ class MyApp(QMainWindow):
             self.wg.view_2.setScene(self.wg.lbl_blending_img)  # 라벨링 할 이미지를 보도록 설정
             self.wg.view_1.show()  # 원본이미지를 띄움
             self.wg.view_2.show()  # 라벨링 이미지를 띄움
+
         except ValueError:
             print("level, width가 제대로 입력되지 않았습니다.")
 
@@ -591,6 +601,12 @@ class MyApp(QMainWindow):
                 pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
                 line = QLineF(self.start.x(), self.start.y(), self.end.x(), self.end.y())
                 self.items.append(self.wg.lbl_blending_img.addLine(line, pen))
+                print('t1', type(self.wg.lbl_blending_img))
+                print('t2', self.wg.lbl_blending_img)
+                test = np.array(self.wg.lbl_blending_img)
+                print('t3', test.shape)
+                print('t4', self.mask_space.shape)
+                print('t5', self.mask_space[0])
                 # print(line)
                 # 시작점을 다시 기존 끝점으로
                 self.start = event.pos()
