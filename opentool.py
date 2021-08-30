@@ -20,11 +20,11 @@ class MyWidget(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.lbl_original_img = QGraphicsScene()  # 많은 수의 2D 그래픽 항목을 관리하기 위한 표면을 제공
-        self.lbl_blending_img = QGraphicsScene()
+        self.lbl_blending_img = QGraphicsScene()  # 많은 수의 2D 그래픽 항목을 관리하기 위한 표면을 제공
+        self.lbl_original_img = QGraphicsScene()
 
-        self.view_1 = QGraphicsView(self.lbl_original_img)  # 원본 이미지
-        self.view_2 = QGraphicsView(self.lbl_blending_img)  # 변환된 이미지 뷰
+        self.view_1 = QGraphicsView(self.lbl_blending_img)  # 원본 이미지
+        self.view_2 = QGraphicsView(self.lbl_original_img)  # 변환된 이미지 뷰
 
         self.lbl_pos = QLabel()  # 비어있는 라벨? 생성 -> mouseMoveEvent()에서 .setText()를 이용해 계속 갱신
         self.lbl_pos.setAlignment(Qt.AlignLeft)  # 라벨을 AlignLeft에 위치시킨다.
@@ -216,6 +216,8 @@ class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        np.set_printoptions(threshold=np.inf)
+
         self.bCtrl = False
         self.zoom = QPointF()
 
@@ -230,7 +232,7 @@ class MyApp(QMainWindow):
 
         self.Nx = 0  # 이미지의 높이 크기가 저장
         self.Ny = 0  # 이미지의 너비 크기가 저장
-        self.NofI = 0  # 총 이미지의 개수가 들어가는 변수 / openImage 메소드에서 한 번 정의된다.
+        self.NofI = 0  # 총 이미지의 개수가 들어가는 변수 / openImage 메소드에서 한 번 정의된다
 
         self.cur_idx = 0  # Pixmap에 올라갈 이미지를 정하는 idx
         self.cur_image = []  # Pixmap에 올라갈 이미지, 왜 리스트 자료형으로 선언했는지 모르겠다.
@@ -239,11 +241,13 @@ class MyApp(QMainWindow):
         self.location = []  # polygon의 위치 좌표
 
         self.mask_space = None  # 그림 그리는 페인트 마스크값
-
+        self.items_array = []
+        self.items_array2 = []
         self.vx = voxel.PyVoxel()  # 복셀 생성자 호출
 
         self.imagePath = ''  # 3D Rendering을 위한 변수 선언
         self.folder_path = ''  # 2D Rendering을 위한 변수 선언
+        self.rgb = 3 # mask_space에 rgb 값을 저장할 공간크기 
 
         self.items = []  # 그리는 행동, 폴리곤 만드는 행동을 저장하는 리스트
         self.start = QPointF()  # 그리기 시작한 좌표점
@@ -325,10 +329,10 @@ class MyApp(QMainWindow):
             image = qimage2ndarray.array2qimage(image)
             image = QPixmap.fromImage(QImage(image))
 
-            self.wg.lbl_original_img.addPixmap(image)  # 이전 idx에 있던 이미지를
-            self.wg.lbl_blending_img.addPixmap(image)  # pixmap에 올릴 이미지로 변경
-            self.wg.view_1.setScene(self.wg.lbl_original_img)
-            self.wg.view_2.setScene(self.wg.lbl_original_img)
+            self.wg.lbl_blending_img.addPixmap(image)  # 이전 idx에 있던 이미지를
+            self.wg.lbl_original_img.addPixmap(image)  # pixmap에 올릴 이미지로 변경
+            self.wg.view_1.setScene(self.wg.lbl_blending_img)
+            self.wg.view_2.setScene(self.wg.lbl_blending_img)
             self.wg.view_1.show()
             self.wg.view_2.show()
 
@@ -349,10 +353,10 @@ class MyApp(QMainWindow):
             image = QPixmap.fromImage(QImage(image))
 
             # 오른쪽 프레임 이미지 업데이트 필요
-            self.wg.lbl_original_img.addPixmap(image)
             self.wg.lbl_blending_img.addPixmap(image)
-            self.wg.view_1.setScene(self.wg.lbl_original_img)
-            self.wg.view_2.setScene(self.wg.lbl_original_img)
+            self.wg.lbl_original_img.addPixmap(image)
+            self.wg.view_1.setScene(self.wg.lbl_blending_img)
+            self.wg.view_2.setScene(self.wg.lbl_blending_img)
             self.wg.view_1.show()
             self.wg.view_2.show()
 
@@ -379,10 +383,10 @@ class MyApp(QMainWindow):
 
             image = qimage2ndarray.array2qimage(image)
             image = QPixmap.fromImage(QImage(image))
-            self.wg.lbl_original_img.addPixmap(image)
             self.wg.lbl_blending_img.addPixmap(image)
-            self.wg.view_1.setScene(self.wg.lbl_original_img)
-            self.wg.view_2.setScene(self.wg.lbl_blending_img)
+            self.wg.lbl_original_img.addPixmap(image)
+            self.wg.view_1.setScene(self.wg.lbl_blending_img)
+            self.wg.view_2.setScene(self.wg.lbl_original_img)
             self.wg.view_1.show()
             self.wg.view_2.show()
 
@@ -418,16 +422,12 @@ class MyApp(QMainWindow):
                 self.EntireImage = np.asarray(imgArray, dtype=np.float32)  # asarray는 데이터 형태가 다를 경우에만 복사(copy)가 된다.
                 self.EntireImage = np.squeeze(
                     self.EntireImage)  # (배열, 축)을 통해 지정된 축의 차원을 축소, (1, 1024, 1024) -> (1024, 1024)
+                
+                self.NofI, self.Ny, self.Nx = self.EntireImage.shape
+                temp_space = np.zeros((self.NofI, self.Ny, self.Nx, self.rgb))# (20 512 512 3)
 
-                print(self.EntireImage.shape)
-
-                self.NofI = self.EntireImage.shape[0]  # 같은 이미지 개수
-                self.Nx = self.EntireImage.shape[1]
-                self.Ny = self.EntireImage.shape[2]
-
-                temp_space = np.zeros(self.EntireImage.shape)
                 self.vx.Create_Mask_Space(temp_space) # 사실 얘가 반환하는 건 존재하지 않는다. -> None
-                self.mask_space = self.vx.m_Voxel
+                self.mask_space = self.vx.m_Voxel # (z, y, x, rgb)
 
                 # self.wg.view_1.setFixedSize(self.EntireImage.shape[1],self.EntireImage.shape[2]) # 이미지 크기에 맞게 view를 설정하면 너무 커지는 현상 발생
                 # self.wg.view_2.setFixedSize(self.EntireImage.shape[1], self.EntireImage.shape[2])
@@ -444,12 +444,12 @@ class MyApp(QMainWindow):
                 image = QPixmap.fromImage(
                     QImage(image))  # image를 입력해주고 QPixmap 객체를 하나 만든다. https://wikidocs.net/33768 < 참고하면 좋다.
 
-                self.wg.lbl_original_img.addPixmap(image)  # MyWidget에서 GraphicsScene()로 선언한 변수에 pixmap을 표시될 이미지로 설정
-                self.wg.view_1.setScene(self.wg.lbl_original_img)  # MyWidget에서 QGraphicsView()로 선언한 view_1의 화면으로 설정
+                self.wg.lbl_blending_img.addPixmap(image)  # MyWidget에서 GraphicsScene()로 선언한 변수에 pixmap을 표시될 이미지로 설정
+                self.wg.view_1.setScene(self.wg.lbl_blending_img)  # MyWidget에서 QGraphicsView()로 선언한 view_1의 화면으로 설정
                 self.wg.view_1.show()  # view_1 시작
 
-                self.wg.lbl_blending_img.addPixmap(image)  # 원래는 blending된 image를 넣어야 하지만 아직 blending 기능X
-                self.wg.view_2.setScene(self.wg.lbl_blending_img)
+                self.wg.lbl_original_img.addPixmap(image)  # 원래는 blending된 image를 넣어야 하지만 아직 blending 기능X
+                self.wg.view_2.setScene(self.wg.lbl_original_img)
                 self.wg.view_2.show()
 
                 self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent  # view_1의 mouseMoveEvent 갱신
@@ -479,9 +479,7 @@ class MyApp(QMainWindow):
                 self.EntireImage = np.asarray(imgArray, dtype=np.float32)
                 self.EntireImage = np.squeeze(self.EntireImage)
 
-                self.NofI = self.EntireImage.shape[0]
-                self.Nx = self.EntireImage.shape[1]
-                self.Ny = self.EntireImage.shape[2]
+                self.NofI, self.Ny, self.Nx = self.EntireImage.shape
 
                 self.cur_image = self.EntireImage[self.cur_idx]
                 # =============================================================================================
@@ -489,12 +487,12 @@ class MyApp(QMainWindow):
                 image = qimage2ndarray.array2qimage(image)
                 image = QPixmap.fromImage(QImage(image))
 
-                self.wg.lbl_original_img.addPixmap(image)
-                self.wg.view_1.setScene(self.wg.lbl_original_img)
+                self.wg.lbl_blending_img.addPixmap(image)
+                self.wg.view_1.setScene(self.wg.lbl_blending_img)
                 self.wg.view_1.show()
 
-                self.wg.lbl_blending_img.addPixmap(image)
-                self.wg.view_2.setScene(self.wg.lbl_blending_img)
+                self.wg.lbl_original_img.addPixmap(image)
+                self.wg.view_2.setScene(self.wg.lbl_original_img)
                 self.wg.view_2.show()
 
                 self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent
@@ -511,13 +509,23 @@ class MyApp(QMainWindow):
                     path = './raw/' + fileName + '.bin'  # path 설정
                     self.vx.ReadFromBin(path)
                     self.mask_space = self.vx.m_Voxel
+
+                    if self.mask_space[0, :, :].any():
+                        print('성공')
+                    
+                    for y in range(512):
+                        for x in range(512):
+                            if self.mask_space[0][y][x].any():
+                                print('masking 정보 : ({}, {}), rgb({}, {}, {})'.format(x, y, self.mask_space[0][y][x][0], self.mask_space[0][y][x][1], self.mask_space[0][y][x][2]))
+
                 except FileNotFoundError:
                     print('현재 해당 .raw에 대한 bin 파일이 존재하지 않습니다.')
                     print('빈 mask_space 생성...')
-                    temp_space = np.zeros(self.EntireImage.shape)
+                   
+                    self.NofI, self.Ny, self.Nx = self.EntireImage.shape
+                    temp_space = np.zeros((self.NofI, self.Ny, self.Nx, self.rgb))# (20 512 512 3)
                     self.vx.Create_Mask_Space(temp_space)
                     self.mask_space = self.vx.m_Voxel
-
 
     # DCM --> Raw, Bin or Raw, Bin --> Raw, Bin
     # if image is qPixelmap --> numpy array
@@ -534,11 +542,11 @@ class MyApp(QMainWindow):
                 self.vx.NumpyArraytoVoxel(self.EntireImage)
                 self.vx.WriteToRaw(path)  # dcm으로 연 파일 raw로 저장
 
-                # 편의성을 위해(파일 둘다 확인) 임시로 ./raw 로 설정, 나중에 './bin/'으로 바꿀 것 - 태영
-
                 self.vx.Create_Mask_Space(self.mask_space)
+                # 편의성을 위해(파일 둘다 확인) 임시로 ./raw 로 설정, 나중에 './bin/'으로 바꿀 것 - 태영
                 path = './raw/' + direName + '.bin'  # path 설정
                 self.vx.WriteToBin(path)
+                
             # else:                                         # raw 파일로 열었을 때 raw로 저장하는 곳
             #     print('if opened RAW')
             #     direName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 Directory명
@@ -567,10 +575,10 @@ class MyApp(QMainWindow):
 
             image = qimage2ndarray.array2qimage(image)  # Q이미지를 numpy array로 바꿈
             image = QPixmap.fromImage(QImage(image))  # numpy array를 pixmap으로 변환
-            self.wg.lbl_original_img.addPixmap(image)  # 원본이미지의 Q이미지를 pix맵으로 설정
-            self.wg.lbl_blending_img.addPixmap(image)  # 라벨링 되어있는 이미지의 Q이미지를 pix맵으로 설정
-            self.wg.view_1.setScene(self.wg.lbl_original_img)  # 원본 이미지를 보도록 설정
-            self.wg.view_2.setScene(self.wg.lbl_blending_img)  # 라벨링 할 이미지를 보도록 설정
+            self.wg.lbl_blending_img.addPixmap(image)  # 원본이미지의 Q이미지를 pix맵으로 설정
+            self.wg.lbl_original_img.addPixmap(image)  # 라벨링 되어있는 이미지의 Q이미지를 pix맵으로 설정
+            self.wg.view_1.setScene(self.wg.lbl_blending_img)  # 원본 이미지를 보도록 설정
+            self.wg.view_2.setScene(self.wg.lbl_original_img)  # 라벨링 할 이미지를 보도록 설정
             self.wg.view_1.show()  # 원본이미지를 띄움
             self.wg.view_2.show()  # 라벨링 이미지를 띄움
 
@@ -593,31 +601,36 @@ class MyApp(QMainWindow):
 
         return image
 
+    def hex_to_rgb(self, hex):
+        return list(int(hex[i:i+2], 16) for i in (0, 2, 4))
+
     def mouseMoveEvent(self, event):
         txt = "마우스가 위치한 이미지의 좌표 ; x={0},y={1}".format(event.x(), event.y())
         self.wg.lbl_pos.setText(txt)
         self.wg.lbl_pos.adjustSize()  # 내용에 맞게 위젯의 크기를 조정한다. https://doc.qt.io/qt-5/qwidget.html#adjustSize
         if event.buttons() & QtCore.Qt.LeftButton:  # 그리는 기능
             self.end = event.pos()
-            if self.wg.drawType == 0:  # 그리는 방법을 Curve로 설정했을경우 실행
-                pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
-                line = QLineF(self.start.x(), self.start.y(), self.end.x(), self.end.y())
-                self.items.append(self.wg.lbl_blending_img.addLine(line, pen))
-                print('t1', type(self.wg.lbl_blending_img))
-                print('t2', self.wg.lbl_blending_img)
-                test = np.array(self.wg.lbl_blending_img)
-                print('t3', test.shape)
-                print('t4', self.mask_space.shape)
-                print('t5', self.mask_space[0])
-                # print(line)
-                # 시작점을 다시 기존 끝점으로
-                self.start = event.pos()
+            if self.start.x() < 511:
+                if self.wg.drawType == 0:  # 그리는 방법을 Curve로 설정했을경우 실행
+                    pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
+                    line = QLineF(self.start.x(), self.start.y(), self.end.x(), self.end.y())
+                    
+                    # print(self.start.x(), self.start.y())
+                    color_hex = QColor(self.wg.pencolor).name().split('#')[-1] # #RRGGBB -> RRGGBB 
+                    color_rgb = self.hex_to_rgb(color_hex) # RRGGBB -> (r, g, b)
 
-            if self.wg.drawType == 1:  # 그리는 방법을 polygon으로 설정했을경우 실행
-                pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
-                brush = QBrush(self.wg.brushcolor)
-                polygon = QPolygonF(self.location)
-                self.items.append(self.wg.lbl_blending_img.addPolygon(polygon, pen, brush))
+                    self.mask_space[self.cur_idx][self.start.y()][self.start.x()] = color_rgb
+                    self.wg.lbl_blending_img.addLine(line, pen) # 이미지에 선 그리기
+
+                    # print(line)
+                    # 시작점을 다시 기존 끝점으로
+                    self.start = event.pos()
+
+                if self.wg.drawType == 1:  # 그리는 방법을 polygon으로 설정했을경우 실행
+                    pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
+                    brush = QBrush(self.wg.brushcolor)
+                    polygon = QPolygonF(self.location)
+                    self.items.append(self.wg.lbl_blending_img.addPolygon(polygon, pen, brush))
 
         # mousePressEvent에서 클릭을 감지하면 True로 변경
         if self.LRClicked:
@@ -658,7 +671,7 @@ class MyApp(QMainWindow):
         if event.button() == QtCore.Qt.LeftButton:
             if self.wg.drawType == 0:
                 self.start = event.pos()
-                # self.start = self.start + QtCore.QPoint(-10, -44)
+                self.start = self.start + QtCore.QPoint(-10, -44)  # default -13, -57
                 self.end = event.pos()
 
             if self.wg.drawType == 1:  # polygon의 위치를 받고 그것을 self location에 추가함
@@ -690,10 +703,10 @@ class MyApp(QMainWindow):
                 image = qimage2ndarray.array2qimage(image)
                 image = QPixmap.fromImage(QImage(image))
 
-                self.wg.lbl_original_img.addPixmap(image)
                 self.wg.lbl_blending_img.addPixmap(image)
-                self.wg.view_1.setScene(self.wg.lbl_original_img)
-                self.wg.view_2.setScene(self.wg.lbl_blending_img)
+                self.wg.lbl_original_img.addPixmap(image)
+                self.wg.view_1.setScene(self.wg.lbl_blending_img)
+                self.wg.view_2.setScene(self.wg.lbl_original_img)
                 self.wg.view_1.show()
                 self.wg.view_2.show()
 
@@ -733,7 +746,7 @@ class MyApp(QMainWindow):
             print(self.zoom.y())  # 이 값에 514 곱하기
             self.zoom += e.angleDelta() / 120
         self.update()
-
+    
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

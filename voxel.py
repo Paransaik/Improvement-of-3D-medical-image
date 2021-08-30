@@ -17,6 +17,7 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
         self.m_nX = 0  # 픽셀 개수
         self.m_nY = 0  # ...
         self.m_nZ = 0  #... # 슬라이스 개수
+        self.rgb = 3
 
         self.m_fXSp = 1.0  # Spacing(sp) : 사진끼리 떨어져있는 거리(x) # row 파일 픽셀 개수
         self.m_fYSp = 1.0  # ...(y)
@@ -103,8 +104,8 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
                     self.m_nY = Header[0]
                     self.m_nZ = Header[1]
 
-                    Data = np.fromfile(f, dtype='uint8', count=self.m_nX*self.m_nY*self.m_nZ)
-                    self.m_Voxel = np.reshape(Data, (self.m_nZ, self.m_nY, self.m_nX))
+                    Data = np.fromfile(f, dtype='uint8', count=self.m_nX*self.m_nY*self.m_nZ*self.rgb)
+                    self.m_Voxel = np.reshape(Data, (self.m_nZ, self.m_nY, self.m_nX, self.rgb))
 
                 except IOError:
                     print('Could not read file' + filename)
@@ -165,8 +166,7 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
         self.m_nZ = Dim[0] 
         
         self.m_Voxel = data.astype(np.uint8, copy=-False)  # .append로하면 겉에는 list가 된다.
-
-
+        
     def ConvertValue(self, SrcV, TarV): # 값을 변환시키는 함수? 
         idx = self.m_Voxel == SrcV
         self.m_Voxel[idx] = TarV
