@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-import pydicom
 
+from PIL import Image
 import numpy as np
 import SimpleITK as itk
 import qimage2ndarray
@@ -187,7 +187,7 @@ class AdjustDialog(QDialog):  # 안에 width와 level를 입력받아서 그 값
 
     def setupUI(self):
         self.setGeometry(1100, 200, 300, 100)
-        self.setWindowTitle("Sign In")
+        self.setWindowTitle("Pixel Range")
         self.setWindowIcon(QIcon('./icon/Adjust.png'))
 
         label1 = QLabel("level: ")
@@ -216,23 +216,21 @@ class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        np.set_printoptions(threshold=np.inf)
-
+        # 줌인 줌아웃 
         self.bCtrl = False
         self.zoom = QPointF()
+        self.alpha = 1 
 
         self.LRpoint = [0, 0]
         self.LRClicked = False
+
+        # window Center는 보고 싶은 HU 값을 의미하고, Window Width는 HU 값부터의 범위이다.
         self.window_level = 2700
         self.window_width = 5350
         self.deltaWL = 0
         self.deltaWW = 0
-        # window Center는 보고 싶은 부위의 HU 값을 의미하고, Window Width는 WC
-        # Window Center는 -600으로 잡고, Window Width는 1600으로 잡아주면 된다.
-
-        self.Nx = 0  # 이미지의 높이 크기가 저장
-        self.Ny = 0  # 이미지의 너비 크기가 저장
-        self.NofI = 0  # 총 이미지의 개수가 들어가는 변수 / openImage 메소드에서 한 번 정의된다
+    
+        self.NofI, self.Ny, self.Nx = 0, 0, 0  # 총 이미지 개수, 높이, 너비
 
         self.cur_idx = 0  # Pixmap에 올라갈 이미지를 정하는 idx
         self.cur_image = []  # Pixmap에 올라갈 이미지, 왜 리스트 자료형으로 선언했는지 모르겠다.
@@ -241,13 +239,12 @@ class MyApp(QMainWindow):
         self.location = []  # polygon의 위치 좌표
 
         self.mask_space = None  # 그림 그리는 페인트 마스크값
-        self.items_array = []
-        self.items_array2 = []
+        self.rgb = 3 # mask_space에 rgb 값을 저장할 공간크기 
+
         self.vx = voxel.PyVoxel()  # 복셀 생성자 호출
 
         self.imagePath = ''  # 3D Rendering을 위한 변수 선언
         self.folder_path = ''  # 2D Rendering을 위한 변수 선언
-        self.rgb = 3 # mask_space에 rgb 값을 저장할 공간크기 
 
         self.items = []  # 그리는 행동, 폴리곤 만드는 행동을 저장하는 리스트
         self.start = QPointF()  # 그리기 시작한 좌표점
@@ -322,19 +319,7 @@ class MyApp(QMainWindow):
                 self.cur_idx = 0
 
             print("left and image", self.cur_idx + 1)
-            # EntireImage = (같은 사진 개수, 해상도, 해상도)
-            self.cur_image = self.EntireImage[self.cur_idx]  # 해당 idx 번째에 있는 사진을 cur_image로 설정
-
-            image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
-            image = qimage2ndarray.array2qimage(image)
-            image = QPixmap.fromImage(QImage(image))
-
-            self.wg.lbl_blending_img.addPixmap(image)  # 이전 idx에 있던 이미지를
-            self.wg.lbl_original_img.addPixmap(image)  # pixmap에 올릴 이미지로 변경
-            self.wg.view_1.setScene(self.wg.lbl_blending_img)
-            self.wg.view_2.setScene(self.wg.lbl_blending_img)
-            self.wg.view_1.show()
-            self.wg.view_2.show()
+            self.viewUpdate(1)
 
     # btn5(Next)가 클릭 되었을 때
     def nextButton(self):
@@ -346,64 +331,45 @@ class MyApp(QMainWindow):
                 self.cur_idx = self.NofI - 1
 
             print("right and image =", self.cur_idx + 1)
-            self.cur_image = self.EntireImage[self.cur_idx]
-
-            image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
-            image = qimage2ndarray.array2qimage(image)
-            image = QPixmap.fromImage(QImage(image))
-
-            # 오른쪽 프레임 이미지 업데이트 필요
-            self.wg.lbl_blending_img.addPixmap(image)
-            self.wg.lbl_original_img.addPixmap(image)
-            self.wg.view_1.setScene(self.wg.lbl_blending_img)
-            self.wg.view_2.setScene(self.wg.lbl_blending_img)
-            self.wg.view_1.show()
-            self.wg.view_2.show()
+            self.viewUpdate(1)
 
     # btn6(ImgNum)가 클릭 되었을 때
     # 사용자로부터 단순한 정수를 입력받는 것이 아니라 다양한 옵션 중 하나를 선택하고자 한다면 getItem 메소드를 사용
     def showDialog(self):
-        num, ok = QInputDialog.getInt(self, 'Input ImageNumber',
-                                      'Enter Num')  # 두 번째 파라미터(타이틀 바 제목), 세 번째 파라미터(EditHint?)
+        num, ok = QInputDialog.getInt(self, 'Input ImageNumber','Enter Num')  # 두 번째 파라미터(타이틀 바 제목), 세 번째 파라미터(EditHint?)
         self.cur_idx = num - 1  # idx로 변환해야하기 때문에 -1
+
         if len(self.EntireImage) == 0:
             print("아직 dataset이 들어오지 않았습니다.")
+
         elif self.cur_idx < 0 or self.cur_idx >= len(self.EntireImage):
             print("선택할 수 없는 번호입니다.")
+
         else:
             print("show image", self.cur_idx + 1)
-            if self.cur_idx > self.NofI - 1:  # NofI는 openImage에서 한 번 정의 된다. 총 이미지 개수
+            if self.cur_idx > self.NofI - 1:  
                 self.cur_idx = self.NofI - 1  # 만약 표시하고 싶은 idx 범위가 사진의 수를 넘어간다면(없는 이미지) 마지막 이미지로 변경
+            
             elif self.cur_idx < 0:  # ?
                 self.cur_idx = self.NofI - 224  # 음수 값으로 변경 & 오류 발생 후 종료
-
-            self.cur_image = self.EntireImage[self.cur_idx]
-
-            image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
-
-            image = qimage2ndarray.array2qimage(image)
-            image = QPixmap.fromImage(QImage(image))
-            self.wg.lbl_blending_img.addPixmap(image)
-            self.wg.lbl_original_img.addPixmap(image)
-            self.wg.view_1.setScene(self.wg.lbl_blending_img)
-            self.wg.view_2.setScene(self.wg.lbl_original_img)
-            self.wg.view_1.show()
-            self.wg.view_2.show()
+            
+            self.viewUpdate(1)
 
     def openDcm(self):
         # QFileDialog는 사용자가 파일 또는 경로를 선택할 수 있도록 하는 다이얼로그
-        self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file',
-                                                        './image')  # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
+        self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file', './image')  # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
         if self.imagePath == '':
             print('openDcm 종료')
         else:
             dcmfileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
             extendName = dcmfileName[-3:]  # 뒤에 확장자명 조회하기, 확장자 명에 따라 호출되는 함수가 다름
+
             if extendName == 'dcm' or extendName == 'DCM':  # only open dcm file
                 self.folder_path = ''  # 다른 dataset으로의 변경을 위한 초기화
+                
                 for i in range(len(self.imagePath.split('/')) - 1):  # folder_path를 imagePath를 이용해서 구해야지만 앞으로 문제 발생 X
                     if i == len(self.imagePath.split('/')) - 1:
-                        self.folder_path = self.folder_path + self.imagePath.split('/')[i]
+                        self.folder_path = self.folder_path + self.imagePath.split('/')[i]          
                     else:
                         self.folder_path = self.folder_path + self.imagePath.split('/')[i] + '/'
 
@@ -412,45 +378,19 @@ class MyApp(QMainWindow):
 
                 reader.SetFileNames(dicom_names)
                 images = reader.Execute()
-                # print('folder_path', self.folder_path)
-                # <class 'SimpleITK.SimpleITK.Image'> <class 'SimpleITK.SimpleITK.Image'>
-                print(type(images[0]), type(images[1]))
 
                 imgArray = itk.GetArrayFromImage(images)  # 이미지로부터 배열을is_opened  가져옴
                 print(imgArray.shape)
                 # EntireImage Handler========================================================================
                 self.EntireImage = np.asarray(imgArray, dtype=np.float32)  # asarray는 데이터 형태가 다를 경우에만 복사(copy)가 된다.
-                self.EntireImage = np.squeeze(
-                    self.EntireImage)  # (배열, 축)을 통해 지정된 축의 차원을 축소, (1, 1024, 1024) -> (1024, 1024)
+                self.EntireImage = np.squeeze(self.EntireImage)  # (배열, 축)을 통해 지정된 축의 차원을 축소, (1, 1024, 1024) -> (1024, 1024)
                 
                 self.NofI, self.Ny, self.Nx = self.EntireImage.shape
-                temp_space = np.zeros((self.NofI, self.Ny, self.Nx, self.rgb))# (20 512 512 3)
+                self.viewUpdate(1)
 
+                temp_space = np.zeros((self.NofI, self.Ny, self.Nx, self.rgb))# (20 512 512 3)
                 self.vx.Create_Mask_Space(temp_space) # 사실 얘가 반환하는 건 존재하지 않는다. -> None
                 self.mask_space = self.vx.m_Voxel # (z, y, x, rgb)
-
-                # self.wg.view_1.setFixedSize(self.EntireImage.shape[1],self.EntireImage.shape[2]) # 이미지 크기에 맞게 view를 설정하면 너무 커지는 현상 발생
-                # self.wg.view_2.setFixedSize(self.EntireImage.shape[1], self.EntireImage.shape[2])
-                print("view size가", self.EntireImage.shape[1], "와", self.EntireImage.shape[2], "로 설정 되었습니다.")
-
-                self.cur_image = self.EntireImage[self.cur_idx]
-                # =============================================================================================
-
-                # 보고 싶은 신체 부위가 있다면 HU table을 참고해 Window Center와 Window Width를 조절한 뒤 그 부분 위주로 출력해줄 수 있다.
-                # WC를 중심으로 WW의 범위만큼을 중심적으로 표현해준다.
-                # window_level이 낮을수록 하얗게 나온다.(HU 조절?), window_width는 WC를 중심으로 관찰하고자 하는 HU 범위를 의미
-                image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
-                image = qimage2ndarray.array2qimage(image)  # 배열에서 이미지로
-                image = QPixmap.fromImage(
-                    QImage(image))  # image를 입력해주고 QPixmap 객체를 하나 만든다. https://wikidocs.net/33768 < 참고하면 좋다.
-
-                self.wg.lbl_blending_img.addPixmap(image)  # MyWidget에서 GraphicsScene()로 선언한 변수에 pixmap을 표시될 이미지로 설정
-                self.wg.view_1.setScene(self.wg.lbl_blending_img)  # MyWidget에서 QGraphicsView()로 선언한 view_1의 화면으로 설정
-                self.wg.view_1.show()  # view_1 시작
-
-                self.wg.lbl_original_img.addPixmap(image)  # 원래는 blending된 image를 넣어야 하지만 아직 blending 기능X
-                self.wg.view_2.setScene(self.wg.lbl_original_img)
-                self.wg.view_2.show()
 
                 self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent  # view_1의 mouseMoveEvent 갱신
                 self.wg.view_2.mouseMoveEvent = self.mouseMoveEvent
@@ -465,13 +405,16 @@ class MyApp(QMainWindow):
         else:
             dcmfileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
             extendName = dcmfileName[-3:]  # 뒤에 확장자명 조회하기, 확장자 명에 따라 호출되는 함수가 다름
+            
             if extendName == 'raw' or extendName == 'RAW':  # only open raw file
                 self.folder_path = ''  # 다른 dataset으로의 변경을 위한 초기화
+                
                 for i in range(len(self.imagePath.split('/')) - 1):  # folder_path를 imagePath를 이용해서 구해야지만 앞으로 문제 발생 X
                     if i == len(self.imagePath.split('/')) - 1:
                         self.folder_path = self.folder_path + self.imagePath.split('/')[i]
                     else:
                         self.folder_path = self.folder_path + self.imagePath.split('/')[i] + '/'
+                
                 self.vx.ReadFromRaw(self.imagePath)
                 imgArray = self.vx.m_Voxel  # 이미지로부터 배열을 가져옴
 
@@ -480,20 +423,7 @@ class MyApp(QMainWindow):
                 self.EntireImage = np.squeeze(self.EntireImage)
 
                 self.NofI, self.Ny, self.Nx = self.EntireImage.shape
-
-                self.cur_image = self.EntireImage[self.cur_idx]
-                # =============================================================================================
-                image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
-                image = qimage2ndarray.array2qimage(image)
-                image = QPixmap.fromImage(QImage(image))
-
-                self.wg.lbl_blending_img.addPixmap(image)
-                self.wg.view_1.setScene(self.wg.lbl_blending_img)
-                self.wg.view_1.show()
-
-                self.wg.lbl_original_img.addPixmap(image)
-                self.wg.view_2.setScene(self.wg.lbl_original_img)
-                self.wg.view_2.show()
+                self.viewUpdate(1)
 
                 self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent
                 self.wg.view_2.mouseMoveEvent = self.mouseMoveEvent
@@ -510,14 +440,11 @@ class MyApp(QMainWindow):
                     self.vx.ReadFromBin(path)
                     self.mask_space = self.vx.m_Voxel
 
-                    if self.mask_space[0, :, :].any():
-                        print('성공')
-                    
                     for y in range(512):
                         for x in range(512):
                             if self.mask_space[0][y][x].any():
                                 print('masking 정보 : ({}, {}), rgb({}, {}, {})'.format(x, y, self.mask_space[0][y][x][0], self.mask_space[0][y][x][1], self.mask_space[0][y][x][2]))
-
+                
                 except FileNotFoundError:
                     print('현재 해당 .raw에 대한 bin 파일이 존재하지 않습니다.')
                     print('빈 mask_space 생성...')
@@ -535,8 +462,10 @@ class MyApp(QMainWindow):
         else:
             dcmfileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
             extendName = dcmfileName[-3:]  # 뒤에 확장자명 조회하기, 확장자 명에 따라 호출되는 함수가 다름
+            
             if extendName == 'dcm' or extendName == 'DCM' or extendName == 'raw' or extendName == 'RAW':  # dcm 파일로 열었을 때 raw로 저장하는 곳
                 print('if opened {}'.format(extendName))
+                
                 direName = self.folder_path.split('/')[-2]  # 현재 보고있는 .dcm파일의 Directory명
                 path = './raw/' + direName + '.raw'  # 저장할 path 설정
                 self.vx.NumpyArraytoVoxel(self.EntireImage)
@@ -546,18 +475,6 @@ class MyApp(QMainWindow):
                 # 편의성을 위해(파일 둘다 확인) 임시로 ./raw 로 설정, 나중에 './bin/'으로 바꿀 것 - 태영
                 path = './raw/' + direName + '.bin'  # path 설정
                 self.vx.WriteToBin(path)
-                
-            # else:                                         # raw 파일로 열었을 때 raw로 저장하는 곳
-            #     print('if opened RAW')
-            #     direName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 Directory명
-            #     direName = direName[:-4]  # 뒤에 확장자 제거
-            #     path = './raw/' + direName + '.raw'  # 저장할 path 설정
-            #     self.vx.NumpyArraytoVoxel(self.EntireImage)
-            #     self.vx.WriteToRaw(path)  # raw로 연 파일 raw로 저장
-            #
-            #     # 편의성을 위해(파일 둘다 확인) 임시로 ./raw 로 설정, 나중에 './bin/'으로 바꿀 것 - 태영
-            #     path = './raw/' + direName + '.bin'  # path 설정
-            #     self.vx.WriteToBin(path)
 
     def AdjustDialogClicked(self):
         dlg = AdjustDialog()
@@ -569,18 +486,7 @@ class MyApp(QMainWindow):
         try:
             self.level = int(self.level)
             self.width = int(self.width)
-
-            image = self.AdjustPixelRange(self.cur_image, self.level,
-                                          self.width)  # 이미지를 받아서 window의 높이와 너비를 바꿔서 image로 설정
-
-            image = qimage2ndarray.array2qimage(image)  # Q이미지를 numpy array로 바꿈
-            image = QPixmap.fromImage(QImage(image))  # numpy array를 pixmap으로 변환
-            self.wg.lbl_blending_img.addPixmap(image)  # 원본이미지의 Q이미지를 pix맵으로 설정
-            self.wg.lbl_original_img.addPixmap(image)  # 라벨링 되어있는 이미지의 Q이미지를 pix맵으로 설정
-            self.wg.view_1.setScene(self.wg.lbl_blending_img)  # 원본 이미지를 보도록 설정
-            self.wg.view_2.setScene(self.wg.lbl_original_img)  # 라벨링 할 이미지를 보도록 설정
-            self.wg.view_1.show()  # 원본이미지를 띄움
-            self.wg.view_2.show()  # 라벨링 이미지를 띄움
+            self.viewUpdate(1)
 
         except ValueError:
             print("level, width가 제대로 입력되지 않았습니다.")
@@ -603,16 +509,57 @@ class MyApp(QMainWindow):
 
     def hex_to_rgb(self, hex):
         return list(int(hex[i:i+2], 16) for i in (0, 2, 4))
+    
+    def viewUpdate(self, type, zoom_img=None):
+        if type == 1:
+            self.cur_image = self.EntireImage[self.cur_idx]
+
+            image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
+            image = qimage2ndarray.array2qimage(image)
+            image = QPixmap.fromImage(QImage(image))
+
+            self.wg.lbl_blending_img.clear()
+            self.wg.lbl_original_img.clear()
+
+            self.wg.lbl_blending_img.addPixmap(image)
+            self.wg.lbl_original_img.addPixmap(image)
+            self.wg.view_1.setScene(self.wg.lbl_blending_img)
+            self.wg.view_2.setScene(self.wg.lbl_original_img)
+            self.wg.view_1.show()
+            self.wg.view_2.show()
+
+        elif type == 2:
+            self.cur_image = zoom_img
+
+            # self.wg.view_1.setFixedSize(zoom_img.shape[1], zoom_img.shape[0]) # 이미지 크기에 맞게 view를 설정하면 너무 커지는 현상 발생
+            # self.wg.view_2.setFixedSize(zoom_img.shape[1], zoom_img.shape[0])
+            
+            image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
+            image = qimage2ndarray.array2qimage(image)
+            image = QPixmap.fromImage(QImage(image))
+
+            self.wg.lbl_blending_img.clear()
+            # self.wg.lbl_original_img.clear()
+
+            self.wg.lbl_blending_img.addPixmap(image)
+            # self.wg.lbl_original_img.addPixmap(image)
+            self.wg.view_1.setScene(self.wg.lbl_blending_img)
+            # self.wg.view_2.setScene(self.wg.lbl_original_img)
+            self.wg.view_1.show()
+            # self.wg.view_2.show()
 
     def mouseMoveEvent(self, event):
         txt = "마우스가 위치한 이미지의 좌표 ; x={0},y={1}".format(event.x(), event.y())
+
         self.wg.lbl_pos.setText(txt)
         self.wg.lbl_pos.adjustSize()  # 내용에 맞게 위젯의 크기를 조정한다. https://doc.qt.io/qt-5/qwidget.html#adjustSize
+        
         if event.buttons() & QtCore.Qt.LeftButton:  # 그리는 기능
             self.end = event.pos()
+            
             if self.start.x() < 511:
                 if self.wg.drawType == 0:  # 그리는 방법을 Curve로 설정했을경우 실행
-                    pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
+                    pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex()) # .bin을 이용해서 다시 그려야할 때 -> QColor에 rgb값을 넣어도 되는지 등 테스트 
                     line = QLineF(self.start.x(), self.start.y(), self.end.x(), self.end.y())
                     
                     # print(self.start.x(), self.start.y())
@@ -698,17 +645,7 @@ class MyApp(QMainWindow):
                     self.window_width = 0
 
                 print("최종반영 ", self.window_level, self.window_width)
-
-                image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
-                image = qimage2ndarray.array2qimage(image)
-                image = QPixmap.fromImage(QImage(image))
-
-                self.wg.lbl_blending_img.addPixmap(image)
-                self.wg.lbl_original_img.addPixmap(image)
-                self.wg.view_1.setScene(self.wg.lbl_blending_img)
-                self.wg.view_2.setScene(self.wg.lbl_original_img)
-                self.wg.view_1.show()
-                self.wg.view_2.show()
+                self.viewUpdate(1)
 
             print("mousePressEvent")
             print("Mouse 클릭한 글로벌 좌표: x={0},y={1}".format(event.globalX(), event.globalY()))
@@ -722,6 +659,7 @@ class MyApp(QMainWindow):
         if event.button() == QtCore.Qt.LeftButton:
             if self.wg.checkbox.isChecked():
                 return None
+            
             pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
 
             if self.wg.drawType == 1:
@@ -743,11 +681,21 @@ class MyApp(QMainWindow):
 
     def wheelEvent(self, e):
         if self.bCtrl:
-            print(self.zoom.y())  # 이 값에 514 곱하기
-            self.zoom += e.angleDelta() / 120
-        self.update()
-    
+            temp_zoom = self.zoom.y()
+            self.zoom += e.angleDelta() / 120 # 휠 위로 -> +1, 아래로 -> -1
+            self.update()
+            
+            if self.zoom.y() - temp_zoom > 0:
+                self.alpha *= 1.2
+            elif self.zoom.y() - temp_zoom < 0:
+                self.alpha /= 1.2
 
+            zoom_img = np.array(self.cur_image)
+            zoom_img = Image.fromarray(zoom_img)
+            zoom_img = np.array(zoom_img.resize((int(self.Ny*self.alpha), int(self.Ny*self.alpha))))
+
+            self.viewUpdate(2, zoom_img)
+            
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = MyApp()
