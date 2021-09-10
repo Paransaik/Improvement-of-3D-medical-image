@@ -393,7 +393,7 @@ class MyApp(QMainWindow):
                 
                 print (self.EntireImage.shape)
                 print (type(self.EntireImage))
-                self.EntireImage = self.rotation_volume(self.EntireImage, viewtype='coronal')
+                self.EntireImage = self.rotation_volume(self.EntireImage, viewtype='axial')
 
                 self.NofI, self.Ny, self.Nx = self.EntireImage.shape
                 self.viewUpdate(1)
