@@ -176,7 +176,6 @@ class MyWidget(QWidget):
             self.brushcolor = color
             self.brushbtn.setStyleSheet('background-color: {}'.format(color.name()))
 
-
 class AdjustDialog(QDialog):  # 안에 width와 level를 입력받아서 그 값으로 수정하는 Dialog
     def __init__(self):
         super().__init__()
@@ -225,8 +224,8 @@ class MyApp(QMainWindow):
         self.LRClicked = False
 
         # window Center는 보고 싶은 HU 값을 의미하고, Window Width는 HU 값부터의 범위이다.
-        self.window_level = 2700
-        self.window_width = 5350
+        self.window_level = 40# 2700
+        self.window_width = 400# 5350
         self.deltaWL = 0
         self.deltaWW = 0
     
@@ -246,11 +245,13 @@ class MyApp(QMainWindow):
         self.imagePath = ''  # 3D Rendering을 위한 변수 선언
         self.folder_path = ''  # 2D Rendering을 위한 변수 선언
 
-        self.items = []  # 그리는 행동, 폴리곤 만드는 행동을 저장하는 리스트
+        self.stack = []
+
         self.start = QPointF()  # 그리기 시작한 좌표점
         self.end = QPointF()  # 그리기 끝난 좌표점
         self.polygon = QPoint()  # 폴리곤의 좌표
         self.label = QLabel()  # QLabel 메서드를 들고옴
+        self.Point = []
 
         self.wg = MyWidget()  # MyWidget 클래스를 사용하기 위해서 객체를 생성
         self.setCentralWidget(self.wg)  # QMainWindow 화면에 레이아웃과 위젯을 표시하기 위해사용
@@ -293,10 +294,15 @@ class MyApp(QMainWindow):
 
     # btn1(uodo)가 클릭 되었을 때
     def undoButton(self):
-        print(self.items)
-        self.items.pop(-1)
-        print(self.items)
-        self.update()
+        for i in range(10):
+            self.stack.pop()
+
+        self.wg.lbl_blending_img.clear()
+        self.viewUpdate(1)
+
+        for i in range(len(self.stack)):
+            self.wg.lbl_blending_img.addLine(self.stack[i][0], self.stack[i][1])
+        # self.update()
 
     # btn2(s_r)가 클릭 되었을 때
     def s_rButton(self):
@@ -364,7 +370,7 @@ class MyApp(QMainWindow):
             dcmfileName = self.imagePath.split('/')[-1]  # 현재 보고있는 .dcm파일의 file명
             extendName = dcmfileName[-3:]  # 뒤에 확장자명 조회하기, 확장자 명에 따라 호출되는 함수가 다름
 
-            if extendName == 'dcm' or extendName == 'DCM':  # only open dcm file
+            if extendName == 'dcm' or extendName == 'DCM' or extendName == 'IMA':  # only open dcm file
                 self.folder_path = ''  # 다른 dataset으로의 변경을 위한 초기화
                 
                 for i in range(len(self.imagePath.split('/')) - 1):  # folder_path를 imagePath를 이용해서 구해야지만 앞으로 문제 발생 X
@@ -380,17 +386,25 @@ class MyApp(QMainWindow):
                 images = reader.Execute()
 
                 imgArray = itk.GetArrayFromImage(images)  # 이미지로부터 배열을is_opened  가져옴
-                print(imgArray.shape)
+
                 # EntireImage Handler========================================================================
                 self.EntireImage = np.asarray(imgArray, dtype=np.float32)  # asarray는 데이터 형태가 다를 경우에만 복사(copy)가 된다.
-                self.EntireImage = np.squeeze(self.EntireImage)  # (배열, 축)을 통해 지정된 축의 차원을 축소, (1, 1024, 1024) -> (1024, 1024)
+                # self.EntireImage = np.squeeze(self.EntireImage)  # (배열, 축)을 통해 지정된 축의 차원을 축소, (1, 1024, 1024) -> (1024, 1024)
                 
+                print (self.EntireImage.shape)
+                print (type(self.EntireImage))
+                self.EntireImage = self.rotation_volume(self.EntireImage, viewtype='coronal')
+
                 self.NofI, self.Ny, self.Nx = self.EntireImage.shape
                 self.viewUpdate(1)
 
                 temp_space = np.zeros((self.NofI, self.Ny, self.Nx, self.rgb))# (20 512 512 3)
                 self.vx.Create_Mask_Space(temp_space) # 사실 얘가 반환하는 건 존재하지 않는다. -> None
                 self.mask_space = self.vx.m_Voxel # (z, y, x, rgb)
+
+                for i in range(self.EntireImage.shape[1]):
+                    for j in range(self.EntireImage.shape[2]):
+                        self.Point.append(QPointF(j, i)) 
 
                 self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent  # view_1의 mouseMoveEvent 갱신
                 self.wg.view_2.mouseMoveEvent = self.mouseMoveEvent
@@ -510,6 +524,20 @@ class MyApp(QMainWindow):
     def hex_to_rgb(self, hex):
         return list(int(hex[i:i+2], 16) for i in (0, 2, 4))
     
+
+    def rotation_volume(self, image, viewtype='axial'):
+        source = image
+        if viewtype == 'axial':
+            image = source.transpose((0, 1, 2))
+        elif viewtype == 'sagittal':
+            image = source.transpose((1, 0, 2))
+            image = np.fliplr(image)
+        elif viewtype == 'coronal':
+            image = source.transpose((2, 0, 1))
+            image = np.fliplr(image)
+        
+        return image
+
     def viewUpdate(self, type, zoom_img=None):
         if type == 1:
             self.cur_image = self.EntireImage[self.cur_idx]
@@ -568,7 +596,7 @@ class MyApp(QMainWindow):
 
                     self.mask_space[self.cur_idx][self.start.y()][self.start.x()] = color_rgb
                     self.wg.lbl_blending_img.addLine(line, pen) # 이미지에 선 그리기
-
+                    self.stack.append([line, pen])
                     # print(line)
                     # 시작점을 다시 기존 끝점으로
                     self.start = event.pos()
@@ -577,7 +605,18 @@ class MyApp(QMainWindow):
                     pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
                     brush = QBrush(self.wg.brushcolor)
                     polygon = QPolygonF(self.location)
-                    self.items.append(self.wg.lbl_blending_img.addPolygon(polygon, pen, brush))
+                    color_hex = QColor(self.wg.brushcolor).name().split('#')[-1] # #RRGGBB -> RRGGBB 
+                    color_rgb = self.hex_to_rgb(color_hex) # RRGGBB -> (r, g, b)
+
+                    for location in self.Point:
+                            a = polygon.containsPoint(location, QtCore.Qt.WindingFill)
+                            if a == True:
+                                print('(x, y) : ({}, {})'.format(int(location.x()), int(location.y())))
+                                self.mask_space[self.cur_idx][int(location.y())][int(location.x())] = color_rgb
+
+                    self.wg.lbl_blending_img.addPolygon(polygon, pen, brush)
+
+                    del self.location[:]
 
         # mousePressEvent에서 클릭을 감지하면 True로 변경
         if self.LRClicked:
@@ -614,6 +653,22 @@ class MyApp(QMainWindow):
 
             print("move: ", temp_wl, temp_ww)  # 현재 최종 wl와 ww를 출력
 
+    def mouseReleaseEvent(self, event):
+        print('re')
+        if event.button() == QtCore.Qt.LeftButton:
+            if self.wg.checkbox.isChecked():
+                return None
+            
+            print('release')
+            pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
+
+            if self.wg.drawType == 1:
+                brush = QBrush(self.wg.brushcolor)
+
+                self.stack.clear()
+                Polygon = QPolygonF(self.start, self.end)
+                self.wg.lbl_blending_img.addPolygon(Polygon, pen, brush)
+
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton:
             if self.wg.drawType == 0:
@@ -624,7 +679,7 @@ class MyApp(QMainWindow):
             if self.wg.drawType == 1:  # polygon의 위치를 받고 그것을 self location에 추가함
                 self.polygon = event.pos()
                 print(self.polygon)
-                self.location.append(self.polygon)
+                self.location.append(self.polygon + QtCore.QPoint(-10, -44))
                 print("좌표가 추가되었습니다")
 
         if event.buttons() == QtCore.Qt.RightButton:  # 질문 : 이게 왜 동시 클릭을 의미?
@@ -655,20 +710,6 @@ class MyApp(QMainWindow):
 
             self.LRpoint = [x, y]
 
-    def mouseReleaseEvent(self, event):
-        if event.button() == QtCore.Qt.LeftButton:
-            if self.wg.checkbox.isChecked():
-                return None
-            
-            pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
-
-            if self.wg.drawType == 1:
-                brush = QBrush(self.wg.brushcolor)
-
-                self.items.clear()
-                Polygon = QPolygonF(self.start, self.end)
-                self.wg.lbl_blending_img.addPolygon(Polygon, pen, brush)
-
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Control:
             self.bCtrl = True
@@ -686,13 +727,18 @@ class MyApp(QMainWindow):
             self.update()
             
             if self.zoom.y() - temp_zoom > 0:
-                self.alpha *= 1.2
+                self.alpha = 10
             elif self.zoom.y() - temp_zoom < 0:
-                self.alpha /= 1.2
+                self.alpha = -10
 
             zoom_img = np.array(self.cur_image)
             zoom_img = Image.fromarray(zoom_img)
-            zoom_img = np.array(zoom_img.resize((int(self.Ny*self.alpha), int(self.Ny*self.alpha))))
+            center_x, center_y = 256, 256
+            x1, y1, x2, y2 = 1, 1, 512, 512
+            x1, y1 = x1+self.alpha, y1+self.alpha
+            x2, y2 = x2-self.alpha, y2-self.alpha
+            zoom_img = zoom_img.crop((int(x1), int(y1), int(x2), int(y2)))
+            zoom_img = np.array(zoom_img.resize((int(self.Ny),int(self.Nx))))
 
             self.viewUpdate(2, zoom_img)
             
