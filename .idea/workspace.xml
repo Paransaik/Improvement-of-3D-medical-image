@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.27.&#10;fixed blending painted">
+    <list default="true" id="19c25ae2-f4d5-4778-8f43-3c4b3a7296e4" name="변경" comment="8.27.&#10;modify resize of view1, view2">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-25__11_22__________.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-25__11_44__________.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-25_오후_11_22,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021-08-25_오후_11_44,_체크아웃_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56,_업데이트_전에_커밋되지_않은_변경_내용_[변경]1/dataset1_001.Seq1.Ser5.Img16.raw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56,_업데이트_전에_커밋되지_않은_변경_내용_[변경]1/dataset1_001.Seq1.Ser5.Img3.raw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56,_업데이트_전에_커밋되지_않은_변경_내용_[변경]1/dataset1_001.Seq1.Ser5.Img9.raw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56,_업데이트_전에_커밋되지_않은_변경_내용_[변경]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2021_08_25_16_56__________1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opentool.py" beforeDir="false" afterPath="$PROJECT_DIR$/opentool.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/voxel.py" beforeDir="false" afterPath="$PROJECT_DIR$/voxel.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +54,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/.conda/envs/ConnectAi/python.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/viewer/voxel.py" />
@@ -261,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630033537055</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="8.27.&#10;modify resize of view1, view2">
+      <created>1630047998349</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1630047998349</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -330,6 +345,7 @@
     <MESSAGE value="8.26.&#10;before pull, commit" />
     <MESSAGE value="8.27.&#10;atfer second pull, commit" />
     <MESSAGE value="8.27.&#10;fixed blending painted" />
-    <option name="LAST_COMMIT_MESSAGE" value="8.27.&#10;fixed blending painted" />
+    <MESSAGE value="8.27.&#10;modify resize of view1, view2" />
+    <option name="LAST_COMMIT_MESSAGE" value="8.27.&#10;modify resize of view1, view2" />
   </component>
 </project>
