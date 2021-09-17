@@ -22,14 +22,38 @@ class MyWidget(QWidget):
 
         self.lbl_blending_img = QGraphicsScene()  # 많은 수의 2D 그래픽 항목을 관리하기 위한 표면을 제공
         self.lbl_original_img = QGraphicsScene()
+        self.lbl_transpos_sagittal = QGraphicsScene()
+        self.lbl_transpos_coronal = QGraphicsScene()
+        self.lbl_3Drander_img = QGraphicsScene()
 
         self.view_1 = QGraphicsView(self.lbl_blending_img)  # 원본 이미지
-        self.view_2 = QGraphicsView(self.lbl_original_img)  # 변환된 이미지 뷰
+        self.view_2 = QGraphicsView(self.lbl_original_img)
+        # self.view_1 = setParent(self.view_1*parent)
 
         self.lbl_pos = QLabel()  # 비어있는 라벨? 생성 -> mouseMoveEvent()에서 .setText()를 이용해 계속 갱신
         self.lbl_pos.setAlignment(Qt.AlignLeft)  # 라벨을 AlignLeft에 위치시킨다.
 
         self.draw = QVBoxLayout()  # 오른쪽에 그리는 방법 펜 컬러 버러쉬 컬러 수정하는 창
+
+        self.number = 0
+
+        view_choice = QGroupBox('view 설정')        
+        self.draw.addWidget(view_choice)
+        
+        self.vbox3 = QVBoxLayout()
+        view_choice.setLayout(self.vbox3)
+
+        text = ['1 x 2', '2 x 2']
+        self.view_checkbox = []
+
+        for i in range(len(text)):  # Curve, Polygon 위젯 생성
+            self.view_checkbox.append(QRadioButton(text[i], self))
+            self.view_checkbox[i].clicked.connect(self.checkClicked)
+            self.vbox3.addWidget(self.view_checkbox[i])
+        self.view_checkbox[0].setChecked(True)
+        self.drawType = 0
+
+        
 
         gb = QGroupBox('그리기 종류')
         self.draw.addWidget(gb)
@@ -87,17 +111,6 @@ class MyWidget(QWidget):
         self.brushbtn.clicked.connect(self.showColorDlg)
         hbox.addWidget(self.brushbtn)
 
-        # 그룹박스4
-        gb = QGroupBox('지우개')
-        self.draw.addWidget(gb)
-
-        hbox = QHBoxLayout()
-        gb.setLayout(hbox)
-
-        # 밑에 여러가지 기능 버튼 추가
-        self.checkbox = QCheckBox('지우개 동작')
-        self.checkbox.stateChanged.connect(self.checkClicked)
-        hbox.addWidget(self.checkbox)
 
         self.btn1 = QPushButton('&Undo', self)
         self.btn1.setCheckable(True)  # 버튼을 누른상태와 그렇지 않은 상태를 구분함
@@ -126,31 +139,39 @@ class MyWidget(QWidget):
         # 박스 형태를 그림으로 그리기
         self.hbox1 = QHBoxLayout()  # 행( row) 방향(수평)으로 위젯을 배치할 때 사용하는 레이아웃
         self.hbox2 = QHBoxLayout()
+        self.hbox3 = QHBoxLayout()
+        self.vbox2 = QVBoxLayout()
+        self.hbox4 = QHBoxLayout()
 
         # 행을 기준으로 배치하기 때문에 원본, 변환 이미지 위젯을 추가함
-        self.hbox1.addWidget(self.view_1)  # 폼 박스에 원본 이미지 위젯 추가
-        self.hbox1.addWidget(self.view_2)  # 폼 박스에 변환 이미지 위젯 추가
+        self.hbox2.addWidget(self.view_1) # 폼 박스에 원본 이미지 위젯 추가    
+        self.hbox2.addWidget(self.view_2) 
+        self.hbox1.addLayout(self.vbox2)
+        self.vbox2.addLayout(self.hbox2)
+        self.vbox2.addLayout(self.hbox4)
         self.hbox1.addLayout(self.draw)
 
-        self.hbox2.addWidget(self.lbl_pos)  # H박스에 위젯 추가 (previous, next, ImgNum 등)
-        self.hbox2.addStretch(3)
-        self.hbox2.addWidget(self.btn1)
-        self.hbox2.addWidget(self.btn2)
-        self.hbox2.addWidget(self.btn3)
-        self.hbox2.addWidget(self.btn4)
-        self.hbox2.addWidget(self.btn5)
-        self.hbox2.addWidget(self.btn6)
+        self.hbox3.addWidget(self.lbl_pos)  # H박스에 위젯 추가 (previous, next, ImgNum 등)
+        self.hbox3.addStretch(3)
+        self.hbox3.addWidget(self.btn1)
+        self.hbox3.addWidget(self.btn2)
+        self.hbox3.addWidget(self.btn3)
+        self.hbox3.addWidget(self.btn4)
+        self.hbox3.addWidget(self.btn5)
+        self.hbox3.addWidget(self.btn6)
 
-        self.vbox = QVBoxLayout()  # 열(col) 방향(수직)으로 위젯을 배치할 때 사용
-        self.vbox.addLayout(self.hbox1)
-        self.vbox.addLayout(self.hbox2)
+        self.vbox1 = QVBoxLayout()  # 열(col) 방향(수직)으로 위젯을 배치할 때 사용
+        self.vbox1.addLayout(self.hbox1)
+        self.vbox1.addLayout(self.hbox3)
+
 
         # draw레이아웃에 여백 공간 생성
         self.draw.addStretch(1)
 
-        self.setLayout(self.vbox)  # addLayout(self.hbox)를 했기 때문에 setLayout을 vbox로
+        self.setLayout(self.vbox1)  # addLayout(self.hbox)를 했기 때문에 setLayout을 vbox로
         # hbox1안에 위젯들 여백 공간 설정
-        self.vbox.setStretchFactor(self.hbox1, 1)
+        self.vbox1.setStretchFactor(self.hbox1, 1)
+
 
     def radioClicked(self):  # 그리는 방법 설정에 뭘로 설정했는지 확인하는 함수
         for i in range(len(self.radiobtns)):
@@ -158,8 +179,25 @@ class MyWidget(QWidget):
                 self.drawType = i
                 break
 
-    def checkClicked(self):  # 지우개 부분에 뭘로 설정했는지 확인하는 함수
-        pass
+    def checkClicked(self):
+            if self.view_checkbox[1].isChecked():
+                if self.number == 0:
+                    self.view_3 = QGraphicsView(self.lbl_transpos_sagittal)
+                    self.hbox4.insertWidget(2, self.view_3)
+                    self.view_4 = QGraphicsView(self.lbl_transpos_coronal)  # tranpos된 이미지
+                    self.hbox4.insertWidget(3, self.view_4)
+                    self.number = self.number = 1
+
+                elif self.number == 1:
+                    print("지원하는 기능은 2x2까지 입니다 1x2로 바꿔주세요.")
+
+            if self.view_checkbox[0].isChecked():
+                self.hbox4.removeWidget(self.view_3)
+                self.hbox4.removeWidget(self.view_4)
+                self.view_1.raise_()
+                self.view_2.raise_()
+                self.number = 0
+
 
     def showColorDlg(self):  # 펜컬러, 브러쉬 컬러 설정하는 함수
 
@@ -232,8 +270,10 @@ class MyApp(QMainWindow):
         self.NofI, self.Ny, self.Nx = 0, 0, 0  # 총 이미지 개수, 높이, 너비
 
         self.cur_idx = 0  # Pixmap에 올라갈 이미지를 정하는 idx
-        self.cur_image = []  # Pixmap에 올라갈 이미지, 왜 리스트 자료형으로 선언했는지 모르겠다.
+        self.cur_image = []  # Pixmap에 올라갈 이미지, 왜 리스트 자료형으로 선언했는지 모르겠다.\
         self.EntireImage = []  # Pixmap에 올라갈 이미지들을 가지고있는 Image(폴더?), 같은 사진(중복) .dcm파일들의 개수만큼 idx를 가지고 있으며 한 사진마다 blending 등을 수행하고 ImgNum버튼을 통해 각 사진별로 달라진점 확인 가능?
+        self.rotation_sagittal = []
+        self.rotation_coronal = []
         self.adjustedImage = []  # 현재 사용X
         self.location = []  # polygon의 위치 좌표
 
@@ -245,13 +285,12 @@ class MyApp(QMainWindow):
         self.imagePath = ''  # 3D Rendering을 위한 변수 선언
         self.folder_path = ''  # 2D Rendering을 위한 변수 선언
 
-        self.stack = []
-
         self.start = QPointF()  # 그리기 시작한 좌표점
         self.end = QPointF()  # 그리기 끝난 좌표점
         self.polygon = QPoint()  # 폴리곤의 좌표
         self.label = QLabel()  # QLabel 메서드를 들고옴
         self.Point = []
+        self.stack = []
 
         self.wg = MyWidget()  # MyWidget 클래스를 사용하기 위해서 객체를 생성
         self.setCentralWidget(self.wg)  # QMainWindow 화면에 레이아웃과 위젯을 표시하기 위해사용
@@ -294,7 +333,7 @@ class MyApp(QMainWindow):
 
     # btn1(uodo)가 클릭 되었을 때
     def undoButton(self):
-        for i in range(10):
+        for i in range(20):
             self.stack.pop()
 
         self.wg.lbl_blending_img.clear()
@@ -393,7 +432,10 @@ class MyApp(QMainWindow):
                 
                 print (self.EntireImage.shape)
                 print (type(self.EntireImage))
+
                 self.EntireImage = self.rotation_volume(self.EntireImage, viewtype='axial')
+                self.rotation_sagittal = self.rotation_volume(self.EntireImage, viewtype = 'sagittal')
+                self.rotation_coronal = self.rotation_volume(self.EntireImage, viewtype='coronal')
 
                 self.NofI, self.Ny, self.Nx = self.EntireImage.shape
                 self.viewUpdate(1)
@@ -405,11 +447,11 @@ class MyApp(QMainWindow):
                 for i in range(self.EntireImage.shape[1]):
                     for j in range(self.EntireImage.shape[2]):
                         self.Point.append(QPointF(j, i)) 
-
-                self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent  # view_1의 mouseMoveEvent 갱신
-                self.wg.view_2.mouseMoveEvent = self.mouseMoveEvent
-                self.wg.view_1.setMouseTracking(True)  # True일 때는 마우스 이동 감지
-                self.wg.view_2.setMouseTracking(True)  # False일 때는 마우스 클릭시에만 이동 감지
+                
+                    self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent  # view_1의 mouseMoveEvent 갱신
+                    self.wg.view_2.mouseMoveEvent = self.mouseMoveEvent  
+                    self.wg.view_1.setMouseTracking(True)
+                    self.wg.view_2.setMouseTracking(True)  # False일 때는 마우스 클릭시에만 이동 감지
 
     def openRawAndBin(self):
         self.imagePath, _ = QFileDialog.getOpenFileName(self, 'Open file', './raw')  # 'Open file'은 열리는 위젯의 이름, 세 번째 매개변수는 기본 경로설정
@@ -434,9 +476,13 @@ class MyApp(QMainWindow):
 
                 # EntireImage Handler========================================================================
                 self.EntireImage = np.asarray(imgArray, dtype=np.float32)
-                self.EntireImage = np.squeeze(self.EntireImage)
+                # self.EntireImage = np.squeeze(self.EntireImage)
+                self.EntireImage = self.rotation_volume(self.EntireImage, viewtype='axial')
+                self.rotation_sagittal = self.rotation_volume(self.EntireImage, viewtype = 'sagittal')
+                self.rotation_coronal = self.rotation_volume(self.EntireImage, viewtype='coronal')
 
                 self.NofI, self.Ny, self.Nx = self.EntireImage.shape
+                print(self.EntireImage.shape)
                 self.viewUpdate(1)
 
                 self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent
@@ -541,20 +587,34 @@ class MyApp(QMainWindow):
     def viewUpdate(self, type, zoom_img=None):
         if type == 1:
             self.cur_image = self.EntireImage[self.cur_idx]
+            self.rotation_sagittal_cur_image = self.rotation_sagittal[self.cur_idx]
+            self.rotation_coronal_cur_image = self.rotation_coronal[self.cur_idx]
 
-            image = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
-            image = qimage2ndarray.array2qimage(image)
-            image = QPixmap.fromImage(QImage(image))
+            img_original = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
+            img_blending = self.AdjustPixelRange(self.cur_image, self.window_level, self.window_width)
+            img_sagittal = self.AdjustPixelRange(self.rotation_sagittal_cur_image, self.window_level, self.window_width)
+            img_coronal = self.AdjustPixelRange(self.rotation_coronal_cur_image, self.window_level, self.window_width)
+
+            img_original = qimage2ndarray.array2qimage(img_original)
+            img_blending = qimage2ndarray.array2qimage(img_blending)
+            img_sagittal = qimage2ndarray.array2qimage(img_sagittal)
+            img_coronal = qimage2ndarray.array2qimage(img_coronal)
+
+            img_original = QPixmap.fromImage(QImage(img_original))
+            img_blending = QPixmap.fromImage(QImage(img_blending))
+            img_sagittal = QPixmap.fromImage(QImage(img_sagittal))
+            img_coronal = QPixmap.fromImage(QImage(img_coronal))
+
 
             self.wg.lbl_blending_img.clear()
             self.wg.lbl_original_img.clear()
+            self.wg.lbl_transpos_sagittal.clear()
+            self.wg.lbl_transpos_coronal.clear()
 
-            self.wg.lbl_blending_img.addPixmap(image)
-            self.wg.lbl_original_img.addPixmap(image)
-            self.wg.view_1.setScene(self.wg.lbl_blending_img)
-            self.wg.view_2.setScene(self.wg.lbl_original_img)
-            self.wg.view_1.show()
-            self.wg.view_2.show()
+            self.wg.lbl_blending_img.addPixmap(img_original)
+            self.wg.lbl_original_img.addPixmap(img_blending)
+            self.wg.lbl_transpos_sagittal.addPixmap(img_sagittal)
+            self.wg.lbl_transpos_coronal.addPixmap(img_coronal)
 
         elif type == 2:
             self.cur_image = zoom_img
@@ -585,7 +645,8 @@ class MyApp(QMainWindow):
         if event.buttons() & QtCore.Qt.LeftButton:  # 그리는 기능
             self.end = event.pos()
             
-            if self.start.x() < 511:
+            
+            if self.start.x() < self.Nx:
                 if self.wg.drawType == 0:  # 그리는 방법을 Curve로 설정했을경우 실행
                     pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex()) # .bin을 이용해서 다시 그려야할 때 -> QColor에 rgb값을 넣어도 되는지 등 테스트 
                     line = QLineF(self.start.x(), self.start.y(), self.end.x(), self.end.y())
@@ -654,11 +715,6 @@ class MyApp(QMainWindow):
             print("move: ", temp_wl, temp_ww)  # 현재 최종 wl와 ww를 출력
 
     def mouseReleaseEvent(self, event):
-        print('re')
-        if event.button() == QtCore.Qt.LeftButton:
-            if self.wg.checkbox.isChecked():
-                return None
-            
             print('release')
             pen = QPen(QColor(self.wg.pencolor), self.wg.combo.currentIndex())
 
