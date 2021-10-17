@@ -72,7 +72,7 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
 
                 Data = np.fromfile(f, dtype='int16', count=self.m_nX*self.m_nY*self.m_nZ)
                 self.m_Voxel = np.reshape(Data, (self.m_nZ, self.m_nY, self.m_nX))
-                # print('self.m_Voxel =', self.m_Voxel)
+                self.m_Voxel = np.clip(self.m_Voxel, 0, 3500)
 
             except IOError:
                 print('Could not read file ' + filename)
@@ -157,6 +157,17 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
         
         self.m_Voxel = data.astype(np.int16, copy=-False)  # .append로하면 겉에는 list가 된다.
 
+    def NumpyArraytoVoxel_float(self, data):
+        self.initialize()
+
+        Dim = data.shape  # shape = (,)
+        self.m_nX = Dim[2]  # shape는 (가로, 세로)가 아닌 (세로, 가로)의 순서이기 때문
+        self.m_nY = Dim[1]
+        self.m_nZ = Dim[0] 
+        
+        self.m_Voxel = data.astype(np.float16, copy=-False)  # .append로하면 겉에는 list가 된다.
+        
+
     def Create_Mask_Space(self, data):  # 넘파이 배열을 받으면
         self.initialize()
 
@@ -191,6 +202,13 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
 
         diff = maxvalue - minvalue
         self.m_Voxel = (self.m_Voxel - minvalue)/diff
+
+    def inverse_NormalizeMM(self, pre_voxel):
+        maxvalue = np.max(pre_voxel)
+        minvalue = np.min(pre_voxel)
+
+        diff = maxvalue - minvalue
+        self.m_Voxel = (self.m_Voxel * diff) + minvalue
 
     def AdjustPixelRangeNormalize(self, Upper):  # version 1?
         self.m_Voxel = self.m_Voxel.astype(np.float32, copy=False)

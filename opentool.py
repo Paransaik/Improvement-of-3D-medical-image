@@ -11,8 +11,10 @@ import SimpleITK as itk
 import qimage2ndarray
 import math
 
+import matplotlib.pyplot as plt 
 import vtk
 from Rendering import Rendering
+from SR import CycleGAN_predict
 import voxel
 
 
@@ -26,7 +28,7 @@ class MyWidget(QWidget):
         self.lbl_transpos_coronal = QGraphicsScene()
         self.lbl_3Drander_img = QGraphicsScene()
 
-        self.view_1 = QGraphicsView(self.lbl_blending_img)  # 원본 이미지
+        self.view_1 = QGraphicsView(self.lbl_blending_img) # 원본 이미지
         self.view_2 = QGraphicsView(self.lbl_original_img)
         # self.view_1 = setParent(self.view_1*parent)
 
@@ -186,9 +188,9 @@ class MyWidget(QWidget):
                     self.hbox4.insertWidget(2, self.view_3)
                     self.view_4 = QGraphicsView(self.lbl_transpos_coronal)  # tranpos된 이미지
                     self.hbox4.insertWidget(3, self.view_4)
-                    self.number = self.number = 1
+                    self.number += 1
 
-                elif self.number == 1:
+                elif self.number >= 1:
                     print("지원하는 기능은 2x2까지 입니다 1x2로 바꿔주세요.")
 
             if self.view_checkbox[0].isChecked():
@@ -281,6 +283,7 @@ class MyApp(QMainWindow):
         self.rgb = 3 # mask_space에 rgb 값을 저장할 공간크기 
 
         self.vx = voxel.PyVoxel()  # 복셀 생성자 호출
+        self.predict_model = CycleGAN_predict.CycleGAN_IMG()
 
         self.imagePath = ''  # 3D Rendering을 위한 변수 선언
         self.folder_path = ''  # 2D Rendering을 위한 변수 선언
@@ -345,6 +348,11 @@ class MyApp(QMainWindow):
 
     # btn2(s_r)가 클릭 되었을 때
     def s_rButton(self):
+        # print(type(self.EntireImage[self.cur_idx]))
+        # print(self.EntireImage[self.cur_idx].shape)
+        pred_img = self.predict_model.pred_start(self.EntireImage[self.cur_idx])
+        plt.imshow(pred_img, cmap='gray')
+        plt.show()
         return 0
 
     # btn3(3D Rendering)가 클릭 되었을 때
@@ -473,6 +481,7 @@ class MyApp(QMainWindow):
                 
                 self.vx.ReadFromRaw(self.imagePath)
                 imgArray = self.vx.m_Voxel  # 이미지로부터 배열을 가져옴
+                print(imgArray)
 
                 # EntireImage Handler========================================================================
                 self.EntireImage = np.asarray(imgArray, dtype=np.float32)
@@ -482,7 +491,6 @@ class MyApp(QMainWindow):
                 self.rotation_coronal = self.rotation_volume(self.EntireImage, viewtype='coronal')
 
                 self.NofI, self.Ny, self.Nx = self.EntireImage.shape
-                print(self.EntireImage.shape)
                 self.viewUpdate(1)
 
                 self.wg.view_1.mouseMoveEvent = self.mouseMoveEvent
@@ -570,7 +578,6 @@ class MyApp(QMainWindow):
     def hex_to_rgb(self, hex):
         return list(int(hex[i:i+2], 16) for i in (0, 2, 4))
     
-
     def rotation_volume(self, image, viewtype='axial'):
         source = image
         if viewtype == 'axial':
