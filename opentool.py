@@ -465,7 +465,6 @@ class MyApp(QMainWindow):
 
                 self.vx.ReadFromRaw(self.imagePath)
                 imgArray = self.vx.m_Voxel  # 이미지로부터 배열을 가져옴
-
                 # EntireImage Handler========================================================================
                 self.EntireImage = np.asarray(imgArray, dtype=np.float32)
                 # self.EntireImage = np.squeeze(self.EntireImage)
@@ -734,6 +733,9 @@ class MyApp(QMainWindow):
             if self.wg.drawType == 0:
                 self.start = event.pos()
                 self.start = self.start + QtCore.QPoint(-10, -44)  # default -13, -57
+                print('x 값', self.start.x())
+                print('y 값', self.start.y())
+                print('test')
                 self.end = event.pos()
 
             if self.wg.drawType == 1:  # polygon의 위치를 받고 그것을 self location에 추가함
@@ -799,7 +801,8 @@ class MyApp(QMainWindow):
             x2, y2 = x2 - self.alpha, y2 - self.alpha
             zoom_img = zoom_img.crop((int(x1), int(y1), int(x2), int(y2)))
             zoom_img = np.array(zoom_img.resize((int(self.Ny), int(self.Nx))))
-
+            print('# # # # zoom_img', zoom_img.resize((int(self.Ny), int(self.Nx))))
+            print('# # # # zoom_img', zoom_img.resize((int(self.Ny), int(self.Nx)).shape))
             self.viewUpdate(2, zoom_img)
 
 

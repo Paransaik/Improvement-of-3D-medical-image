@@ -1,6 +1,7 @@
 import numpy as np
 import sys
 
+
 # b는 바이너리의 약자 
 class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
     # Raw 이미지 파일은 이미지 파일 포맷 중 하나로 디지털 카메라나 이미지 스캐너의 이미지 센서로부터 최소한으로 처리한 데이터를 포함하고있다.
@@ -45,12 +46,16 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
     def ReadFromRaw(self, filename):  # 이미지 16비트
         print('success ReadFromBin')
         with open(filename, 'rb') as f:  # rb = byte 형식으로 파일 읽기 # f.close를 매번하기 귀찮기 때문에 with를 사용, f는 instance
+            print(f)
             try:
                 Header = np.fromfile(f, dtype='int32', count=1)  # dtype이 int32인 data만 file로부터 받아오는?
                 self.m_Org = Header[0]  # header는 Raw파일에 첫 두바이트를 m_org를 넣었다. 저게 -1이라면
                                         # 만약 -1이 아니라면 숫자란 이야기다 256이 들어있다.
+                print('Header', Header)
+                print(self.m_Org)
                 if self.m_Org == -1:  # 데이터가 거꾸로 뒤집어진? 경우
                     Header = np.fromfile(f, dtype='float32', count=6)  # "x, y, z spacing", "x, y, z orgin"
+                    # print('############', Header.shape)
                     self.m_fXSp = Header[0]
                     self.m_fYSp = Header[1]
                     self.m_fZSp = Header[2]
@@ -65,16 +70,32 @@ class PyVoxel: # Voxel은 Volumn과 pixel의 합성어
                     self.m_nX = self.m_Org  # m_nX는 X크기 but, Header[1] = m_nX 값일텐데 왜?
 
                 Header = np.fromfile(f, dtype='int32', count=2)  # nY nZ
-                self.m_nY = Header[0]  # 512
-                self.m_nZ = Header[1]  # 20
+                self.m_nY = Header[0]  # 256
+                self.m_nZ = Header[1]  # 28
 
                 Data = np.fromfile(f, dtype='int16', count=self.m_nX*self.m_nY*self.m_nZ)
+                # print('?', self.m_nX*self.m_nY*self.m_nZ) # 256 * 256 * 28, /4 458,752
+                print('Data', Data)
+                print('Datashape', Data.shape)
                 self.m_Voxel = np.reshape(Data, (self.m_nZ, self.m_nY, self.m_nX))
+                # self.m_Voxel = np.resize(self.m_Voxel, (1, 256, 256))
+                # a = self.scale(self.m_Voxel, 28, 128, 128)
+                # print(a)
+                # print(a.shape)
+                print('m_voxel shape', self.m_Voxel.shape)
                 # print('self.m_Voxel =', self.m_Voxel)
 
             except IOError:
                 print('Could not read file ' + filename)
                 sys.exit()
+
+    def scale(im, nD, nR, nC):
+        print(im)
+        number_rows = len(im[1])  # source number of rows
+        number_columns = len(im[2])  # source number of columns
+        return [[[im[d][1][2] for c in range(nC)] for r in range(nR)] for d in range(nD)]
+        # return [[[im[d][int(number_rows * r / nR)][int(number_columns * c / nC)]
+        #          for c in range(nC)] for r in range(nR)] for d in range(nD)]
 
     def ReadFromBin(self, filename): # .bin 파일 읽는
             with open(filename, 'rb') as f:
